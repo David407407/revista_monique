@@ -1,5 +1,6 @@
 .contraportada {
   position: relative;
+  z-index: 20; /* encima de todas las hojas */
   margin: 0 var(--sheet-gap);
   border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
   overflow: hidden;

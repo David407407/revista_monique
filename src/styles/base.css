@@ -73,6 +73,8 @@ samp {
 
 /* Que el navbar fijo no tape el inicio de la sección al saltar con un enlace */
 section[id],
+article[id],
+aside[id],
 footer[id] {
   scroll-margin-top: var(--nav-h);
 }
