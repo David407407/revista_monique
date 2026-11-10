@@ -1,36 +1,26 @@
-// Muestra temporal de estilos. Se reemplaza cuando existan las secciones.
-const colores = [
-  ['--abismo', 'Abismo'], ['--bosque', 'Bosque'], ['--grafito', 'Grafito'],
-  ['--papel', 'Papel lunar'], ['--papel-2', 'Papel 2'],
-  ['--biolum', 'Bioluminiscencia'], ['--plasma', 'Plasma'],
-  ['--nebulosa', 'Nebulosa'], ['--azul-palido', 'Azul pálido'],
-]
+// Orden de la revista. Cada sección vive en src/sections/<Nombre>/ y la edita solo su responsable.
+import Portada from './sections/Portada/Portada.jsx'
+import Indice from './sections/Indice/Indice.jsx'
+import Articulo1 from './sections/Articulo1/Articulo1.jsx'
+import Anuncio1 from './sections/Anuncio1/Anuncio1.jsx'
+import Articulo2 from './sections/Articulo2/Articulo2.jsx'
+import Articulo3 from './sections/Articulo3/Articulo3.jsx'
+import Anuncio2 from './sections/Anuncio2/Anuncio2.jsx'
+import Entrevista from './sections/Entrevista/Entrevista.jsx'
+import Contraportada from './sections/Contraportada/Contraportada.jsx'
 
 export default function App() {
   return (
-    <main style={{ background: 'var(--papel)', minHeight: '100vh', padding: 'clamp(24px, 5vw, 64px)' }}>
-      <h1 style={{ fontSize: 'var(--text-hero-portada)' }}>
-        Point Bleu <em style={{ color: 'var(--biolum-papel)' }}>Pâle</em>
-      </h1>
-      <p className="lead" style={{ marginTop: 24, maxWidth: 'var(--measure)' }}>
-        Iluminando la ciencia que no se ve.
-      </p>
-      <h2 style={{ marginTop: 56 }}>Lo que cabe en un agujero negro</h2>
-      <p style={{ marginTop: 16, maxWidth: 'var(--measure)' }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="mono" style={{ marginTop: 16, color: 'var(--tinta-suave)' }}>
-        Nº 07 — Noviembre 2026 · 12 min
-      </p>
-      <ul style={{ listStyle: 'none', padding: 0, marginTop: 56, display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-        {colores.map(([v, nombre]) => (
-          <li key={v} className="label" style={{ width: 150 }}>
-            <span style={{ display: 'block', height: 64, borderRadius: 12, background: `var(${v})`, border: '1px solid var(--borde-papel)' }} />
-            <span style={{ display: 'block', marginTop: 8 }}>{nombre}</span>
-          </li>
-        ))}
-      </ul>
+    <main>
+      <Portada />
+      <Indice />
+      <Articulo1 />
+      <Anuncio1 />
+      <Articulo2 />
+      <Articulo3 />
+      <Anuncio2 />
+      <Entrevista />
+      <Contraportada />
     </main>
   )
 }
