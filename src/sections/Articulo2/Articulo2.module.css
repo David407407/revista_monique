@@ -12,29 +12,12 @@
   --exp-borde: #3a4a78;
   --pad: 40px;
 
-  /* Hoja apilada en variante "bleed": sin margen lateral ni radio, conserva sombra y apilado */
-  position: sticky;
-  top: var(--nav-h);
-  z-index: 5;
-  margin: 0;
-  border-radius: 0;
-  overflow: hidden;
-  box-shadow: var(--shadow-sheet);
-
+  /* El apilado, el margen, el radio y la sombra los pone <Hojas> (src/components/Hojas) */
+  scroll-margin-top: var(--nav-h);
   width: 100%;
   padding-bottom: 72px;
   background: var(--papel);
   color: var(--tinta);
-}
-
-/* Marcador del ancla #nebulosas (fuera de la hoja sticky) */
-.ancla {
-  height: 0;
-  scroll-margin-top: 0; /* Immersif: el hero llega hasta arriba, bajo el navbar */
-}
-
-.anclaSimple {
-  scroll-margin-top: var(--nav-h);
 }
 
 .hoja :focus-visible {

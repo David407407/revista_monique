@@ -2,7 +2,7 @@
 // Artículo 2 en francés: «Les piliers de la création». Dos modos de lectura: Immersif (hero a pantalla
 // completa + módulos interactivos + cita) y Simple (texto íntegro + versiones estáticas de M1, M2 y M3).
 // La hoja de esta sección va sin bordes (bleed).
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import img1000 from '../../assets/nebulosas/piliers-de-la-creation-1000.webp'
 import img1600 from '../../assets/nebulosas/piliers-de-la-creation-1600.webp'
 import img2560 from '../../assets/nebulosas/piliers-de-la-creation-2560.webp'
@@ -11,7 +11,6 @@ import ExplorateurImage from './ExplorateurImage.jsx'
 import Partager from './Partager.jsx'
 import Rico from './Rico.jsx'
 import { NBSP } from './typo.js'
-import useHojaApilada from './useHojaApilada.js'
 import Chiffres from './modulos/Chiffres.jsx'
 import { ListaMachine, TablaEchelle, TablaPalette } from './modulos/Estaticos.jsx'
 import ModuloEchelle from './modulos/ModuloEchelle.jsx'
@@ -279,9 +278,7 @@ function Navegacion() {
 }
 
 export default function Articulo2({ initialMode = 'immersif' }) {
-  const hoja = useRef(null)
   const [modo, setModo] = useState(() => leerModo(initialMode))
-  useHojaApilada(hoja)
 
   useEffect(() => {
     try {
@@ -296,11 +293,8 @@ export default function Articulo2({ initialMode = 'immersif' }) {
 
   return (
     <>
-      {/* El ancla va fuera de la hoja: si estuviera en el elemento sticky, al saltar a #nebulosas desde
-          más abajo el navegador usaría la posición "pegada" y caería en el lugar equivocado. */}
-      <div id={t.id} className={immersif ? styles.ancla : `${styles.ancla} ${styles.anclaSimple}`} />
       <article
-        ref={hoja}
+        id={t.id}
         lang="fr"
         aria-labelledby="nebulosas-titulo"
         className={`${styles.hoja} ${immersif ? styles.immersif : styles.simple}`}
