@@ -1,0 +1,29 @@
+.primera,
+.hoja {
+  position: sticky;
+}
+
+.hoja {
+  margin: 0 var(--sheet-gap);
+  overflow: hidden;
+  border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  box-shadow: var(--shadow-sheet);
+  /* Fondo por defecto para secciones que aún no tienen el suyo */
+  background: var(--abismo);
+}
+
+@media (max-width: 640px) {
+  .hoja {
+    margin: 0 6px;
+    border-radius: 20px 20px 0 0;
+  }
+}
+
+/* Sin animaciones: las secciones simplemente se siguen una a otra */
+@media (prefers-reduced-motion: reduce) {
+  .primera,
+  .hoja {
+    position: relative;
+    top: 0 !important;
+  }
+}

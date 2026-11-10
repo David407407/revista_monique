@@ -1,0 +1,126 @@
+.navbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  font-family: var(--font-ui);
+  color: var(--papel);
+  background: rgba(11, 26, 23, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--borde-oscuro);
+  transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+}
+
+/* Sobre la foto de la portada: sin fondo, como en Aeon */
+.transparente {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+
+.inner {
+  max-width: 1440px;
+  min-height: var(--nav-h);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background: var(--borde-oscuro);
+  transition: background 0.4s;
+}
+
+.transparente .divider {
+  background: rgba(246, 241, 228, 0.3);
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav a {
+  padding: 12px 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--papel);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: var(--azul-palido);
+}
+
+.menuButton {
+  display: none;
+  width: var(--tap);
+  height: var(--tap);
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  color: var(--papel);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menuButton:hover {
+  background: rgba(246, 241, 228, 0.12);
+}
+
+/* En pantallas angostas las secciones pasan al menú */
+@media (max-width: 1100px) {
+  .inner {
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 16px 20px;
+    background: var(--abismo);
+    border-bottom: 1px solid var(--borde-oscuro);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+  }
+
+  .nav.open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav a {
+    padding: 14px 0;
+    font-size: 20px;
+    border-bottom: 1px solid var(--borde-oscuro);
+  }
+}

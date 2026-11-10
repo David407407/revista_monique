@@ -2,6 +2,7 @@
    Fuente: prompt-point-bleu-pale.md. No cambiar sin avisar al equipo. */
 :root {
   /* Fondos oscuros */
+  --noche: #07110f;    /* fondo detrás de las hojas */
   --abismo: #0b1a17;   /* navbar, portada */
   --bosque: #12241f;   /* figuras, heroes */
   --grafito: #171a19;  /* footer */
@@ -20,6 +21,7 @@
   --tinta: #1a1714;
   --tinta-suave: #5e5a52;
   --niebla: #9fb3ad;        /* texto secundario sobre oscuro */
+  --niebla-clara: #c9d6d1; /* párrafos sobre oscuro */
 
   /* Bordes */
   --borde-papel: #cfc6b0;
