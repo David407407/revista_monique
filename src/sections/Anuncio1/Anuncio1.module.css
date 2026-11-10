@@ -1,0 +1,195 @@
+/* Paleta propia del anuncio (distinta del editorial), tomada del diseño */
+.anuncio {
+  --ad-fondo: #0e0d24;
+  --ad-texto: #ecebff;
+  --ad-suave: #c9c7f0;
+  --ad-tenue: #9d9ac9;
+  --ad-borde: #34315e;
+  --ad-acento: #b3b0f5;
+
+  position: relative;
+  /* Una pantalla menos el navbar, para que se fije debajo de él y no lo tape */
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  color: var(--ad-texto);
+  background: var(--ad-fondo);
+}
+
+.cabecera,
+.cuerpo,
+.legal {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.cabecera {
+  padding-top: 28px;
+  padding-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.marca {
+  font: 800 22px/1 var(--font-ui);
+  letter-spacing: 0.04em;
+}
+
+.marca em {
+  font: italic 400 22px/1 var(--font-display);
+  color: var(--ad-acento);
+}
+
+.pill {
+  padding: 5px 12px;
+  font: 700 11px/1.4 var(--font-ui);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ad-tenue);
+  border: 1px solid var(--ad-borde);
+  border-radius: 12px;
+}
+
+.cuerpo {
+  flex: 1;
+  padding-top: 0;
+  padding-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px;
+}
+
+.texto {
+  flex: 999 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+}
+
+.titulo {
+  font: 800 clamp(3rem, 6vw, 5.75rem) / 0.92 var(--font-ui);
+  letter-spacing: -0.045em;
+  color: #fff;
+}
+
+.titulo em {
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--ad-acento);
+}
+
+.bajada {
+  max-width: 480px;
+  font: 400 20px/1.55 var(--font-body);
+  color: var(--ad-suave);
+}
+
+.datos {
+  width: 100%;
+  margin: 0;
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  border-top: 1px solid var(--ad-borde);
+  border-bottom: 1px solid var(--ad-borde);
+}
+
+.datos div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.datos dt {
+  font: 800 28px/1 var(--font-ui);
+}
+
+.datos dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ad-tenue);
+}
+
+.cta {
+  min-height: 56px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 16px/1 var(--font-ui);
+  color: var(--ad-fondo);
+  text-decoration: none;
+  background: var(--ad-acento);
+  border-radius: 28px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  background: #cfcdfa;
+}
+
+.cta svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta:hover svg {
+  transform: translateX(3px);
+}
+
+.orbitas {
+  flex: 1 1 420px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.giro {
+  animation: girar linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.legal {
+  padding-bottom: 28px;
+  font: 400 12px/1.5 var(--font-body);
+  color: var(--ad-tenue);
+}
+
+@media (max-width: 640px) {
+  .cabecera,
+  .cuerpo,
+  .legal {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .cuerpo {
+    gap: 32px;
+    padding-bottom: 40px;
+  }
+
+  .datos {
+    gap: 24px;
+  }
+
+  .orbitas {
+    flex-basis: 260px;
+    max-width: 300px;
+  }
+}

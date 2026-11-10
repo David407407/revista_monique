@@ -90,6 +90,12 @@ Los estilos compartidos ya están en `src/styles/tokens.css` (paleta, fuentes, t
 - **Navbar** transparente sobre la foto de la portada y sin íconos que no funcionan (solo el botón de menú en pantallas angostas).
 - Si un botón no funciona, no se muestra.
 
+## Componentes compartidos
+
+- **`src/components/Article/Article.jsx`**: plantilla de artículo con la anatomía del diseño (cabecera con número y sección, modo **Immersif/Simple** guardado en `localStorage`, hero con foto, cuerpo en 3 columnas con metadatos y *Notes en marge*, cita y figura solo en Immersif, *Pour en savoir plus*, *Partager* funcional, tarjeta de autor y navegación Précédent / Article suivant). **Articulo2 y Articulo3 deben usarla**; `src/sections/Articulo1/Articulo1.jsx` es el ejemplo de cómo pasarle las props. Las fotos van optimizadas en WebP en `src/assets/<seccion>/`, con crédito.
+- **`src/components/Hojas/Hojas.jsx`**: efecto de hojas apiladas en `App.jsx`. Cada sección se queda fija al terminarla y la siguiente la cubre. Una sección que mide una pantalla completa debe usar `min-height: calc(100vh - var(--nav-h))` para no quedar bajo el navbar (ver `Anuncio1`).
+- **`src/components/Logo/Logo.jsx`** y **`src/components/Navbar/Navbar.jsx`**.
+
 La verdad del producto para impeccable está en `PRODUCT.md`. El diseño se trabaja con la skill **impeccable**.
 
 ## Stack

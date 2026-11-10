@@ -3,7 +3,7 @@ import styles from './Indice.module.css'
 
 // Títulos y tiempos de lectura provisionales: cada responsable los ajusta al escribir su pieza.
 const piezas = [
-  { href: '#agujeros-negros', n: '01', min: '[X]', seccion: 'Trous noirs', titulo: 'Ce que contient un trou noir', acento: 'var(--biolum)' },
+  { href: '#agujeros-negros', n: '01', min: '7', seccion: 'Trous noirs', titulo: 'Aller simple pour un trou noir', acento: 'var(--biolum)' },
   { href: '#nebulosas', n: '02', min: '[X]', seccion: 'Nébuleuses', titulo: 'Là où naissent les étoiles', acento: 'var(--plasma)' },
   { href: '#tiempo', n: '03', min: '[X]', seccion: 'Temps', titulo: 'L’horloge qui retarde', acento: 'var(--biolum)' },
   { href: '#entrevista', n: '04', min: '[X]', seccion: 'Entretien', titulo: '[NOM DU DOCTEUR] et les fluides de l’univers', acento: 'var(--nebulosa)' },
