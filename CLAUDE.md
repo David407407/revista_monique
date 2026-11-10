@@ -2,6 +2,8 @@
 
 Contexto del proyecto para cualquier Claude que trabaje en este repo. Léelo antes de empezar.
 
+> **IDIOMA: todo el contenido visible de la revista va en FRANCÉS** (textos, títulos, botones, `alt` de imágenes, `aria-label`, anuncios, entrevista). Decidido el 2026-11-10. Este archivo, los comentarios del código, los nombres de carpetas y los `id` de las secciones (`#agujeros-negros`, etc.) siguen en español.
+
 ## Qué es
 
 Revista digital científica de **espacio y física** llamada **Point Bleu Pâle** ("Pale Blue Dot" en francés, por la foto de la Tierra de la Voyager 1 popularizada por Carl Sagan). Se escribe con **â** (acento circunflejo).
@@ -81,6 +83,14 @@ El diseño visual ya está hecho en **Claude Design**, en la laptop del compañe
 Los estilos compartidos ya están en `src/styles/tokens.css` (paleta, fuentes, tamaños, medidas) y `src/styles/base.css` (estilos globales y clases `.label`, `.mono`, `.lead`, `.sr-only`). Úsalos con `var(--nombre)`; no inventes colores ni fuentes nuevas. Todo debe verse como una sola revista, no como dos pegadas.
 
 **Decisión del equipo:** del diseño de Claude Design se toma **solo lo visual** (paleta, tipografía, navegación con hojas que se apilan, anatomía del artículo, navbar y footer estilo Quanta). El **contenido** es el de este archivo, no el del diseño: si el diseño dice Física / Biología / Matemáticas, Dra. Elena Marín, anuncios ficticios (Lumen, Orión) u otro orden de secciones, ignóralo. Cada artículo usa uno de los tres acentos (`--biolum`, `--plasma`, `--nebulosa`).
+
+**Cambios al diseño ya decididos:**
+- **Portada minimalista** estilo [Aeon](https://aeon.co/essays/why-astrophysics-needs-to-abandon-the-big-questions): foto a pantalla completa ("Cosmic Cliffs" del telescopio Webb, crédito NASA, ESA, CSA, STScI) con título y bajada centrados. Sin botones ni índice.
+- **Índice** como sección aparte justo después de la portada (`#indice`).
+- **Navbar** transparente sobre la foto de la portada y sin íconos que no funcionan (solo el botón de menú en pantallas angostas).
+- Si un botón no funciona, no se muestra.
+
+La verdad del producto para impeccable está en `PRODUCT.md`. El diseño se trabaja con la skill **impeccable**.
 
 ## Stack
 

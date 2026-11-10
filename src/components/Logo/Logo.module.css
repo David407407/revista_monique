@@ -1,0 +1,46 @@
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--papel);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logo svg {
+  align-self: center;
+  margin-right: 2px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo:hover svg {
+  transform: rotate(-30deg);
+}
+
+.point {
+  font: 800 24px/1 var(--font-ui);
+  letter-spacing: -0.01em;
+}
+
+.pale {
+  margin-left: -2px;
+  font: italic 400 24px/1 var(--font-display);
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.revue {
+  font: 600 11px/1 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.large .point {
+  font-size: 28px;
+}
+
+.large .pale {
+  font-size: 28px;
+}

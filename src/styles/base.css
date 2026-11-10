@@ -12,7 +12,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--abismo);
+  background: var(--noche);
   color: var(--tinta);
   font: 400 var(--text-body) / 1.7 var(--font-body);
   font-synthesis: none;
@@ -69,6 +69,12 @@ code,
 kbd,
 samp {
   font-family: var(--font-mono);
+}
+
+/* Que el navbar fijo no tape el inicio de la sección al saltar con un enlace */
+section[id],
+footer[id] {
+  scroll-margin-top: var(--nav-h);
 }
 
 /* Superficies del navegador */
