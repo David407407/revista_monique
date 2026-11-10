@@ -1,0 +1,232 @@
+/* Esquemas animados del Artículo 1 */
+
+.escena {
+  margin: 40px 0 48px;
+}
+
+.lienzo {
+  padding: 28px 24px 18px;
+  border-radius: 20px;
+  background: var(--bosque);
+  color: var(--niebla-clara);
+}
+
+.lienzo svg {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.t,
+.tSuave {
+  font: 600 17px var(--font-ui);
+  fill: var(--papel);
+}
+
+.tSuave {
+  font-weight: 500;
+  fill: var(--niebla-clara);
+}
+
+.lecturas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 24px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--borde-oscuro);
+  font: 500 var(--text-mono) / 1.5 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.lecturas b {
+  font-weight: 600;
+  color: var(--papel);
+}
+
+.escena figcaption {
+  margin-top: 14px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--tinta-suave);
+}
+
+/* Comparador película / foto real */
+.comparador {
+  position: relative;
+  aspect-ratio: 1200 / 699;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #050505;
+}
+
+.comparador img,
+.film {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.film {
+  clip-path: inset(0 calc(100% - var(--x)) 0 0);
+}
+
+.marca {
+  position: absolute;
+  top: 12px;
+  max-width: 42%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(7, 17, 15, 0.72);
+  font: 600 12px/1.3 var(--font-ui);
+  color: var(--papel);
+  pointer-events: none;
+}
+
+.marcaIzq {
+  left: 12px;
+}
+
+.marcaDer {
+  right: 12px;
+  text-align: right;
+}
+
+.linea {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--x);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--papel);
+  pointer-events: none;
+}
+
+.rango {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+
+.poignee {
+  position: absolute;
+  top: 50%;
+  left: var(--x);
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--papel);
+  color: var(--tinta);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  transition: scale 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rango:hover ~ .poignee,
+.rango:active ~ .poignee {
+  scale: 1.08;
+}
+
+.rango:focus-visible ~ .poignee {
+  outline: 2px solid var(--biolum);
+  outline-offset: 3px;
+}
+
+/* Reloj de la esquina */
+.reloj {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 30px;
+  background: var(--abismo);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  translate: 0 12px;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), translate 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reloj[data-visible='true'] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.relojTexto {
+  display: flex;
+  flex-direction: column;
+  font: 500 11px/1.3 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--niebla);
+}
+
+.relojTexto b {
+  font: 600 15px/1.2 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  color: var(--biolum);
+}
+
+/* Solo en modo Immersif */
+:global([data-modo='simple']) .escena,
+:global([data-modo='simple']) .reloj,
+:global([data-modo='simple']) .soloInmersivo {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .lienzo {
+    padding: 20px 14px 14px;
+  }
+
+  .t,
+  .tSuave {
+    font-size: 19px;
+  }
+
+  /* En celular el reloj es más compacto para tapar menos texto */
+  .reloj {
+    right: 10px;
+    bottom: 10px;
+    gap: 6px;
+    padding: 5px 10px 5px 5px;
+  }
+
+  .reloj svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .relojTexto > span {
+    display: none;
+  }
+
+  .relojTexto b {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reloj {
+    translate: 0 0;
+  }
+}

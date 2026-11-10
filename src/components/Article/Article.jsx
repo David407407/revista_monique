@@ -78,7 +78,7 @@ export default function Article(props) {
   }
 
   return (
-    <article id={id} className={styles.article} style={{ '--acento': acento.oscuro, '--acento-papel': acento.papel }} aria-labelledby={`${id}-titre`}>
+    <article id={id} className={styles.article} style={{ '--acento': acento.oscuro, '--acento-papel': acento.papel }} aria-labelledby={`${id}-titre`} data-modo={modo}>
       {anterior && <a href={anterior.href} className={`${styles.borde} ${styles.bordeIzq}`}>← Précédent</a>}
       {siguiente && <a href={siguiente.href} className={`${styles.borde} ${styles.bordeDer}`}>Article suivant →</a>}
 
