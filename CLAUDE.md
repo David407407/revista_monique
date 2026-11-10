@@ -78,7 +78,9 @@ Preguntas propuestas:
 
 El diseño visual ya está hecho en **Claude Design**, en la laptop del compañero. Es la fuente de verdad visual: tipografías, colores, espaciados y estilo de las secciones salen de ahí. Todavía no está importado a este repo.
 
-Primero hay que pasar los estilos compartidos (colores, fuentes, espaciados) a `src/styles/`, para que los dos trabajen con la misma base. Todo debe verse como una sola revista, no como dos pegadas.
+Los estilos compartidos ya están en `src/styles/tokens.css` (paleta, fuentes, tamaños, medidas) y `src/styles/base.css` (estilos globales y clases `.label`, `.mono`, `.lead`, `.sr-only`). Úsalos con `var(--nombre)`; no inventes colores ni fuentes nuevas. Todo debe verse como una sola revista, no como dos pegadas.
+
+**Decisión del equipo:** del diseño de Claude Design se toma **solo lo visual** (paleta, tipografía, navegación con hojas que se apilan, anatomía del artículo, navbar y footer estilo Quanta). El **contenido** es el de este archivo, no el del diseño: si el diseño dice Física / Biología / Matemáticas, Dra. Elena Marín, anuncios ficticios (Lumen, Orión) u otro orden de secciones, ignóralo. Cada artículo usa uno de los tres acentos (`--biolum`, `--plasma`, `--nebulosa`).
 
 ## Stack
 
