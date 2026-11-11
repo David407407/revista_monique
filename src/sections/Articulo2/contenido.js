@@ -243,7 +243,7 @@ const crudo = {
     ],
   },
 
-  // Galería «D'autres nuages». Textos descriptivos de lo que se ve; nombre del objeto y crédito por confirmar.
+  // Galería «D'autres nuages». Nombre del objeto y crédito según la ficha de ESA/Webb.
   galerie: {
     kicker: 'Galerie',
     titulo: 'Les piliers ne sont pas seuls',
@@ -254,21 +254,21 @@ const crudo = {
         titre: 'Un nuage creusé de l’intérieur',
         texte: 'Au centre, une grande cavité bleutée, comme une bulle. Sur les bords, la poussière orangée et les filaments sombres résistent encore : c’est le même duel que dans les piliers, entre la lumière des étoiles et le nuage qui les entoure.',
         alt: 'Nébuleuse orangée et bleue : une vaste cavité lumineuse au centre, entourée de nuages de poussière brune et de filaments sombres, sur un fond semé d’étoiles.',
-        credit: '[À VÉRIFIER] Nom de l’objet · crédit de l’image',
+        credit: 'N159, Grand Nuage de Magellan · ESA/Webb, NASA & CSA, E. Sabbi, M. Zamani (ESA/Webb)',
       },
       {
         id: 'dentelle',
         titre: 'Une dentelle de feu',
         texte: 'Des milliers de filaments orange s’enchevêtrent autour d’un cœur bleu. Comme pour les piliers, ces couleurs sont une traduction : elles rendent visibles des lumières que nos yeux ne savent pas voir.',
         alt: 'Nébuleuse en forme d’éclat : un cœur bleu lumineux entouré de filaments orange très fins qui s’étirent vers le haut et vers le bas, sur un fond noir étoilé.',
-        credit: '[À VÉRIFIER] Nom de l’objet · crédit de l’image',
+        credit: 'NGC 6302, nébuleuse du Papillon · ESA/Webb, NASA & CSA, M. Matsuura',
       },
       {
         id: 'sablier',
         titre: 'Un sablier dans la foule',
         texte: 'Au centre, un point très brillant. De part et d’autre, un gaz rouge s’étire comme les deux moitiés d’un sablier, traversé de longs voiles bleus. Tout autour, des milliers d’étoiles : on regarde à travers une région très peuplée du ciel.',
         alt: 'Petite nébuleuse rouge en forme de sablier autour d’un point blanc lumineux, traversée de voiles bleus, au milieu d’un champ d’étoiles très dense.',
-        credit: '[À VÉRIFIER] Nom de l’objet · crédit de l’image',
+        credit: 'NGC 6537, nébuleuse de l’Araignée rouge · ESA/Webb, NASA & CSA, J. H. Kastner (RIT)',
       },
     ],
   },
@@ -285,9 +285,12 @@ const crudo = {
       { fuente: 'ESA/Webb', titulo: 'Pillars of Creation (NIRCam)', href: 'https://esawebb.org/images/weic2216b/' },
       { fuente: 'Wikipédia', titulo: 'Piliers de la création', href: 'https://fr.wikipedia.org/wiki/Piliers_de_la_cr%C3%A9ation' },
       { fuente: 'Wikipédia', titulo: 'Nébuleuse de l’Aigle', href: 'https://fr.wikipedia.org/wiki/N%C3%A9buleuse_de_l%27Aigle' },
+      { fuente: 'ESA/Webb', titulo: 'Stars brewing in a nebulous cauldron (N159)', href: 'https://esawebb.org/images/potm2610a/' },
+      { fuente: 'ESA/Webb', titulo: 'Webb investigates complex heart of a cosmic butterfly (NGC 6302)', href: 'https://esawebb.org/news/weic2517/' },
+      { fuente: 'ESA/Webb', titulo: 'Red Spider Nebula (NGC 6537)', href: 'https://esawebb.org/images/potm2510a/' },
     ],
     glosario: 'Glossaire : nébuleuse, protoétoile, infrarouge, diffraction, photoévaporation, EGG.',
-    creditos: 'Image : NASA, ESA, CSA, STScI.',
+    creditos: 'Images : NASA, ESA, CSA, STScI (piliers) ; ESA/Webb, NASA & CSA (galerie).',
   },
 
   partager: {

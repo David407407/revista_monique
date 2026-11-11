@@ -15,9 +15,13 @@ import ngc1068 from '../../assets/articulo3/ngc-1068-864.webp'
 import { EscalaTiempo, ModuloCarrera, ModuloGalaxia, ModuloGps, ModuloMachine } from './Modulos.jsx'
 import styles from './Articulo3.module.css'
 
-// Créditos pendientes: reemplazar por el crédito de la ficha oficial de cada imagen.
-// El de la espiral (NGC 2283) viene de los metadatos del archivo original.
-const PENDIENTE = '[CRÉDITO: verificar en la ficha oficial NASA/ESA/CSA]'
+// Créditos según la ficha oficial de cada imagen
+const CREDITOS = {
+  casA: 'NASA/CXC/SAO, NASA/ESA/STScI, NASA/ESA/CSA/STScI/Milisavljevic et al., NASA/JPL/Caltech',
+  gato: 'NASA, ESA, CSA, STScI',
+  m82: 'ESA/Webb, NASA & CSA, A. Bolatto',
+  ngc1068: 'ESA/Webb, NASA & CSA, J. Lee et l’équipe PHANGS-JWST',
+}
 
 function Foto({ src, srcSet, width, height, alt, pie, credito, lado = 'derecha', recorte = false }) {
   return (
@@ -44,8 +48,8 @@ export default function Articulo3() {
       acento={{ oscuro: '#b3c8b4', papel: '#2f5b44' }}
       titulo="Le temps dans le cosmos"
       tituloJsx={<>Le temps <em>dans le cosmos</em></>}
-      auteur="[AUTEUR]"
-      auteurBio="[BIO DE L’AUTEUR]."
+      auteur="Baruc Bazán"
+      auteurBio="Élève et co-auteur de Point Bleu Pâle."
       date="10 nov. 2026"
       lecture="8 MIN"
       tags={['temps', 'lumière', 'relativité']}
@@ -53,7 +57,7 @@ export default function Articulo3() {
         src: heroGrande,
         srcSet: `${heroChica} 1200w, ${heroGrande} 2000w`,
         alt: 'Reste de supernova : une grande bulle de gaz en filaments bleus, roses et violets, sur un fond noir parsemé d’étoiles.',
-        credito: `Image : ${PENDIENTE}`,
+        credito: `Image : Cassiopée A — ${CREDITOS.casA}`,
         posicion: '50% 50%',
       }}
       cuerpo={
@@ -88,7 +92,7 @@ export default function Articulo3() {
             height={1581}
             alt="Nébuleuse de gaz orange et bleu avec des étoiles brillantes et des colonnes de poussière sombre."
             pie="Fig. 3 — La nébuleuse de la Patte de Chat, une pouponnière d’étoiles observée en infrarouge."
-            credito={PENDIENTE}
+            credito={CREDITOS.gato}
           />
           <p>Le Soleil vivra environ 10 milliards d’années. Une étoile massive, elle, peut ne vivre que quelques millions d’années : un simple battement de cils, à l’échelle du cosmos.</p>
           <p>Pourquoi ? Plus une étoile est lourde, plus vite elle consomme son combustible. Un peu comme une voiture de course : son réservoir est plus gros que celui d’une petite citadine, mais elle le vide bien plus vite. Et beaucoup de ces étoiles pressées finissent par exploser en supernovæ.</p>
@@ -106,7 +110,7 @@ export default function Articulo3() {
             height={608}
             alt="Galaxie vue par la tranche, avec des filaments rouges de gaz expulsés de part et d’autre."
             pie="Fig. 5 — Une galaxie à flambée d’étoiles : le gaz et la poussière sont expulsés par l’énergie des jeunes étoiles."
-            credito={PENDIENTE}
+            credito={CREDITOS.m82}
           />
           <p>Certaines galaxies fabriquent des étoiles à un rythme bien supérieur à celui de la Voie lactée. On les appelle les galaxies à flambée d’étoiles (<em>starburst</em>, en anglais). La plus célèbre, M82, produit des étoiles environ dix fois plus vite que notre galaxie.</p>
           <p>Mais ce rythme ne peut pas durer. Les astronomes parlent de « temps d’épuisement » : la quantité de gaz disponible divisée par la vitesse à laquelle il est consommé. C’est comme ton forfait mobile : si tu regardes des vidéos toute la journée, tes données ne tiennent pas jusqu’à la fin du mois. Dans ces galaxies, le temps d’épuisement se compte généralement en dizaines ou en centaines de millions d’années.</p>
@@ -140,7 +144,7 @@ export default function Articulo3() {
             height={974}
             alt="Galaxie spirale vue de face, au noyau très lumineux et avec un jet rosé en son centre."
             pie="Fig. 9 — NGC 1068, une galaxie active : en son cœur se cache un trou noir supermassif."
-            credito={PENDIENTE}
+            credito={CREDITOS.ngc1068}
           />
           <p>Les effets les plus extrêmes se produisent près d’un trou noir, comme celui de NGC 1068. Comme on l’a vu dans <a href="#agujeros-negros">l’article sur les trous noirs</a>, pour un observateur lointain, une horloge placée près de l’horizon des événements avancerait de plus en plus lentement.</p>
           <p>C’est l’idée du film <em>Interstellar</em>, où une heure sur une planète proche du trou noir équivaut à sept ans sur Terre. La physique derrière cette scène est plausible, même si elle exige des conditions extrêmes. On t’avait promis d’expliquer comment le temps peut ralentir : promesse tenue.</p>
@@ -151,7 +155,11 @@ export default function Articulo3() {
       sources={[
         'J. C. Hafele et R. E. Keating, « Around-the-World Atomic Clocks », Science, 1972.',
         'N. Ashby, « Relativity in the Global Positioning System », Living Reviews in Relativity, 2003.',
+        'Chandra/NASA — chandra.harvard.edu/photo/2024/casa (image de Cassiopée A).',
+        'ESA/Webb — esawebb.org/images/weic2513a (nébuleuse de la Patte de Chat).',
+        'ESA/Webb — esawebb.org/images/weic2410 (galaxie M82).',
         'ESA/Webb — esawebb.org (image de NGC 2283).',
+        'ESA/Webb — esawebb.org, image du mois de janvier 2023 (NGC 1068 / M77).',
         'Kip Thorne, La Science d’Interstellar, 2014.',
       ]}
       anterior={{ href: '#nebulosas', titulo: 'Les piliers de la création' }}
