@@ -1,0 +1,254 @@
+/* Galería «Les piliers ne sont pas seuls». Colores de .hoja (Articulo2.module.css) y tokens globales. */
+
+/* ---------- Immersif: banda oscura a todo el ancho de la hoja ---------- */
+.galerie {
+  margin-top: 120px;
+  padding: 96px var(--pad) 104px;
+  background: var(--noche-profunda);
+  color: var(--papel);
+}
+
+.cabecera {
+  max-width: 1360px;
+  margin: 0 auto 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: 48px;
+  row-gap: 16px;
+  align-items: end;
+}
+
+.kicker {
+  grid-column: 1 / -1;
+  font: 700 12px/1.2 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--nebulosa);
+}
+
+.titulo {
+  font: 600 clamp(2.25rem, 4.6vw, 4rem) / 1.02 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--papel);
+}
+
+.intro {
+  font: 400 18px/1.6 var(--font-body);
+  color: var(--exp-hecho);
+}
+
+.mosaico {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  row-gap: 64px;
+}
+
+/* La primera imagen ocupa todo el ancho, recortada en formato panorámico */
+.item:first-child {
+  grid-column: 1 / -1;
+}
+
+.figura {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.marco {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  aspect-ratio: 1 / 1;
+  background: var(--noche-azul);
+}
+
+.item:first-child .marco {
+  aspect-ratio: 21 / 10;
+}
+
+.imagen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Encuadre de la panorámica: la cavidad central queda en el centro del recorte */
+.item:first-child .imagen {
+  object-position: 50% 36%;
+}
+
+@media (hover: hover) {
+  .figura:hover .imagen {
+    transform: scale(1.035);
+  }
+}
+
+.leyenda {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 20px;
+  align-items: start;
+}
+
+.numero {
+  padding-top: 6px;
+  font: 500 13px/1.6 var(--font-mono);
+  color: var(--calido);
+}
+
+.leyendaTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 62ch;
+}
+
+.titre {
+  font: 600 24px/1.2 var(--font-display);
+  color: var(--papel);
+}
+
+.texte {
+  font: 400 16px/1.6 var(--font-body);
+  color: var(--exp-hecho);
+}
+
+.credit {
+  margin-top: 4px;
+  font: 500 11px/1.4 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--claro);
+  opacity: 0.75;
+}
+
+/* En la panorámica: título a la izquierda, texto y crédito a la derecha */
+@media (min-width: 900px) {
+  .galerie .item:first-child .leyendaTexto {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 48px;
+    row-gap: 8px;
+  }
+
+  .galerie .item:first-child .titre {
+    grid-row: 1 / span 2;
+    font-size: 30px;
+  }
+
+  .galerie .item:first-child .texte,
+  .galerie .item:first-child .credit {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 899px) {
+  .cabecera {
+    grid-template-columns: 1fr;
+  }
+
+  .mosaico {
+    grid-template-columns: 1fr;
+    row-gap: 56px;
+  }
+
+  .item:first-child .marco {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 600px) {
+  .galerie {
+    margin-top: 96px;
+    padding: 64px 20px 72px;
+  }
+
+  .cabecera {
+    margin-bottom: 40px;
+  }
+
+  .marco {
+    border-radius: 12px;
+  }
+
+  .titre,
+  .item:first-child .titre {
+    font-size: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imagen {
+    transition: none;
+  }
+
+  .figura:hover .imagen {
+    transform: none;
+  }
+}
+
+/* ---------- Simple: dentro de la columna de texto, fondo claro, imágenes sin recorte ---------- */
+.simple {
+  margin-top: 56px;
+}
+
+.simple .cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.simple .kicker {
+  color: var(--nebulosa-papel);
+}
+
+.simple .titulo {
+  font: 600 32px/1.15 var(--font-display);
+  color: var(--tinta);
+}
+
+.simple .intro,
+.simple .texte,
+.simple .credit {
+  color: var(--cuerpo);
+}
+
+.simple .mosaico {
+  grid-template-columns: 1fr;
+  row-gap: 48px;
+}
+
+.simple .marco,
+.simple .item:first-child .marco {
+  aspect-ratio: auto;
+  border-radius: 8px;
+}
+
+.simple .imagen {
+  height: auto;
+}
+
+.simple .figura:hover .imagen {
+  transform: none;
+}
+
+.simple .titre,
+.simple .item:first-child .titre {
+  font-size: 22px;
+  color: var(--tinta);
+}
+
+.simple .numero {
+  color: var(--nebulosa-papel);
+}

@@ -244,6 +244,36 @@ const crudo = {
     ],
   },
 
+  // Galería «D'autres nuages». Textos descriptivos de lo que se ve; nombre del objeto y crédito por confirmar.
+  galerie: {
+    kicker: 'Galerie',
+    titulo: 'Les piliers ne sont pas seuls',
+    intro: 'Les piliers ne sont qu’un petit coin de ciel. Voici trois autres nébuleuses : aucune ne ressemble aux autres, mais toutes sont faites du même gaz et de la même poussière.',
+    imagenes: [
+      {
+        id: 'creuse',
+        titre: 'Un nuage creusé de l’intérieur',
+        texte: 'Au centre, une grande cavité bleutée, comme une bulle. Sur les bords, la poussière orangée et les filaments sombres résistent encore : c’est le même duel que dans les piliers, entre la lumière des étoiles et le nuage qui les entoure.',
+        alt: 'Nébuleuse orangée et bleue : une vaste cavité lumineuse au centre, entourée de nuages de poussière brune et de filaments sombres, sur un fond semé d’étoiles.',
+        credit: '[À VÉRIFIER] Nom de l’objet · crédit de l’image',
+      },
+      {
+        id: 'dentelle',
+        titre: 'Une dentelle de feu',
+        texte: 'Des milliers de filaments orange s’enchevêtrent autour d’un cœur bleu. Comme pour les piliers, ces couleurs sont une traduction : elles rendent visibles des lumières que nos yeux ne savent pas voir.',
+        alt: 'Nébuleuse en forme d’éclat : un cœur bleu lumineux entouré de filaments orange très fins qui s’étirent vers le haut et vers le bas, sur un fond noir étoilé.',
+        credit: '[À VÉRIFIER] Nom de l’objet · crédit de l’image',
+      },
+      {
+        id: 'sablier',
+        titre: 'Un sablier dans la foule',
+        texte: 'Au centre, un point très brillant. De part et d’autre, un gaz rouge s’étire comme les deux moitiés d’un sablier, traversé de longs voiles bleus. Tout autour, des milliers d’étoiles : on regarde à travers une région très peuplée du ciel.',
+        alt: 'Petite nébuleuse rouge en forme de sablier autour d’un point blanc lumineux, traversée de voiles bleus, au milieu d’un champ d’étoiles très dense.',
+        credit: '[À VÉRIFIER] Nom de l’objet · crédit de l’image',
+      },
+    ],
+  },
+
   cita: {
     texto: 'Ce que nous voyons aujourd’hui a quitté les piliers vers 4500 av. J.-C.',
     autor: '— Point Bleu Pâle',
