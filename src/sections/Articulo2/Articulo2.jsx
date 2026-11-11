@@ -2,13 +2,13 @@
 // Artículo 2 en francés: «Les piliers de la création». Dos modos de lectura: Immersif (hero a pantalla
 // completa + módulos interactivos + cita) y Simple (texto íntegro + versiones estáticas de M1, M2 y M3).
 // La hoja de esta sección va sin bordes (bleed).
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import img1000 from '../../assets/nebulosas/piliers-de-la-creation-1000.webp'
 import img1600 from '../../assets/nebulosas/piliers-de-la-creation-1600.webp'
 import img2560 from '../../assets/nebulosas/piliers-de-la-creation-2560.webp'
+import Cierre from '../../components/Cierre/Cierre.jsx'
 import { texto as t } from './contenido.js'
 import ExplorateurImage from './ExplorateurImage.jsx'
-import Partager from './Partager.jsx'
 import Rico from './Rico.jsx'
 import { NBSP } from './typo.js'
 import Chiffres from './modulos/Chiffres.jsx'
@@ -39,20 +39,6 @@ function leerModo(inicial) {
   return inicial
 }
 
-// Mismo dibujo que LogoMark (rama portada-contraportada). Cambiar por ese componente cuando se una a main.
-function Emblema() {
-  return (
-    <svg width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <ellipse cx="18" cy="18" rx="16" ry="7" transform="rotate(-24 18 18)" stroke="currentColor" strokeWidth="1" strokeDasharray="1.5 3" />
-      <circle cx="18" cy="18" r="5.5" fill="var(--azul-palido)" />
-      <circle cx="4.5" cy="23" r="1.6" fill="currentColor" />
-      <circle cx="31" cy="12.5" r="1.8" fill="currentColor" />
-      <circle cx="9" cy="7" r="1.1" fill="currentColor" opacity="0.7" />
-      <circle cx="28" cy="29" r="1.1" fill="currentColor" opacity="0.7" />
-    </svg>
-  )
-}
-
 function BarraSuperior({ modo, setModo }) {
   return (
     <header className={`${styles.barra} ${modo === 'immersif' ? styles.barraSobreHero : ''}`}>
@@ -61,9 +47,6 @@ function BarraSuperior({ modo, setModo }) {
           <span className={styles.numero}>{t.numero}</span>
           <span className={styles.rubrique}>{t.rubrique}</span>
         </p>
-        <span className={styles.emblema} role="img" aria-label={t.emblema}>
-          <Emblema />
-        </span>
         <div className={styles.barraDer}>
           <div role="group" aria-label={t.modo.grupo} className={styles.toggle}>
             {['immersif', 'simple'].map((m) => (
@@ -210,70 +193,34 @@ function Cita() {
   )
 }
 
-function MasLejos() {
+// Cierre compartido con El tiempo (src/components/Cierre): fuentes, compartir, autor y artículos vecinos.
+function CierreNebulosas() {
   const m = t.masLejos
-  return (
-    <section className={styles.masLejos} aria-labelledby="nebulosas-plus-loin">
-      <h2 id="nebulosas-plus-loin" className={styles.masLejosTitulo}>{m.titulo}</h2>
-      <ul>
-        {m.enlaces.map((e) => (
-          <li key={e.href}>
-            {`${e.fuente} — `}
-            <a href={e.href} target="_blank" rel="noopener noreferrer">
-              {`«${NBSP}${e.titulo}${NBSP}»`}
-              <span className="sr-only">{` ${m.nuevaVentana}`}</span>
-            </a>
-          </li>
-        ))}
-        <li>{m.glosario}</li>
-      </ul>
-      <p className={styles.masLejosCreditos}>{m.creditos}</p>
-    </section>
-  )
-}
-
-function Autor() {
-  return (
-    <div className={styles.autorTarjeta}>
-      <span className={styles.avatar} aria-hidden="true">{t.autor.iniciales}</span>
-      <div className={styles.autorTexto}>
-        <p className={styles.autorEtiqueta}>{t.autor.etiqueta}</p>
-        <p className={styles.autorNombre}>{t.autor.nombre}</p>
-        <p className={styles.autorBio}>{t.autor.bio}</p>
-      </div>
-    </div>
-  )
-}
-
-// Cierre común a los dos modos: lecturas, compartir y autor.
-function Final() {
-  return (
-    <>
-      <MasLejos />
-      <Partager t={t.partager} ancla={t.id} />
-      <Autor />
-    </>
-  )
-}
-
-function Navegacion() {
   const n = t.navegacion
+  const fuentes = [
+    ...m.enlaces.map((e) => (
+      <Fragment key={e.href}>
+        {`${e.fuente} — `}
+        <a href={e.href} target="_blank" rel="noopener noreferrer">
+          {`«${NBSP}${e.titulo}${NBSP}»`}
+          <span className="sr-only">{` ${m.nuevaVentana}`}</span>
+        </a>
+      </Fragment>
+    )),
+    m.glosario,
+  ]
   return (
-    <nav aria-label={n.label} className={styles.prevNext}>
-      <a href={n.anterior.href} className={styles.prev}>
-        <span className={styles.prevNextEtiqueta}>{n.anterior.etiqueta}</span>
-        <span className={styles.prevNextTitulo}>{n.anterior.titulo}</span>
-      </a>
-      <a href={n.siguiente.href} className={`${styles.next} ${styles.oscuro}`}>
-        <span>
-          <span className={styles.prevNextEtiqueta}>{n.siguiente.etiqueta}</span>
-          <span className={styles.prevNextTitulo}>{n.siguiente.titulo}</span>
-        </span>
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={styles.nextFlecha}>
-          <path d="M5 14h18M16 7l7 7-7 7" />
-        </svg>
-      </a>
-    </nav>
+    <Cierre
+      id={t.id}
+      titulo={t.partager.asunto}
+      fuentes={fuentes}
+      nota={m.creditos}
+      auteur={t.autor.nombre}
+      auteurBio={t.autor.bio}
+      anterior={{ href: n.anterior.href, titulo: n.anterior.titulo }}
+      siguiente={{ href: n.siguiente.href, seccion: n.siguiente.seccion, titulo: n.siguiente.titulo }}
+      acento={{ oscuro: 'var(--vino-claro)', papel: 'var(--vino)' }}
+    />
   )
 }
 
@@ -333,7 +280,6 @@ export default function Articulo2({ initialMode = 'immersif' }) {
             <ModuloSonido t={t.sonido} imagen={img1000} />
             <BloqueTexto>
               <Apartado bloque={b.cierre} primero />
-              <Final />
             </BloqueTexto>
           </>
         ) : (
@@ -347,11 +293,10 @@ export default function Articulo2({ initialMode = 'immersif' }) {
             <Apartado bloque={b.naissance} />
             <Apartado bloque={b.encore} />
             <Apartado bloque={b.cierre} />
-            <Final />
           </BloqueTexto>
         )}
 
-        <Navegacion />
+        <CierreNebulosas />
       </article>
     </>
   )

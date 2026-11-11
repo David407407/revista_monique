@@ -6,7 +6,6 @@ const crudo = {
   id: 'nebulosas',
   numero: '05 / 09', // 5.ª de 9 secciones según el orden de CLAUDE.md
   rubrique: 'Nébuleuses',
-  emblema: 'Point Bleu Pâle',
 
   modo: { grupo: 'Mode de lecture', immersif: 'Immersif', simple: 'Simple' },
   sommaire: { texto: 'Sommaire', href: '#indice' },
@@ -276,13 +275,13 @@ const crudo = {
     bio: 'Astrophysicienne et vulgarisatrice.',
   },
 
-  // Vecinos según el orden de CLAUDE.md. Títulos tomados del índice (provisionales).
+  // Vecinos según el orden de CLAUDE.md. Títulos reales de Articulo1 y Articulo3.
   navegacion: {
     label: 'Articles voisins',
     bordeAnterior: '← Article précédent',
     bordeSiguiente: 'Suivant →',
-    anterior: { href: '#agujeros-negros', etiqueta: '← Précédent · Trous noirs', titulo: 'Ce que contient un trou noir' },
-    siguiente: { href: '#tiempo', etiqueta: 'Suivant · Temps', titulo: 'L’horloge qui retarde' },
+    anterior: { href: '#agujeros-negros', etiqueta: '← Précédent · Trous noirs', titulo: 'Aller simple pour un trou noir' },
+    siguiente: { href: '#tiempo', etiqueta: 'Suivant · Temps', seccion: 'Temps', titulo: 'Le temps dans le cosmos' },
   },
 }
 

@@ -1,0 +1,250 @@
+/* Anuncio 2 — misma anatomía que Anuncio1, con la paleta de la revista (tokens.css) */
+.anuncio {
+  position: relative;
+  /* Una pantalla menos el navbar, para que se fije debajo de él y no lo tape */
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  color: var(--papel);
+  background: var(--abismo);
+}
+
+.cabecera,
+.cuerpo,
+.legal {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.cabecera {
+  padding-top: 28px;
+  padding-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.marca {
+  font: 800 22px/1 var(--font-ui);
+  letter-spacing: 0.04em;
+}
+
+.marca em {
+  font: italic 400 22px/1 var(--font-display);
+  color: var(--biolum);
+}
+
+.pill {
+  padding: 5px 12px;
+  font: 700 11px/1.4 var(--font-ui);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--niebla);
+  border: 1px solid var(--borde-oscuro-2);
+  border-radius: 12px;
+}
+
+.cuerpo {
+  flex: 1;
+  padding-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px;
+}
+
+.texto {
+  flex: 999 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+}
+
+.titulo {
+  font: 800 clamp(2.75rem, 5.4vw, 5.25rem) / 0.95 var(--font-ui);
+  letter-spacing: -0.045em;
+  color: var(--papel);
+}
+
+.titulo em {
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--biolum);
+}
+
+.bajada {
+  max-width: 500px;
+  font: 400 20px/1.55 var(--font-body);
+  color: var(--niebla-clara);
+}
+
+.datos {
+  width: 100%;
+  margin: 0;
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  border-top: 1px solid var(--borde-oscuro-2);
+  border-bottom: 1px solid var(--borde-oscuro-2);
+}
+
+.datos div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.datos dt {
+  font: 800 28px/1 var(--font-ui);
+}
+
+.datos dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--niebla);
+}
+
+.cta {
+  min-height: 56px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 16px/1 var(--font-ui);
+  color: var(--abismo);
+  text-decoration: none;
+  background: var(--biolum);
+  border-radius: 28px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  background: var(--papel);
+}
+
+.cta svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta:hover svg {
+  transform: translateX(3px);
+}
+
+/* Cielo de planetario */
+.cielo {
+  flex: 1 1 420px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.cupula {
+  fill: var(--noche);
+  stroke: var(--borde-oscuro-2);
+  stroke-width: 1.2;
+}
+
+.anillo {
+  fill: none;
+  stroke: var(--borde-oscuro);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+.giro {
+  animation: girar 240s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.estrella {
+  fill: var(--niebla-clara);
+  animation: titilar 6s ease-in-out infinite;
+}
+
+@keyframes titilar {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.constelacion {
+  fill: none;
+  stroke: var(--biolum);
+  stroke-width: 1.4;
+  stroke-opacity: 0.55;
+  stroke-linejoin: round;
+}
+
+.puntero {
+  stroke: var(--biolum);
+  stroke-width: 1;
+  stroke-opacity: 0.35;
+  stroke-dasharray: 3 6;
+}
+
+.brillante {
+  fill: var(--papel);
+}
+
+.polar {
+  fill: var(--azul-palido);
+}
+
+.halo {
+  fill: var(--azul-palido);
+  opacity: 0.15;
+}
+
+.etiqueta {
+  font: 500 13px var(--font-mono);
+  fill: var(--niebla);
+}
+
+.cardinal {
+  font: 700 13px var(--font-ui);
+  letter-spacing: 0.15em;
+  fill: var(--niebla);
+}
+
+.legal {
+  padding-bottom: 28px;
+  font: 400 12px/1.5 var(--font-body);
+  color: var(--niebla);
+}
+
+@media (max-width: 640px) {
+  .cabecera,
+  .cuerpo,
+  .legal {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .cuerpo {
+    gap: 32px;
+  }
+
+  .datos {
+    gap: 24px;
+  }
+
+  .cielo {
+    flex-basis: 260px;
+    max-width: 300px;
+  }
+}

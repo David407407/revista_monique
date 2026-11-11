@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Logo from '../Logo/Logo.jsx'
 import styles from './Navbar.module.css'
 
@@ -11,26 +11,39 @@ const secciones = [
   ['#contraportada', 'Archives'],
 ]
 
+// Navbar de cristal (transparente con desenfoque, estilo Apple).
+// Se esconde al bajar y vuelve a aparecer al subir; arriba del todo siempre se ve.
 export default function Navbar() {
   const [abierto, setAbierto] = useState(false)
-  // Transparente mientras está sobre la foto de la portada
-  const [sobreFoto, setSobreFoto] = useState(true)
+  const [oculto, setOculto] = useState(false)
+  const ultimoY = useRef(0)
 
   useEffect(() => {
-    const revisar = () => setSobreFoto(window.scrollY < window.innerHeight * 0.85)
+    // Barato: solo compara posiciones; React ignora setOculto con el mismo valor
+    const revisar = () => {
+      const y = window.scrollY
+      const delta = y - ultimoY.current
+      if (y < 80) setOculto(false)
+      else if (delta > 6) setOculto(true)
+      else if (delta < -6) setOculto(false)
+      if (Math.abs(delta) > 6 || y < 80) ultimoY.current = y
+    }
     revisar()
     window.addEventListener('scroll', revisar, { passive: true })
-    window.addEventListener('resize', revisar)
-    return () => {
-      window.removeEventListener('scroll', revisar)
-      window.removeEventListener('resize', revisar)
-    }
+    return () => window.removeEventListener('scroll', revisar)
   }, [])
 
-  const transparente = sobreFoto && !abierto
+  const escondido = oculto && !abierto
 
   return (
-    <header className={`${styles.navbar} ${transparente ? styles.transparente : ''}`}>
+    <header
+      className={`${styles.navbar} ${escondido ? styles.oculto : ''}`}
+      onFocus={() => setOculto(false)}
+    >
+      {/* Desenfoque progresivo (como iOS): 7 capas de blur creciente, cada una en su franja */}
+      <div className={styles.cristal} aria-hidden="true">
+        {[0, 1, 2, 3, 4, 5, 6].map((i) => <span key={i} />)}
+      </div>
       <div className={styles.inner}>
         <Logo accent="var(--azul-palido)" />
         <span className={styles.divider} aria-hidden="true" />

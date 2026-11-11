@@ -1,0 +1,270 @@
+/* Cierre de artículo: banda oscura + tarjeta clara de esquinas casi rectas */
+.cierre {
+  margin-top: 96px;
+  padding: 80px 0 88px;
+  background: var(--abismo);
+}
+
+.rejilla {
+  max-width: 1520px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) 80px;
+  grid-template-areas: 'izq tarjeta der';
+  align-items: center;
+}
+
+/* Enlaces verticales en los márgenes */
+.lateral {
+  min-width: var(--tap);
+  padding: 16px 10px;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  writing-mode: vertical-rl;
+  font: 500 13px/1 var(--font-ui);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--acento);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lateral:hover {
+  color: var(--papel);
+}
+
+.izq {
+  grid-area: izq;
+  transform: rotate(180deg);
+}
+
+.der {
+  grid-area: der;
+}
+
+/* Tarjeta */
+.tarjeta {
+  grid-area: tarjeta;
+  padding: clamp(32px, 5vw, 76px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px clamp(40px, 6vw, 96px);
+  color: var(--tinta);
+  border-radius: 2px;
+  background:
+    radial-gradient(90% 70% at 12% 18%, #fffdf7 0%, rgba(255, 253, 247, 0) 60%),
+    radial-gradient(70% 55% at 88% 8%, rgba(207, 198, 176, 0.55) 0%, rgba(207, 198, 176, 0) 70%),
+    radial-gradient(60% 50% at 70% 95%, rgba(207, 198, 176, 0.45) 0%, rgba(207, 198, 176, 0) 70%),
+    linear-gradient(180deg, var(--papel) 0%, var(--papel-2) 100%);
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  min-width: 0;
+}
+
+.bloque {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.etiqueta {
+  font: 500 13px/1.3 var(--font-ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.fuentes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fuentes li {
+  padding: 14px 0;
+  font: 400 18px/1.45 var(--font-display);
+  color: var(--tinta);
+  border-top: 1px solid var(--borde-papel);
+}
+
+.fuentes li:last-child {
+  border-bottom: 1px solid var(--borde-papel);
+}
+
+.fuentes a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+}
+
+.fuentes a:hover {
+  color: var(--acento-papel);
+}
+
+.nota {
+  font: 400 12px/1.5 var(--font-mono);
+  color: var(--tinta-suave);
+}
+
+.iconos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-left: -10px;
+}
+
+.iconos a,
+.iconos button {
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  color: var(--tinta);
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.iconos a:hover,
+.iconos button:hover {
+  color: var(--acento-papel);
+  background: rgba(207, 198, 176, 0.35);
+}
+
+.aviso {
+  margin-left: 8px;
+  font: 400 12px/1 var(--font-mono);
+  color: var(--acento-papel);
+}
+
+.nombre {
+  font: 400 clamp(2rem, 3.4vw, 2.75rem) / 1.05 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--tinta);
+}
+
+.bio {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--tinta);
+}
+
+/* Barra «À suivre» (abajo a la izquierda, como una línea de anuncio discreta) */
+.suivant {
+  grid-column: 1 / -1;
+  justify-self: start;
+  width: min(100%, 680px);
+  padding: 10px 10px 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: var(--tinta);
+  text-decoration: none;
+  background: rgba(255, 253, 247, 0.6);
+  border: 1px solid var(--borde-papel);
+  border-radius: 2px;
+  transition: border-color 0.2s;
+}
+
+.suivant:hover {
+  border-color: var(--tinta);
+}
+
+.suivantTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.suivantEtiqueta {
+  font: 500 11px/1.3 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.suivantTitulo {
+  font: 400 20px/1.25 var(--font-display);
+}
+
+.boton {
+  flex: none;
+  min-height: var(--tap);
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  font: 600 13px/1 var(--font-ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--papel);
+  background: var(--acento-papel);
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+.suivant:hover .boton {
+  background: var(--tinta);
+}
+
+@media (max-width: 900px) {
+  .tarjeta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Celular: los enlaces laterales pasan abajo, en horizontal */
+@media (max-width: 760px) {
+  .cierre {
+    margin-top: 64px;
+    padding: 40px 8px 32px;
+  }
+
+  .rejilla {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'tarjeta tarjeta'
+      'izq der';
+    row-gap: 16px;
+  }
+
+  .lateral {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 12px;
+  }
+
+  .izq {
+    justify-self: start;
+  }
+
+  .der {
+    justify-self: end;
+  }
+
+  .tarjeta {
+    padding: 32px 20px;
+    gap: 40px;
+  }
+
+  .columna {
+    gap: 40px;
+  }
+
+  .suivant {
+    padding: 10px 10px 10px 16px;
+  }
+
+  .boton {
+    padding: 0 16px;
+  }
+}

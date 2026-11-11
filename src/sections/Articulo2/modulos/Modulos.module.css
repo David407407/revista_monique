@@ -1,23 +1,37 @@
-/* Módulos interactivos de la sección Nebulosas (tarjeta oscura común + piezas de cada módulo).
-   Las variables de color (--noche-azul, --calido, --exp-*) vienen de .hoja en Articulo2.module.css. */
+/* Módulos interactivos de la sección Nebulosas: estilo «Papier et vin».
+   Tarjeta clara y mate (papel con grano, tinta, líneas finas) con un único acento rojo vino (--vino).
+   Sin sombras, brillos ni degradados. Las variables (--vino, --pad…) vienen de .hoja en Articulo2.module.css. */
 
 /* ---------- Tarjeta común ---------- */
 .modulo {
+  position: relative;
+  isolation: isolate;
   width: calc(100% - 2 * var(--pad));
   max-width: calc(1440px - 80px);
   margin: 96px auto 0;
-  padding: 40px;
+  padding: clamp(28px, 5vw, 72px);
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
-  border-radius: 20px;
-  background: var(--noche-azul);
-  color: var(--papel);
+  gap: 48px clamp(40px, 7vw, 112px);
+  color: var(--tinta);
+  background: var(--papel-2);
+  border: 1px solid var(--borde-papel);
+}
+
+/* Grano de papel impreso */
+.modulo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.6;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 .modulo :focus-visible {
-  outline: 2px solid var(--calido);
-  outline-offset: 2px;
+  outline: 1px solid var(--vino);
+  outline-offset: 3px;
 }
 
 .cabecera {
@@ -29,28 +43,37 @@
 }
 
 .kicker {
-  font: 700 12px/1.2 var(--font-ui);
-  letter-spacing: 0.16em;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 500 12px/1.2 var(--font-ui);
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--nebulosa);
+  color: var(--vino);
+}
+
+.kicker::before {
+  content: '';
+  width: 36px;
+  height: 1px;
+  background: currentColor;
 }
 
 .titulo {
-  font-size: 34px;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--papel);
+  font: 400 clamp(2rem, 3.4vw, 2.875rem) / 1.08 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--tinta);
 }
 
 .apoyo {
   font: 400 17px/1.65 var(--font-body);
-  color: var(--exp-hecho);
+  color: var(--tinta-suave);
 }
 
 .cifra {
-  font: 800 clamp(2.5rem, 5vw, 4.5rem) / 1.05 var(--font-display);
-  letter-spacing: -0.02em;
-  color: var(--calido);
+  font: 400 clamp(2.75rem, 5.5vw, 5rem) / 1 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--vino);
 }
 
 .cifra:focus {
@@ -60,7 +83,7 @@
 .dato,
 .nota {
   font: 400 13px/1.5 var(--font-mono);
-  color: var(--niebla);
+  color: var(--tinta-suave);
 }
 
 .nota {
@@ -99,16 +122,26 @@
 .fichaOscura {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-top: 20px;
-  border-top: 1px solid var(--exp-separador);
+  gap: 14px;
+  padding-top: 24px;
+  border-top: 2px solid var(--tinta);
+}
+
+.fichaOscura .dato {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vino);
+}
+
+.fichaOscura .apoyo {
+  font: italic 400 18px/1.6 var(--font-display);
 }
 
 .fichaTitulo {
-  font-size: 26px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--calido);
+  font: 400 clamp(1.75rem, 2.6vw, 2.25rem) / 1.1 var(--font-display);
+  letter-spacing: -0.015em;
+  color: var(--tinta);
 }
 
 /* ---------- Píldoras ---------- */
@@ -124,24 +157,25 @@
   justify-content: center;
   min-height: var(--tap);
   padding: 0 18px;
-  border: 1px solid var(--exp-borde);
-  border-radius: 22px;
+  border: 1px solid var(--borde-papel);
+  border-radius: 0;
   background: transparent;
-  color: var(--papel);
-  font: 600 14px/1.2 var(--font-ui);
+  color: var(--tinta);
+  font: 500 14px/1.2 var(--font-ui);
   text-align: center;
   cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
 
 .pildora:hover {
-  border-color: var(--calido);
+  border-color: var(--tinta);
 }
 
 .pildora[aria-pressed='true'],
 .pildora[aria-current] {
-  border-color: var(--calido);
-  background: var(--calido);
-  color: var(--noche-azul);
+  border-color: var(--tinta);
+  background: var(--tinta);
+  color: var(--papel);
 }
 
 .pildora[aria-disabled='true'] {
@@ -160,7 +194,7 @@
 .pildoraGrande {
   min-width: 140px;
   min-height: 56px;
-  border-radius: 28px;
+  border-radius: 0;
   font-size: 18px;
 }
 
@@ -175,11 +209,37 @@
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-radius: 14px;
   background: var(--noche-profunda);
 }
 
+/* Explorez l’image: el visor ocupa todo el alto de su columna (a la par del texto de la derecha) */
+.visorLleno {
+  flex: 1 1 auto;
+  aspect-ratio: auto;
+  min-height: clamp(280px, 34vw, 520px);
+}
+
+/* En pantalla ancha, grid de dos columnas: la columna de la imagen toma el alto de la del texto */
+@media (min-width: 900px) {
+  .explorador {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  }
+
+  /* filas de grid: la imagen ocupa todo lo que deja el crédito */
+  .explorador .colAncha {
+    display: grid;
+    grid-template-rows: minmax(320px, 1fr) auto;
+  }
+}
+
+.visorLleno .visorImg {
+  position: absolute;
+  inset: 0;
+}
+
 .visorImg {
+  display: block;
   width: 100%;
   height: 100%;
   max-width: none;
@@ -197,80 +257,9 @@
   left: 16px;
   bottom: 14px;
   padding: 5px 10px;
-  border-radius: 10px;
-  background: rgba(6, 12, 34, 0.7);
+  background: rgba(26, 23, 20, 0.72);
   font: 400 12px/1.3 var(--font-mono);
   color: var(--papel);
-}
-
-/* ---------- M1 Échelle ---------- */
-.resultado {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.barraLog {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0 4px;
-}
-
-.barraPista {
-  position: relative;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--exp-borde);
-}
-
-.barraMarca {
-  position: absolute;
-  top: -5px;
-  width: 1px;
-  height: 16px;
-  background: var(--niebla);
-}
-
-.barraPunto {
-  position: absolute;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  margin: -9px 0 0 -9px;
-  border-radius: 50%;
-  background: var(--calido);
-  box-shadow: 0 0 0 4px rgba(255, 162, 92, 0.25);
-  transition: left 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.barraEtiquetas {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  font: 400 12px/1.3 var(--font-mono);
-  color: var(--niebla);
-}
-
-.barraEtiquetas span {
-  max-width: 7.5em;
-  text-align: center;
-}
-
-.barraEtiquetas span:first-child {
-  text-align: left;
-}
-
-.barraEtiquetas span:last-child {
-  text-align: right;
-}
-
-.extra {
-  flex: 1 1 100%;
-  padding-top: 20px;
-  border-top: 1px solid var(--exp-separador);
-  font: 400 13px/1.6 var(--font-mono);
-  color: var(--niebla);
 }
 
 /* ---------- M2 Machine ---------- */
@@ -286,33 +275,30 @@
 }
 
 .curseur::-webkit-slider-runnable-track {
-  height: 6px;
-  border-radius: 3px;
-  background: linear-gradient(to right, var(--calido) var(--progreso), var(--exp-borde) var(--progreso));
+  height: 2px;
+  background: linear-gradient(to right, var(--vino) var(--progreso), var(--borde-papel) var(--progreso));
 }
 
 .curseur::-moz-range-track {
-  height: 6px;
-  border-radius: 3px;
-  background: linear-gradient(to right, var(--calido) var(--progreso), var(--exp-borde) var(--progreso));
+  height: 2px;
+  background: linear-gradient(to right, var(--vino) var(--progreso), var(--borde-papel) var(--progreso));
 }
 
 .curseur::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
-  margin-top: -9px;
-  border: 3px solid var(--noche-azul);
-  border-radius: 50%;
-  background: var(--calido);
+  width: 4px;
+  height: 26px;
+  margin-top: -12px;
+  border: 0;
+  background: var(--tinta);
 }
 
 .curseur::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border: 3px solid var(--noche-azul);
-  border-radius: 50%;
-  background: var(--calido);
+  width: 4px;
+  height: 26px;
+  border: 0;
+  border-radius: 0;
+  background: var(--tinta);
 }
 
 .pistaEventos {
@@ -323,16 +309,14 @@
 
 .puntoEvento {
   position: absolute;
-  top: 0;
-  width: 8px;
-  height: 8px;
-  margin-left: -4px;
-  border-radius: 50%;
-  background: var(--exp-borde);
+  top: -2px;
+  width: 1px;
+  height: 10px;
+  background: var(--borde-papel);
 }
 
 .puntoAlcanzado {
-  background: var(--calido);
+  background: var(--vino);
 }
 
 .lecturas {
@@ -340,6 +324,9 @@
   flex-direction: column;
   gap: 6px;
   margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--borde-papel);
+  border-bottom: 1px solid var(--borde-papel);
   font: 400 13px/1.5 var(--font-mono);
 }
 
@@ -350,12 +337,12 @@
 }
 
 .lecturas dt {
-  color: var(--niebla);
+  color: var(--tinta-suave);
 }
 
 .lecturas dd {
   margin: 0;
-  color: var(--papel);
+  color: var(--tinta);
 }
 
 /* ---------- M3 Palette ---------- */
@@ -372,23 +359,23 @@
 }
 
 .reglaEje {
-  fill: var(--exp-borde);
+  fill: var(--borde-papel);
 }
 
 .reglaTick {
-  stroke: var(--niebla);
+  stroke: var(--tinta-suave);
   stroke-width: 1;
 }
 
 .reglaGuia {
-  stroke: var(--niebla);
+  stroke: var(--tinta-suave);
   stroke-width: 1;
   stroke-dasharray: 2 3;
 }
 
 .reglaTexto {
   font: 400 12px var(--font-mono);
-  fill: var(--niebla);
+  fill: var(--tinta-suave);
 }
 
 .marcadorFiltro {
@@ -400,15 +387,13 @@
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 50%;
   background: transparent;
   cursor: pointer;
 }
 
 .marcadorFiltro span {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  width: 14px;
+  height: 14px;
   background: var(--color);
   transition: transform 0.2s;
 }
@@ -418,9 +403,8 @@
 }
 
 .marcadorFiltro[aria-pressed='true'] span {
-  box-shadow:
-    0 0 0 3px var(--noche-azul),
-    0 0 0 5px var(--papel);
+  outline: 1px solid var(--tinta);
+  outline-offset: 3px;
   transform: scale(1.25);
 }
 
@@ -433,10 +417,9 @@
 .muestra {
   display: inline-block;
   flex: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  vertical-align: -5px;
+  width: 18px;
+  height: 18px;
+  vertical-align: -3px;
 }
 
 /* ---------- M4 Quiz ---------- */
@@ -449,9 +432,8 @@
 }
 
 .quizPregunta {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font: 400 clamp(1.625rem, 3vw, 2.25rem) / 1.2 var(--font-display);
+  letter-spacing: -0.015em;
 }
 
 .quizPregunta:focus {
@@ -475,7 +457,7 @@
 }
 
 .quizMal {
-  color: var(--nebulosa);
+  color: var(--vino);
 }
 
 /* ---------- M5 Sonido ---------- */
@@ -486,8 +468,7 @@
   left: 0;
   width: 2px;
   margin-left: -1px;
-  background: var(--calido);
-  box-shadow: 0 0 12px rgba(255, 162, 92, 0.8);
+  background: var(--papel);
 }
 
 .volumen {
@@ -527,9 +508,9 @@
 }
 
 .chiffreCifra {
-  font: 800 54px/1 var(--font-display);
-  letter-spacing: -0.02em;
-  color: var(--nebulosa-papel);
+  font: 400 60px/1 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--vino);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -626,13 +607,10 @@
 @media (max-width: 600px) {
   .modulo {
     margin-top: 64px;
-    padding: 20px;
-    gap: 24px;
+    padding: 28px 20px;
+    gap: 32px;
   }
 
-  .titulo {
-    font-size: 28px;
-  }
 
   .regla {
     margin: 0 12px;
@@ -654,7 +632,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .visorZoom,
-  .barraPunto,
   .marcadorFiltro span {
     transition: none;
   }

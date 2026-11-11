@@ -7,9 +7,9 @@ export default function ExplorateurImage({ t, imagen }) {
   const d = t.defs[detail]
 
   return (
-    <section aria-labelledby="nebulosas-explorer" className={s.modulo}>
+    <section aria-labelledby="nebulosas-explorer" className={`${s.modulo} ${s.explorador}`}>
       <div className={s.colAncha}>
-        <div className={s.visor}>
+        <div className={`${s.visor} ${s.visorLleno}`}>
           <img
             src={imagen.src}
             srcSet={imagen.srcSet}

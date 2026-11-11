@@ -2,6 +2,7 @@
 // Todo el texto visible va en francés.
 import { useState } from 'react'
 import { LogoMark } from '../Logo/Logo.jsx'
+import Cierre from '../Cierre/Cierre.jsx'
 import styles from './Article.module.css'
 
 const CLAVE_MODO = 'pbp-modo-lectura'
@@ -61,10 +62,12 @@ function Partager({ id, titulo }) {
  *  id, numero ("03 / 09"), seccion, acento ({ oscuro, papel }), titulo (texto plano para compartir),
  *  tituloJsx, auteur, auteurBio, date, lecture, tags[], hero { src, srcSet, alt, credito, posicion },
  *  cuerpo (antes de la cita), notas[], cita { texto, autor }, figura { svg, pie }, cuerpoFinal,
- *  sources[], anterior { href, titulo }, siguiente { href, seccion, titulo }
+ *  sources[], anterior { href, titulo }, siguiente { href, seccion, titulo },
+ *  variante: 'afilado' (opcional) = esquinas casi rectas y cierre con la tarjeta <Cierre>. Sin ella, todo queda igual.
  */
 export default function Article(props) {
-  const { id, numero, seccion, acento, titulo, tituloJsx, auteur, auteurBio, date, lecture, tags = [], hero, cuerpo, notas = [], cita, figura, cuerpoFinal, sources = [], anterior, siguiente } = props
+  const { id, numero, seccion, acento, titulo, tituloJsx, auteur, auteurBio, date, lecture, tags = [], hero, cuerpo, notas = [], cita, figura, cuerpoFinal, sources = [], anterior, siguiente, variante } = props
+  const afilado = variante === 'afilado'
   const [modo, setModo] = useState(leerModo)
   const immersif = modo === 'immersif'
 
@@ -78,7 +81,7 @@ export default function Article(props) {
   }
 
   return (
-    <article id={id} className={styles.article} style={{ '--acento': acento.oscuro, '--acento-papel': acento.papel }} aria-labelledby={`${id}-titre`} data-modo={modo}>
+    <article id={id} className={`${styles.article} ${afilado ? styles.afilado : ''}`} style={{ '--acento': acento.oscuro, '--acento-papel': acento.papel }} aria-labelledby={`${id}-titre`} data-modo={modo}>
       {anterior && <a href={anterior.href} className={`${styles.borde} ${styles.bordeIzq}`}>← Précédent</a>}
       {siguiente && <a href={siguiente.href} className={`${styles.borde} ${styles.bordeDer}`}>Article suivant →</a>}
 
@@ -87,7 +90,7 @@ export default function Article(props) {
           <span className={styles.numero}>{numero}</span>
           <span className={styles.seccion}>{seccion}</span>
         </div>
-        <span className={styles.marca} aria-hidden="true"><LogoMark size={30} accent="var(--acento-papel)" /></span>
+        {!afilado && <span className={styles.marca} aria-hidden="true"><LogoMark size={30} accent="var(--acento-papel)" /></span>}
         <div className={styles.cabeceraDer}>
           <div role="group" aria-label="Mode de lecture" className={styles.modo}>
             <button type="button" aria-pressed={immersif} onClick={() => cambiarModo('immersif')}>Immersif</button>
@@ -102,7 +105,7 @@ export default function Article(props) {
 
       {immersif ? (
         <div className={styles.hero}>
-          <img src={hero.src} srcSet={hero.srcSet} sizes="(max-width: 640px) 100vw, 1360px" alt={hero.alt} loading="lazy" style={{ objectPosition: hero.posicion || 'center' }} />
+          <img src={hero.src} srcSet={hero.srcSet} sizes={afilado ? '100vw' : '(max-width: 640px) 100vw, 1360px'} alt={hero.alt} loading="lazy" style={{ objectPosition: hero.posicion || 'center' }} />
           <div className={styles.heroTexto}>
             <h1 id={`${id}-titre`} className={styles.titulo}>{tituloJsx}</h1>
             <span className={styles.firma}>Écrit par {auteur} · {date}</span>
@@ -161,29 +164,36 @@ export default function Article(props) {
         <div className={styles.cuerpo}>
           {cuerpoFinal}
 
-          {sources.length > 0 && (
-            <div className={styles.saberMas}>
-              <span className={styles.etiquetaAcento}>Pour en savoir plus</span>
-              <ul>
-                {sources.map((s, i) => <li key={i}>{s}</li>)}
-              </ul>
-            </div>
+          {!afilado && (
+            <>
+              {sources.length > 0 && (
+                <div className={styles.saberMas}>
+                  <span className={styles.etiquetaAcento}>Pour en savoir plus</span>
+                  <ul>
+                    {sources.map((s, i) => <li key={i}>{s}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              <Partager id={id} titulo={titulo} />
+
+              <div className={styles.autor}>
+                <span className={styles.avatar} aria-hidden="true">{iniciales(auteur)}</span>
+                <div>
+                  <span className={styles.etiqueta}>Écrit par</span>
+                  <span className={styles.autorNombre}>{auteur}</span>
+                  <p>{auteurBio}</p>
+                </div>
+              </div>
+            </>
           )}
-
-          <Partager id={id} titulo={titulo} />
-
-          <div className={styles.autor}>
-            <span className={styles.avatar} aria-hidden="true">{iniciales(auteur)}</span>
-            <div>
-              <span className={styles.etiqueta}>Écrit par</span>
-              <span className={styles.autorNombre}>{auteur}</span>
-              <p>{auteurBio}</p>
-            </div>
-          </div>
         </div>
         <div aria-hidden="true" className={styles.huecoDer} />
       </div>
 
+      {afilado ? (
+        <Cierre id={id} titulo={titulo} fuentes={sources} auteur={auteur} auteurBio={auteurBio} anterior={anterior} siguiente={siguiente} />
+      ) : (
       <nav aria-label="Navigation entre les articles" className={styles.prevNext}>
         {anterior && (
           <a href={anterior.href} className={styles.prev}>
@@ -201,6 +211,7 @@ export default function Article(props) {
           </a>
         )}
       </nav>
+      )}
     </article>
   )
 }

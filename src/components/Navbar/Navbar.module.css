@@ -1,22 +1,58 @@
+/* Cristal al estilo iOS, sin borde. Desenfoque PROGRESIVO: 7 capas apiladas, de blur fuerte arriba
+   a casi nada abajo; cada capa solo se ve en su franja (máscara) y se funde con la siguiente.
+   El tinte oscuro baja con un degradado suavizado. Así no hay corte visible.
+   Se esconde al bajar (clase .oculto) y reaparece al subir. */
 .navbar {
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
   font-family: var(--font-ui);
   color: var(--papel);
-  background: rgba(11, 26, 23, 0.9);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--borde-oscuro);
-  transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Sobre la foto de la portada: sin fondo, como en Aeon */
-.transparente {
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-bottom-color: transparent;
+.cristal {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  height: calc(100% + 64px);
+  pointer-events: none;
+  /* tinte con curva suave (muchos puntos) para que no se vean escalones */
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 17, 15, 0.62) 0%,
+    rgba(7, 17, 15, 0.58) 18%,
+    rgba(7, 17, 15, 0.5) 32%,
+    rgba(7, 17, 15, 0.39) 45%,
+    rgba(7, 17, 15, 0.27) 57%,
+    rgba(7, 17, 15, 0.16) 69%,
+    rgba(7, 17, 15, 0.08) 80%,
+    rgba(7, 17, 15, 0.025) 91%,
+    rgba(7, 17, 15, 0) 100%
+  );
+}
+
+.cristal span {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(var(--b)) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--b)) saturate(130%);
+  mask-image: var(--m);
+  -webkit-mask-image: var(--m);
+}
+
+/* De abajo (blur mínimo) hacia arriba (blur máximo); cada franja se superpone con la vecina */
+.cristal span:nth-child(1) { --b: 0.5px; --m: linear-gradient(to top, transparent 0%, #000 12.5%, #000 25%, transparent 37.5%); }
+.cristal span:nth-child(2) { --b: 1px;   --m: linear-gradient(to top, transparent 12.5%, #000 25%, #000 37.5%, transparent 50%); }
+.cristal span:nth-child(3) { --b: 2px;   --m: linear-gradient(to top, transparent 25%, #000 37.5%, #000 50%, transparent 62.5%); }
+.cristal span:nth-child(4) { --b: 4px;   --m: linear-gradient(to top, transparent 37.5%, #000 50%, #000 62.5%, transparent 75%); }
+.cristal span:nth-child(5) { --b: 8px;   --m: linear-gradient(to top, transparent 50%, #000 62.5%, #000 75%, transparent 87.5%); }
+.cristal span:nth-child(6) { --b: 14px;  --m: linear-gradient(to top, transparent 62.5%, #000 75%, #000 87.5%, transparent 100%); }
+.cristal span:nth-child(7) { --b: 24px;  --m: linear-gradient(to top, transparent 75%, #000 87.5%, #000 100%); }
+
+/* Sube también la franja difuminada de abajo */
+.oculto {
+  transform: translateY(calc(-100% - 70px));
 }
 
 .inner {
@@ -32,12 +68,7 @@
 .divider {
   width: 1px;
   height: 40px;
-  background: var(--borde-oscuro);
-  transition: background 0.4s;
-}
-
-.transparente .divider {
-  background: rgba(246, 241, 228, 0.3);
+  background: rgba(246, 241, 228, 0.25);
 }
 
 .nav {
@@ -104,8 +135,11 @@
     align-items: stretch;
     gap: 0;
     padding: 8px 16px 20px;
-    background: var(--abismo);
-    border-bottom: 1px solid var(--borde-oscuro);
+    /* casi opaco para que el menú se lea sobre cualquier fondo */
+    background: rgba(11, 26, 23, 0.94);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(246, 241, 228, 0.1);
     visibility: hidden;
     opacity: 0;
     transform: translateY(-8px);
@@ -121,6 +155,6 @@
   .nav a {
     padding: 14px 0;
     font-size: 20px;
-    border-bottom: 1px solid var(--borde-oscuro);
+    border-bottom: 1px solid rgba(246, 241, 228, 0.1);
   }
 }

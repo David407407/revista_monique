@@ -529,6 +529,113 @@
   font: 800 26px/1.15 var(--font-display);
 }
 
+/* Variante «afilado» (opt-in con <Article variante="afilado">): esquinas casi rectas y cierre con <Cierre> */
+.afilado {
+  padding-bottom: 0;
+}
+
+.afilado .hero,
+.afilado .figuraFondo {
+  border-radius: 2px;
+}
+
+/* La figura pasa a papel, como las tarjetas del artículo */
+.afilado .figuraFondo {
+  background: var(--papel-2);
+  border: 1px solid var(--borde-papel);
+}
+
+/* Immersif / Simple: botones de cristal, translúcidos, que dejan ver el fondo */
+.afilado .modo {
+  padding: 3px;
+  background: rgba(26, 23, 20, 0.05);
+  border: 1px solid rgba(26, 23, 20, 0.14);
+  border-radius: 2px;
+  box-shadow: none;
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+.afilado .modo button {
+  min-height: 38px;
+  padding: 0 16px;
+  font-weight: 500;
+  color: var(--tinta-suave);
+  border-radius: 1px;
+}
+
+.afilado .modo button[aria-pressed='true'] {
+  font-weight: 600;
+  color: var(--tinta);
+  background: rgba(26, 23, 20, 0.1);
+}
+
+.afilado .tags span {
+  border-radius: 2px;
+}
+
+/* Hero a pantalla completa (solo Immersif): la foto ocupa todo el alto bajo el navbar
+   y la cabecera del artículo flota encima, en claro, como en Nebulosas. */
+.afilado[data-modo='immersif'] .cabecera {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: var(--papel);
+}
+
+.afilado[data-modo='immersif'] .numero,
+.afilado[data-modo='immersif'] .sommaire {
+  color: var(--papel);
+}
+
+.afilado[data-modo='immersif'] .seccion {
+  color: var(--acento);
+}
+
+.afilado[data-modo='immersif'] .modo {
+  background: rgba(246, 241, 228, 0.08);
+  border-color: rgba(246, 241, 228, 0.26);
+}
+
+.afilado[data-modo='immersif'] .modo button {
+  color: rgba(246, 241, 228, 0.72);
+}
+
+.afilado[data-modo='immersif'] .modo button[aria-pressed='true'] {
+  color: var(--papel);
+  background: rgba(246, 241, 228, 0.18);
+}
+
+.afilado .hero {
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100dvh - var(--nav-h));
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Velo arriba para que la cabecera se lea sobre cualquier foto */
+.afilado .hero::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: 200px;
+  background: linear-gradient(to bottom, rgba(5, 5, 5, 0.6), rgba(5, 5, 5, 0));
+  pointer-events: none;
+}
+
+.afilado .heroTexto {
+  padding-bottom: 72px;
+}
+
+.afilado .credito {
+  top: auto;
+  bottom: 16px;
+  right: 16px;
+}
+
 @media (max-width: 1100px) {
   .borde {
     display: none;
