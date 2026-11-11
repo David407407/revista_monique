@@ -1,58 +1,75 @@
-/* Cristal al estilo iOS, sin borde. Desenfoque PROGRESIVO: 7 capas apiladas, de blur fuerte arriba
-   a casi nada abajo; cada capa solo se ve en su franja (máscara) y se funde con la siguiente.
-   El tinte oscuro baja con un degradado suavizado. Así no hay corte visible.
-   Se esconde al bajar (clase .oculto) y reaparece al subir. */
 .navbar {
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
   font-family: var(--font-ui);
   color: var(--papel);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cristal {
+/* Cristal tipo iOS: el desenfoque es máximo arriba y se apaga hacia abajo, sin borde ni fondo plano.
+   Seis capas de blur con la misma caja; solo cambia su máscara (cada una empieza a apagarse 12.5% más
+   arriba que la anterior), así que no hay bordes de capa que se vean como rayas. Se apilan: cada capa
+   difumina lo que dejó la anterior, y el radio total (~12px arriba) baja suave hasta 0 abajo. */
+.glass {
   position: absolute;
-  z-index: -1;
   inset: 0 0 auto;
-  height: calc(100% + 64px);
+  height: calc(var(--nav-h) + 32px); /* baja más allá de la barra para que no haya un corte visible */
+  z-index: -1;
   pointer-events: none;
-  /* tinte con curva suave (muchos puntos) para que no se vean escalones */
-  background: linear-gradient(
-    to bottom,
-    rgba(7, 17, 15, 0.62) 0%,
-    rgba(7, 17, 15, 0.58) 18%,
-    rgba(7, 17, 15, 0.5) 32%,
-    rgba(7, 17, 15, 0.39) 45%,
-    rgba(7, 17, 15, 0.27) 57%,
-    rgba(7, 17, 15, 0.16) 69%,
-    rgba(7, 17, 15, 0.08) 80%,
-    rgba(7, 17, 15, 0.025) 91%,
-    rgba(7, 17, 15, 0) 100%
-  );
 }
 
-.cristal span {
+.glass span {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(var(--b)) saturate(130%);
-  -webkit-backdrop-filter: blur(var(--b)) saturate(130%);
-  mask-image: var(--m);
-  -webkit-mask-image: var(--m);
+  --mascara: linear-gradient(#000 var(--rampa), transparent calc(var(--rampa) + 25%));
+  -webkit-mask-image: var(--mascara);
+  mask-image: var(--mascara);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
 }
 
-/* De abajo (blur mínimo) hacia arriba (blur máximo); cada franja se superpone con la vecina */
-.cristal span:nth-child(1) { --b: 0.5px; --m: linear-gradient(to top, transparent 0%, #000 12.5%, #000 25%, transparent 37.5%); }
-.cristal span:nth-child(2) { --b: 1px;   --m: linear-gradient(to top, transparent 12.5%, #000 25%, #000 37.5%, transparent 50%); }
-.cristal span:nth-child(3) { --b: 2px;   --m: linear-gradient(to top, transparent 25%, #000 37.5%, #000 50%, transparent 62.5%); }
-.cristal span:nth-child(4) { --b: 4px;   --m: linear-gradient(to top, transparent 37.5%, #000 50%, #000 62.5%, transparent 75%); }
-.cristal span:nth-child(5) { --b: 8px;   --m: linear-gradient(to top, transparent 50%, #000 62.5%, #000 75%, transparent 87.5%); }
-.cristal span:nth-child(6) { --b: 14px;  --m: linear-gradient(to top, transparent 62.5%, #000 75%, #000 87.5%, transparent 100%); }
-.cristal span:nth-child(7) { --b: 24px;  --m: linear-gradient(to top, transparent 75%, #000 87.5%, #000 100%); }
+/* --blur: radio de la capa. --rampa: dónde empieza a apagarse (la rampa mide 25% del alto). */
+.glass span:nth-child(1) { --blur: 2px;   --rampa: 75%; }
+.glass span:nth-child(2) { --blur: 3.5px; --rampa: 62.5%; }
+.glass span:nth-child(3) { --blur: 4.5px; --rampa: 50%; }
+.glass span:nth-child(4) { --blur: 5.3px; --rampa: 37.5%; }
+.glass span:nth-child(5) { --blur: 6px;   --rampa: 25%; }
+.glass span:nth-child(6) { --blur: 6.6px; --rampa: 12.5%; }
 
-/* Sube también la franja difuminada de abajo */
-.oculto {
-  transform: translateY(calc(-100% - 70px));
+/* Tinte neutro (grafito, no el verde de --abismo) con caída suavizada (smoothstep) para que no haya
+   escalón visible; sostiene el texto crema sobre las hojas claras (contraste > 6:1 sobre papel). */
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grafito);
+  --mascara: linear-gradient(
+    rgb(0 0 0 / 0.74) 38.5%, rgb(0 0 0 / 0.71) 46.2%, rgb(0 0 0 / 0.62) 53.8%, rgb(0 0 0 / 0.51) 61.5%,
+    rgb(0 0 0 / 0.37) 69.2%, rgb(0 0 0 / 0.23) 76.9%, rgb(0 0 0 / 0.12) 84.6%, rgb(0 0 0 / 0.03) 92.3%, transparent
+  );
+  -webkit-mask-image: var(--mascara);
+  mask-image: var(--mascara);
+}
+
+/* Sobre la foto de la portada: sin cristal, como en Aeon */
+.glass span,
+.glass::after {
+  transition: opacity 0.4s;
+}
+
+.transparente .glass span,
+.transparente .glass::after {
+  opacity: 0;
+}
+
+/* Menú móvil abierto: la cabecera pasa a sólida del mismo color que el panel (sin cristal, que si no el
+   blur mezcla el crema de debajo en su borde) para que no haya un corte entre ambos */
+.navbar:has(.open) {
+  background: var(--abismo);
+}
+
+.navbar:has(.open) .glass {
+  display: none;
 }
 
 .inner {
@@ -68,7 +85,12 @@
 .divider {
   width: 1px;
   height: 40px;
-  background: rgba(246, 241, 228, 0.25);
+  background: var(--borde-oscuro);
+  transition: background 0.4s;
+}
+
+.transparente .divider {
+  background: rgba(246, 241, 228, 0.3);
 }
 
 .nav {
@@ -135,11 +157,8 @@
     align-items: stretch;
     gap: 0;
     padding: 8px 16px 20px;
-    /* casi opaco para que el menú se lea sobre cualquier fondo */
-    background: rgba(11, 26, 23, 0.94);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid rgba(246, 241, 228, 0.1);
+    background: var(--abismo);
+    border-bottom: 1px solid var(--borde-oscuro);
     visibility: hidden;
     opacity: 0;
     transform: translateY(-8px);
@@ -155,6 +174,6 @@
   .nav a {
     padding: 14px 0;
     font-size: 20px;
-    border-bottom: 1px solid rgba(246, 241, 228, 0.1);
+    border-bottom: 1px solid var(--borde-oscuro);
   }
 }

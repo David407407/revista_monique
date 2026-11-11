@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Logo from '../Logo/Logo.jsx'
 import styles from './Navbar.module.css'
 
@@ -11,38 +11,29 @@ const secciones = [
   ['#contraportada', 'Archives'],
 ]
 
-// Navbar de cristal (transparente con desenfoque, estilo Apple).
-// Se esconde al bajar y vuelve a aparecer al subir; arriba del todo siempre se ve.
 export default function Navbar() {
   const [abierto, setAbierto] = useState(false)
-  const [oculto, setOculto] = useState(false)
-  const ultimoY = useRef(0)
+  // Transparente mientras está sobre la foto de la portada
+  const [sobreFoto, setSobreFoto] = useState(true)
 
   useEffect(() => {
-    // Barato: solo compara posiciones; React ignora setOculto con el mismo valor
-    const revisar = () => {
-      const y = window.scrollY
-      const delta = y - ultimoY.current
-      if (y < 80) setOculto(false)
-      else if (delta > 6) setOculto(true)
-      else if (delta < -6) setOculto(false)
-      if (Math.abs(delta) > 6 || y < 80) ultimoY.current = y
-    }
+    const revisar = () => setSobreFoto(window.scrollY < window.innerHeight * 0.85)
     revisar()
     window.addEventListener('scroll', revisar, { passive: true })
-    return () => window.removeEventListener('scroll', revisar)
+    window.addEventListener('resize', revisar)
+    return () => {
+      window.removeEventListener('scroll', revisar)
+      window.removeEventListener('resize', revisar)
+    }
   }, [])
 
-  const escondido = oculto && !abierto
+  const transparente = sobreFoto && !abierto
 
   return (
-    <header
-      className={`${styles.navbar} ${escondido ? styles.oculto : ''}`}
-      onFocus={() => setOculto(false)}
-    >
-      {/* Desenfoque progresivo (como iOS): 7 capas de blur creciente, cada una en su franja */}
-      <div className={styles.cristal} aria-hidden="true">
-        {[0, 1, 2, 3, 4, 5, 6].map((i) => <span key={i} />)}
+    <header className={`${styles.navbar} ${transparente ? styles.transparente : ''}`}>
+      {/* Seis capas de desenfoque progresivo; el CSS le da a cada una su radio y su máscara */}
+      <div className={styles.glass} aria-hidden="true">
+        <span /><span /><span /><span /><span /><span />
       </div>
       <div className={styles.inner}>
         <Logo accent="var(--azul-palido)" />
