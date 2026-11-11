@@ -59,7 +59,7 @@ function Partager({ id, titulo }) {
 
 /**
  * props:
- *  id, numero ("03 / 09"), seccion, acento ({ oscuro, papel }), titulo (texto plano para compartir),
+ *  id, numero ("03 / 09"), seccion, acento ({ oscuro, papel, titulo? }: titulo = color opcional del título sobre la foto), titulo (texto plano para compartir),
  *  tituloJsx, auteur, auteurBio, date, lecture, tags[], hero { src, srcSet, alt, credito, posicion },
  *  cuerpo (antes de la cita), notas[], cita { texto, autor }, figura { svg, pie }, cuerpoFinal,
  *  sources[], anterior { href, titulo }, siguiente { href, seccion, titulo },
@@ -81,7 +81,7 @@ export default function Article(props) {
   }
 
   return (
-    <article id={id} className={`${styles.article} ${afilado ? styles.afilado : ''}`} style={{ '--acento': acento.oscuro, '--acento-papel': acento.papel }} aria-labelledby={`${id}-titre`} data-modo={modo}>
+    <article id={id} className={`${styles.article} ${afilado ? styles.afilado : ''}`} style={{ '--acento': acento.oscuro, '--acento-papel': acento.papel, '--acento-titulo': acento.titulo }} aria-labelledby={`${id}-titre`} data-modo={modo}>
       {anterior && <a href={anterior.href} className={`${styles.borde} ${styles.bordeIzq}`}>← Précédent</a>}
       {siguiente && <a href={siguiente.href} className={`${styles.borde} ${styles.bordeDer}`}>Article suivant →</a>}
 

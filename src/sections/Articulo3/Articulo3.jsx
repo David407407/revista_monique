@@ -7,8 +7,8 @@ import heroGrande from '../../assets/articulo3/hero-cas-a-2000.webp'
 import heroChica from '../../assets/articulo3/hero-cas-a-1200.webp'
 import gatoGrande from '../../assets/articulo3/cats-paw-1440.webp'
 import gatoChica from '../../assets/articulo3/cats-paw-800.webp'
-import starburstGrande from '../../assets/articulo3/starburst-1440.webp'
-import starburstChica from '../../assets/articulo3/starburst-800.webp'
+import cangrejoGrande from '../../assets/articulo3/crab-1440.webp'
+import cangrejoChica from '../../assets/articulo3/crab-800.webp'
 import espiralGrande from '../../assets/articulo3/spiral-1280.webp'
 import espiralChica from '../../assets/articulo3/spiral-800.webp'
 import ngc1068 from '../../assets/articulo3/ngc-1068-864.webp'
@@ -19,7 +19,8 @@ import styles from './Articulo3.module.css'
 const CREDITOS = {
   casA: 'NASA/CXC/SAO, NASA/ESA/STScI, NASA/ESA/CSA/STScI/Milisavljevic et al., NASA/JPL/Caltech',
   gato: 'NASA, ESA, CSA, STScI',
-  m82: 'ESA/Webb, NASA & CSA, A. Bolatto',
+  // Verificar en la ficha de la imagen al descargarla
+  cangrejo: 'NASA, ESA, CSA, STScI, T. Temim (Princeton University)',
   ngc1068: 'ESA/Webb, NASA & CSA, J. Lee et l’équipe PHANGS-JWST',
 }
 
@@ -45,7 +46,8 @@ export default function Articulo3() {
       numero="06 / 09"
       seccion="Temps"
       // Verde «old money»: inglés profundo sobre papel, salvia claro sobre fondo oscuro
-      acento={{ oscuro: '#b3c8b4', papel: '#2f5b44' }}
+      // El título sobre la foto va en oro cálido: resalta contra los azules y rosas de Cassiopée A
+      acento={{ oscuro: '#b3c8b4', papel: '#2f5b44', titulo: '#f6c978' }}
       titulo="Le temps dans le cosmos"
       tituloJsx={<>Le temps <em>dans le cosmos</em></>}
       auteur="Baruc Bazán"
@@ -74,7 +76,7 @@ export default function Articulo3() {
       notas={[
         'Année-lumière : la distance que parcourt la lumière en un an, environ 9 500 milliards de kilomètres. C’est une distance, pas une durée !',
         'Supernova (au pluriel, supernovæ) : l’explosion d’une étoile massive en fin de vie.',
-        'Temps d’épuisement : combien de temps une galaxie peut encore fabriquer des étoiles avant de tomber en panne de gaz, si elle garde le même rythme.',
+        'Pulsar : le cœur écrasé d’une étoile qui a explosé. Il tourne très vite et balaie l’espace de faisceaux, comme un phare.',
         'Nanoseconde : un milliardième de seconde. Microseconde : un millionième de seconde.',
       ]}
       figura={{
@@ -100,21 +102,21 @@ export default function Articulo3() {
           <ModuloCarrera />
           <p>Les plus massives des étoiles qui naissent dans la Patte de Chat vivront vite et mourront jeunes. Leurs explosions rendront à l’espace les éléments lourds qui formeront un jour de nouvelles planètes. Le recyclage, version cosmique.</p>
 
-          <H2>Une flambée à durée limitée</H2>
+          <H2>Une explosion en différé</H2>
           <Foto
             lado="izquierda"
-            recorte
-            src={starburstGrande}
-            srcSet={`${starburstChica} 800w, ${starburstGrande} 1440w`}
+            src={cangrejoGrande}
+            srcSet={`${cangrejoChica} 800w, ${cangrejoGrande} 1440w`}
             width={1440}
-            height={608}
-            alt="Galaxie vue par la tranche, avec des filaments rouges de gaz expulsés de part et d’autre."
-            pie="Fig. 5 — Une galaxie à flambée d’étoiles : le gaz et la poussière sont expulsés par l’énergie des jeunes étoiles."
-            credito={CREDITOS.m82}
+            height={1254}
+            alt="Nuage de gaz en forme de cage, aux filaments orange et rouges, rempli d’une brume blanche et bleutée, sur un fond noir étoilé."
+            pie="Fig. 5 — La nébuleuse du Crabe, les restes de la supernova de 1054, vue en infrarouge."
+            credito={CREDITOS.cangrejo}
           />
-          <p>Certaines galaxies fabriquent des étoiles à un rythme bien supérieur à celui de la Voie lactée. On les appelle les galaxies à flambée d’étoiles (<em>starburst</em>, en anglais). La plus célèbre, M82, produit des étoiles environ dix fois plus vite que notre galaxie.</p>
-          <p>Mais ce rythme ne peut pas durer. Les astronomes parlent de « temps d’épuisement » : la quantité de gaz disponible divisée par la vitesse à laquelle il est consommé. C’est comme ton forfait mobile : si tu regardes des vidéos toute la journée, tes données ne tiennent pas jusqu’à la fin du mois. Dans ces galaxies, le temps d’épuisement se compte généralement en dizaines ou en centaines de millions d’années.</p>
-          <p>En plus, les vents des étoiles et les supernovæ chassent une partie du gaz, comme le montrent les filaments rouges de l’image. La galaxie jette son propre carburant par la fenêtre, ce qui accélère la fin de la flambée.</p>
+          <p>Le 4 juillet 1054, des astronomes chinois notent l’apparition d’une « étoile invitée » dans la constellation du Taureau. Elle brille si fort qu’on la voit en plein jour pendant 23 jours, et la nuit pendant presque deux ans. Ce qu’ils observent, c’est une supernova : l’explosion d’une étoile environ dix fois plus lourde que le Soleil.</p>
+          <p>Les restes de cette explosion forment aujourd’hui la nébuleuse du Crabe : un nuage de gaz en filaments qui continue de grossir à environ 1 500 kilomètres par seconde. En son centre, il reste le cœur de l’étoile, écrasé en une boule d’une vingtaine de kilomètres qui tourne sur elle-même environ 30 fois par seconde : un pulsar.</p>
+          <p>Mais le plus fou, c’est le calendrier. La nébuleuse du Crabe se trouve à environ 6 500 années-lumière. La lumière de l’explosion a donc mis 6 500 ans à arriver jusqu’à nous. L’étoile avait en réalité explosé il y a environ 7 500 ans, bien avant la construction des pyramides. En 1054, les astronomes chinois regardaient une rediffusion.</p>
+          <p>Et si une étoile explosait là-bas aujourd’hui ? On ne le saurait que dans 6 500 ans, vers l’an 8500. Le ciel, c’est un match en différé : on découvre le résultat longtemps après la fin. Bételgeuse, l’épaule rouge d’Orion, finira elle aussi en supernova. Elle est à environ 550 années-lumière : si elle a explosé il y a deux siècles, la nouvelle est encore en route.</p>
 
           <H2>L’année cosmique</H2>
           <Foto
@@ -157,7 +159,8 @@ export default function Articulo3() {
         'N. Ashby, « Relativity in the Global Positioning System », Living Reviews in Relativity, 2003.',
         'Chandra/NASA — chandra.harvard.edu/photo/2024/casa (image de Cassiopée A).',
         'ESA/Webb — esawebb.org/images/weic2513a (nébuleuse de la Patte de Chat).',
-        'ESA/Webb — esawebb.org/images/weic2410 (galaxie M82).',
+        'NASA/Webb — image de la nébuleuse du Crabe (2023).',
+        'D. A. Green et F. R. Stephenson, « Historical Supernovae », 2003 (supernova de 1054).',
         'ESA/Webb — esawebb.org (image de NGC 2283).',
         'ESA/Webb — esawebb.org, image du mois de janvier 2023 (NGC 1068 / M77).',
         'Kip Thorne, La Science d’Interstellar, 2014.',
