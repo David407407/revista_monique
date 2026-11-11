@@ -9,6 +9,7 @@ import img2560 from '../../assets/nebulosas/piliers-de-la-creation-2560.webp'
 import Cierre from '../../components/Cierre/Cierre.jsx'
 import { texto as t } from './contenido.js'
 import ExplorateurImage from './ExplorateurImage.jsx'
+import Galerie from './Galerie.jsx'
 import Rico from './Rico.jsx'
 import { NBSP } from './typo.js'
 import Chiffres from './modulos/Chiffres.jsx'
@@ -278,6 +279,7 @@ export default function Articulo2({ initialMode = 'immersif' }) {
             <Chiffres t={t.chiffres} />
             <ModuloQuiz t={t.quiz} />
             <ModuloSonido t={t.sonido} imagen={img1000} />
+            <Galerie t={t.galerie} />
             <BloqueTexto>
               <Apartado bloque={b.cierre} primero />
             </BloqueTexto>
@@ -292,6 +294,7 @@ export default function Articulo2({ initialMode = 'immersif' }) {
             <TablaPalette t={t.palette} />
             <Apartado bloque={b.naissance} />
             <Apartado bloque={b.encore} />
+            <Galerie t={t.galerie} simple />
             <Apartado bloque={b.cierre} />
           </BloqueTexto>
         )}
