@@ -1,0 +1,462 @@
+/* Artículo 3 — fotos laterales, módulos interactivos y esquema de la escala de tiempos */
+
+/* ---------- Fotos a un lado del texto ---------- */
+.foto {
+  margin: 8px 0 32px;
+}
+
+.foto img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  background: var(--bosque);
+}
+
+.recorte img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.foto figcaption {
+  margin-top: 12px;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+
+.credito {
+  display: block;
+  margin-top: 4px;
+  font: 400 11px/1.4 var(--font-mono);
+  font-style: normal;
+}
+
+/* Los títulos de sección empiezan debajo de cualquier foto flotante */
+.limpiar {
+  clear: both;
+}
+
+@media (min-width: 641px) {
+  .derecha,
+  .izquierda {
+    width: 44%;
+  }
+
+  .derecha {
+    float: right;
+    margin-left: 32px;
+  }
+
+  .izquierda {
+    float: left;
+    margin-right: 32px;
+  }
+}
+
+/* Pantalla ancha: la foto sale hacia la columna vacía del costado */
+@media (min-width: 1240px) {
+  .derecha,
+  .izquierda {
+    width: 400px;
+  }
+
+  .derecha {
+    margin-right: -230px;
+  }
+
+  .izquierda {
+    margin-left: -190px;
+  }
+}
+
+/* ---------- Módulos interactivos: estilo «Papier» (como Nebulosas), acento verde inglés ----------
+   Papel mate con grano, tinta, líneas finas y un único acento: --acento-papel (verde inglés «old money» del artículo).
+   Los dibujos son de tinta, como grabados. Sin sombras, brillos ni degradados. */
+.modulo {
+  clear: both;
+  margin: 40px 0 48px;
+}
+
+.panel {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: clamp(24px, 4vw, 40px);
+  color: var(--tinta);
+  background: var(--papel-2);
+  border: 1px solid var(--borde-papel);
+}
+
+/* Grano de papel impreso */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.6;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.panel :focus-visible {
+  outline: 1px solid var(--acento-papel);
+  outline-offset: 3px;
+}
+
+.modulo figcaption {
+  margin-top: 14px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--tinta-suave);
+}
+
+.moduloCabecera {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 500 var(--text-label) / 1.2 var(--font-ui);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--acento-papel);
+}
+
+.moduloCabecera .kicker::before {
+  content: '';
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+}
+
+.moduloTitulo {
+  font: 400 clamp(1.625rem, 2.8vw, 2.125rem) / 1.1 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--tinta);
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.opciones button,
+.accion {
+  min-height: var(--tap);
+  padding: 0 18px;
+  font: 500 14px/1 var(--font-ui);
+  color: var(--tinta);
+  background: transparent;
+  border: 1px solid var(--borde-papel);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.opciones button:hover,
+.accion:hover {
+  border-color: var(--tinta);
+}
+
+.opciones button[aria-pressed='true'] {
+  color: var(--papel);
+  background: var(--tinta);
+  border-color: var(--tinta);
+}
+
+/* Acción principal (lancer, faire tourner): llena en verde */
+.accion {
+  align-self: flex-start;
+  color: var(--papel);
+  background: var(--acento-papel);
+  border-color: var(--acento-papel);
+}
+
+.accion:hover {
+  background: var(--tinta);
+  border-color: var(--tinta);
+}
+
+.accion:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lienzo {
+  width: 100%;
+  height: auto;
+}
+
+.mensaje {
+  min-height: 3.3em;
+  font: italic 400 19px/1.55 var(--font-display);
+  color: var(--tinta);
+}
+
+.lecturas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--borde-papel);
+  border-bottom: 1px solid var(--borde-papel);
+  font: 400 var(--text-mono) / 1.5 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.lecturas dt {
+  color: var(--tinta-suave);
+}
+
+.lecturas dd {
+  margin: 0;
+  color: var(--tinta);
+}
+
+/* Cursores: línea fina, recorrido en verde y tirador de tinta (como en Nebulosas) */
+.panel input[type='range'] {
+  --progreso: 0%;
+  width: 100%;
+  height: var(--tap);
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.panel input[type='range']::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(to right, var(--acento-papel) var(--progreso), var(--borde-papel) var(--progreso));
+}
+
+.panel input[type='range']::-moz-range-track {
+  height: 2px;
+  background: linear-gradient(to right, var(--acento-papel) var(--progreso), var(--borde-papel) var(--progreso));
+}
+
+.panel input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 4px;
+  height: 26px;
+  margin-top: -12px;
+  border: 0;
+  background: var(--tinta);
+}
+
+.panel input[type='range']::-moz-range-thumb {
+  width: 4px;
+  height: 26px;
+  border: 0;
+  border-radius: 0;
+  background: var(--tinta);
+}
+
+.svgEtiqueta {
+  font: 500 15px var(--font-ui);
+  fill: var(--tinta);
+}
+
+/* Trazos de tinta comunes a los dibujos */
+.tinta {
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+.tintaLlena {
+  fill: var(--tinta);
+}
+
+.acentoLleno {
+  fill: var(--acento-papel);
+}
+
+/* Machine à remonter le temps */
+.trayecto {
+  stroke: var(--tinta-suave);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+}
+
+.foton {
+  fill: var(--acento-papel);
+  animation: viaje 1.8s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+}
+
+@keyframes viaje {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(450px);
+  }
+}
+
+/* Course des étoiles */
+.barraFondo {
+  fill: var(--borde-papel);
+}
+
+.explosion {
+  animation: boum 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes boum {
+  from {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Horloge de la Galaxie */
+.galaxia {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+}
+
+.lienzoCuadrado {
+  flex: 1 1 240px;
+  max-width: 320px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.galaxiaControles {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.escalaRango {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -8px;
+  font: 400 12px/1.4 var(--font-mono);
+  color: var(--tinta-suave);
+}
+
+.brazo {
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 1;
+  stroke-opacity: 0.45;
+}
+
+.nucleo {
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 1;
+}
+
+.orbita {
+  fill: none;
+  stroke: var(--acento-papel);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+
+.marcaOrbita {
+  fill: var(--tinta-suave);
+}
+
+.halo {
+  fill: none;
+  stroke: var(--acento-papel);
+  stroke-width: 1;
+}
+
+/* GPS */
+.calle {
+  stroke: var(--borde-papel);
+  stroke-width: 1;
+}
+
+.desvio {
+  stroke: var(--acento-papel);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.pinFantasma {
+  opacity: 1;
+}
+
+.pinOculto {
+  opacity: 0;
+}
+
+/* En modo Simple el artículo queda en texto e imágenes */
+:global([data-modo='simple']) .modulo {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: 24px 16px 18px;
+  }
+}
+
+/* ---------- Esquema de la escala de tiempos (sobre papel, ver .afilado .figuraFondo) ---------- */
+.eje {
+  stroke: var(--tinta);
+  stroke-width: 1;
+}
+
+.marca {
+  stroke: var(--tinta-suave);
+  stroke-width: 1;
+}
+
+.guia {
+  stroke: var(--acento-papel);
+  stroke-width: 1;
+  stroke-opacity: 0.7;
+}
+
+.punto {
+  fill: var(--acento-papel);
+}
+
+.tramo {
+  stroke: var(--tinta);
+  stroke-width: 6;
+}
+
+.etiqueta {
+  font: 400 17px var(--font-display);
+  fill: var(--tinta);
+}
+
+.valor {
+  font: 400 12px var(--font-mono);
+  fill: var(--tinta-suave);
+}
+
+.graduacion {
+  font: 400 12px var(--font-mono);
+  fill: var(--tinta-suave);
+}

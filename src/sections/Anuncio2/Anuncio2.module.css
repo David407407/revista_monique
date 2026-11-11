@@ -1,0 +1,335 @@
+/* Anuncio 2 — anuncio a página completa de revista sobre un cielo estilo Stellarium Web.
+   Paleta de la revista (tokens.css): azul pálido para las líneas del cielo, como en Stellarium,
+   y --plasma para los puntos cardinales (Stellarium los pinta en rojo anaranjado). */
+.anuncio {
+  position: relative;
+  /* Una pantalla menos el navbar, para que se fije debajo de él y no lo tape */
+  min-height: calc(100vh - var(--nav-h));
+  padding: 24px 40px 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-areas:
+    'cabecera cabecera'
+    'texto ventana'
+    'firma firma'
+    'legal legal';
+  column-gap: 48px;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  color: var(--papel);
+  background: linear-gradient(var(--noche), var(--abismo) 55%, var(--bosque));
+}
+
+.anuncio > :not(svg) {
+  position: relative;
+}
+
+/* ---------- Cielo ---------- */
+.cielo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.resplandor0 {
+  stop-color: var(--azul-palido);
+  stop-opacity: 0;
+}
+
+.resplandor1 {
+  stop-color: var(--azul-palido);
+  stop-opacity: 0.13;
+}
+
+.estrella,
+.titila {
+  fill: var(--niebla-clara);
+}
+
+.titila {
+  animation: titilar 7s ease-in-out infinite;
+}
+
+@keyframes titilar {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.linea {
+  fill: none;
+  stroke: var(--azul-palido);
+  stroke-width: 1.2;
+  stroke-opacity: 0.5;
+  stroke-linejoin: round;
+}
+
+.brillante {
+  fill: var(--papel);
+}
+
+.polar {
+  fill: var(--papel);
+}
+
+.reticula {
+  fill: none;
+  stroke: var(--papel);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.nombrePolar {
+  font: 600 14px var(--font-ui);
+  fill: var(--papel);
+}
+
+.notaPolar {
+  font: italic 400 14px var(--font-display);
+  fill: var(--niebla);
+}
+
+.constelacion {
+  font: 600 11px var(--font-ui);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  fill: var(--azul-palido);
+  fill-opacity: 0.75;
+  transition: opacity 0.4s;
+}
+
+.nombreEstrella {
+  font: 500 12px var(--font-ui);
+  fill: var(--niebla);
+  transition: opacity 0.4s;
+}
+
+.suelo {
+  fill: var(--noche);
+}
+
+.cardinal {
+  font: 700 13px var(--font-ui);
+  letter-spacing: 0.12em;
+  fill: var(--plasma);
+}
+
+/* ---------- Texto del anuncio ---------- */
+.cabecera {
+  grid-area: cabecera;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pill {
+  padding: 5px 12px;
+  font: 700 11px/1.4 var(--font-ui);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--niebla);
+  border: 1px solid var(--borde-oscuro-2);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--noche) 70%, transparent);
+}
+
+.texto {
+  grid-area: texto;
+  align-self: center;
+  padding: 24px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  /* Las líneas del cielo pasan por detrás: un velo suave mantiene el texto legible */
+  text-shadow: 0 1px 14px var(--noche), 0 0 3px var(--noche);
+}
+
+.titulo {
+  font: 800 clamp(2.6rem, 5.6vw, 5.4rem) / 0.98 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--papel);
+  text-wrap: balance;
+}
+
+.titulo em {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--azul-palido);
+}
+
+.bajada {
+  max-width: 32em;
+  font: 400 19px/1.6 var(--font-body);
+  color: var(--niebla-clara);
+}
+
+/* Hueco de cielo: su borde inferior marca el horizonte */
+.ventana {
+  grid-area: ventana;
+  min-height: 320px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-bottom: 46px;
+}
+
+/* Reloj al estilo de la barra de Stellarium Web: solo muestra la hora, no es un botón */
+.reloj {
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--niebla-clara);
+  border: 1px solid var(--borde-oscuro-2);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--noche) 72%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.reloj svg {
+  color: var(--azul-palido);
+}
+
+.dia {
+  font: 500 13px/1 var(--font-ui);
+}
+
+.hora {
+  font: 500 14px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--papel);
+}
+
+/* ---------- Firma: sobre el suelo, como el pie de un anuncio impreso ---------- */
+.firma {
+  grid-area: firma;
+  padding: 18px 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 40px;
+}
+
+.marca {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 28px;
+}
+
+.nombre {
+  font: 800 24px/1 var(--font-ui);
+  letter-spacing: 0.02em;
+}
+
+.nombre em {
+  font: italic 400 25px/1 var(--font-display);
+  color: var(--azul-palido);
+}
+
+.datos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  font: 400 15px/1.4 var(--font-body);
+  color: var(--niebla);
+}
+
+.datos li + li::before {
+  content: '·';
+  padding: 0 10px;
+  color: var(--borde-oscuro-2);
+}
+
+.cta {
+  min-height: 52px;
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 16px/1 var(--font-ui);
+  color: var(--abismo);
+  text-decoration: none;
+  background: var(--papel);
+  border-radius: 26px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  background: var(--azul-palido);
+}
+
+.cta svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta:hover svg {
+  transform: translateX(3px);
+}
+
+.legal {
+  grid-area: legal;
+  padding-top: 14px;
+  max-width: 70em;
+  font: 400 12px/1.5 var(--font-body);
+  color: var(--niebla);
+  border-top: 1px solid var(--borde-oscuro);
+}
+
+/* ---------- Pantallas angostas: texto, cielo, firma ---------- */
+@media (max-width: 900px) {
+  .anuncio {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas:
+      'cabecera'
+      'texto'
+      'ventana'
+      'firma'
+      'legal';
+  }
+
+  .texto {
+    padding: 28px 0 0;
+    gap: 20px;
+  }
+
+  .ventana {
+    min-height: clamp(300px, 72vw, 440px);
+    justify-content: center;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 640px) {
+  .anuncio {
+    padding: 20px 16px 20px;
+  }
+
+  .bajada {
+    font-size: 17px;
+  }
+
+  .firma {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .datos {
+    gap: 4px 16px;
+  }
+
+  .datos li + li::before {
+    content: none;
+  }
+
+  .cta {
+    justify-content: center;
+  }
+}

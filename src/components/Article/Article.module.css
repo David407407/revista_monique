@@ -165,8 +165,9 @@
   color: var(--papel);
 }
 
+/* --acento-titulo (opcional, prop acento.titulo) cambia solo el color del título sobre la foto */
 .titulo em {
-  color: var(--acento);
+  color: var(--acento-titulo, var(--acento));
 }
 
 .tituloSimple {
@@ -527,6 +528,126 @@
 
 .prevTitulo {
   font: 800 26px/1.15 var(--font-display);
+}
+
+/* Variante «afilado» (opt-in con <Article variante="afilado">): esquinas casi rectas y cierre con <Cierre> */
+.afilado {
+  padding-bottom: 0;
+}
+
+.afilado .hero,
+.afilado .figuraFondo {
+  border-radius: 2px;
+}
+
+/* La figura pasa a papel, como las tarjetas del artículo */
+.afilado .figuraFondo {
+  background: var(--papel-2);
+  border: 1px solid var(--borde-papel);
+}
+
+/* Immersif / Simple: cápsula de cristal líquido (desenfoque + brillo arriba), igual que en Nebulosas */
+.afilado .modo {
+  padding: 4px;
+  background: rgba(255, 253, 247, 0.5);
+  border: 1px solid rgba(26, 23, 20, 0.1);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 6px 20px rgba(26, 23, 20, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.afilado .modo button {
+  min-height: 38px;
+  padding: 0 18px;
+  font-weight: 500;
+  color: var(--tinta-suave);
+  border-radius: 999px;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.afilado .modo button[aria-pressed='true'] {
+  font-weight: 600;
+  color: var(--tinta);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 1px 4px rgba(26, 23, 20, 0.16);
+}
+
+.afilado .tags span {
+  border-radius: 2px;
+}
+
+/* Hero a pantalla completa (solo Immersif): la foto ocupa todo el alto bajo el navbar
+   y la cabecera del artículo flota encima, en claro, como en Nebulosas. */
+.afilado[data-modo='immersif'] .cabecera {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: var(--papel);
+}
+
+.afilado[data-modo='immersif'] .numero,
+.afilado[data-modo='immersif'] .sommaire {
+  color: var(--papel);
+}
+
+.afilado[data-modo='immersif'] .seccion {
+  color: var(--acento);
+}
+
+.afilado[data-modo='immersif'] .modo {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.afilado[data-modo='immersif'] .modo button {
+  color: rgba(246, 241, 228, 0.75);
+}
+
+.afilado[data-modo='immersif'] .modo button[aria-pressed='true'] {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.afilado .hero {
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100dvh - var(--nav-h));
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Velo arriba para que la cabecera se lea sobre cualquier foto */
+.afilado .hero::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: 200px;
+  background: linear-gradient(to bottom, rgba(5, 5, 5, 0.6), rgba(5, 5, 5, 0));
+  pointer-events: none;
+}
+
+.afilado .heroTexto {
+  padding-bottom: 72px;
+}
+
+.afilado .credito {
+  top: auto;
+  bottom: 16px;
+  right: 16px;
 }
 
 @media (max-width: 1100px) {

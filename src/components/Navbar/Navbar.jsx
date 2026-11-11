@@ -31,6 +31,10 @@ export default function Navbar() {
 
   return (
     <header className={`${styles.navbar} ${transparente ? styles.transparente : ''}`}>
+      {/* Seis capas de desenfoque progresivo; el CSS le da a cada una su radio y su máscara */}
+      <div className={styles.glass} aria-hidden="true">
+        <span /><span /><span /><span /><span /><span />
+      </div>
       <div className={styles.inner}>
         <Logo accent="var(--azul-palido)" />
         <span className={styles.divider} aria-hidden="true" />
