@@ -17,14 +17,14 @@ export function formatDuree(anios) {
   if (anios >= 1e6) {
     const m = anios / 1e6
     const v = m < 10 ? Math.round(m * 10) / 10 : dosCifras(m)
-    return `≈${NBSP}${nombre(v)}${NBSP}millions d’années`
+    return `≈${NBSP}${nombre(v)}${NBSP}million years`
   }
-  if (anios >= 1000) return `≈${NBSP}${nombre(dosCifras(anios))}${NBSP}ans`
+  if (anios >= 1000) return `≈${NBSP}${nombre(dosCifras(anios))}${NBSP}years`
   if (anios < 10) {
     const v = Math.round(anios)
-    return `${nombre(v)}${NBSP}${v < 2 ? 'an' : 'ans'}`
+    return `${nombre(v)}${NBSP}${v === 1 ? 'year' : 'years'}`
   }
-  return `≈${NBSP}${nombre(Math.round(anios))}${NBSP}ans`
+  return `≈${NBSP}${nombre(Math.round(anios))}${NBSP}years`
 }
 
 // Posición en la barra logarítmica de 1 año (0) a 1 000 millones de años (1).
@@ -36,4 +36,4 @@ export function anneeTexte(ecoule, anioSalida, avJC) {
   return a >= 1 ? annee(a) : `${annee(1 - a)}${NBSP}${avJC}`
 }
 
-export const plural = (n, [uno, varios]) => (n < 2 ? uno : varios)
+export const plural = (n, [uno, varios]) => (n === 1 ? uno : varios) // regla del inglés: solo 1 va en singular

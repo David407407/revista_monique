@@ -42,11 +42,11 @@ const LINEAS = [
 
 // Nombres que se quedan derechos mientras el cielo gira: [texto, estrellas de referencia, desplazamiento px, tipo]
 const NOMBRES = [
-  ['Grande Ourse', ['megrez', 'phecda', 'alioth'], [0, 34], 'constelacion'],
-  ['Petite Ourse', ['kochab', 'zetaUmi', 'pherkad'], [0, 30], 'constelacion'],
-  ['Cassiopée', ['schedar', 'gammaCas', 'ruchbah'], [0, -26], 'constelacion'],
+  ['Big Dipper', ['megrez', 'phecda', 'alioth'], [0, 34], 'constelacion'],
+  ['Little Dipper', ['kochab', 'zetaUmi', 'pherkad'], [0, 30], 'constelacion'],
+  ['Cassiopeia', ['schedar', 'gammaCas', 'ruchbah'], [0, -26], 'constelacion'],
   ['Capella', ['capella'], [10, -10], 'estrella'],
-  ['Véga', ['vega'], [10, -10], 'estrella'],
+  ['Vega', ['vega'], [10, -10], 'estrella'],
   ['Deneb', ['deneb'], [10, -10], 'estrella'],
 ]
 
@@ -153,8 +153,8 @@ export function Cielo({ medidas, lst, giro, etiquetas }) {
         <g transform={`translate(${e('polaire').join(' ')})`}>
           <circle r={radio(2)} className={styles.polar} />
           <path d="M-13,-6 A14,14 0 0 1 -6,-13 M6,-13 A14,14 0 0 1 13,-6 M13,6 A14,14 0 0 1 6,13 M-6,13 A14,14 0 0 1 -13,6" className={styles.reticula} />
-          <text x="22" y="-3" className={styles.nombrePolar}>Étoile polaire</text>
-          <text x="22" y="15" className={styles.notaPolar}>tout tourne autour d’elle</text>
+          <text x="22" y="-3" className={styles.nombrePolar}>North Star</text>
+          <text x="22" y="15" className={styles.notaPolar}>everything turns around it</text>
         </g>
       </g>
 
@@ -175,7 +175,7 @@ export function Cielo({ medidas, lst, giro, etiquetas }) {
       ))}
 
       <path d={suelo(w, h, horizonte)} className={styles.suelo} />
-      {[['NO', -45], ['N', 0], ['NE', 45]].map(([letra, az]) => (
+      {[['NW', -45], ['N', 0], ['NE', 45]].map(([letra, az]) => (
         <text key={letra} x={px + az * escala} y={horizonte - 18} textAnchor="middle" className={styles.cardinal}>
           {letra}
         </text>

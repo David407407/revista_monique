@@ -7,11 +7,11 @@ export const NBSP = ' '
 export const FINE = ' '
 const WJ = '⁠' // word joiner: impide el corte de línea sin dibujar nada
 
-const nf = new Intl.NumberFormat('fr-FR')
-const nfAnnee = new Intl.NumberFormat('fr-FR', { useGrouping: false })
+const nf = new Intl.NumberFormat('en-US')
+const nfAnnee = new Intl.NumberFormat('en-US', { useGrouping: false })
 
-// Números con espacio fino en los miles y coma decimal (Intl usa U+202F en fr-FR).
-export const nombre = (n, opciones) => (opciones ? new Intl.NumberFormat('fr-FR', opciones) : nf).format(n)
+// Números en formato inglés: coma en los miles y punto decimal (versión en inglés).
+export const nombre = (n, opciones) => (opciones ? new Intl.NumberFormat('en-US', opciones) : nf).format(n)
 export const annee = (n) => nfAnnee.format(n)
 
 export function fr(texto) {

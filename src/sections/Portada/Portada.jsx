@@ -11,30 +11,30 @@ export default function Portada() {
         src={fotoGrande}
         srcSet={`${fotoChica} 1080w, ${fotoGrande} 2560w`}
         sizes="100vw"
-        alt="Les Falaises cosmiques de la nébuleuse de la Carène : des montagnes de gaz orangé sous un ciel bleu rempli d’étoiles."
+        alt="The Cosmic Cliffs of the Carina Nebula: mountains of orange gas under a blue sky full of stars."
         fetchPriority="high"
       />
 
       <div className={styles.texto}>
-        <p className={styles.numero}>Nº 07 · Novembre 2026</p>
+        <p className={styles.numero}>No. 07 · November 2026</p>
         <h1 id="portada-titulo" className={styles.titulo}>
-          Éclairer la science <em>qu’on ne voit pas</em>
+          Shedding light on the science <em>we can’t see</em>
         </h1>
         <p className={styles.bajada}>
-          Des trous noirs, des nuages où naissent les étoiles, des horloges qui
-          retardent et un expert des fluides. Un numéro consacré à l’invisible.
+          Black holes, clouds where stars are born, clocks that run
+          slow and an expert on fluids. An issue devoted to the invisible.
         </p>
       </div>
 
       <a href="#indice" className={styles.desliza}>
-        <span>Faites défiler pour lire</span>
+        <span>Scroll to read</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </a>
 
       <p className={styles.credito}>
-        Image : NASA, ESA, CSA, STScI · Télescope spatial James Webb
+        Image: NASA, ESA, CSA, STScI · James Webb Space Telescope
       </p>
     </section>
   )

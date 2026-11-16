@@ -3,11 +3,11 @@ import Logo from '../Logo/Logo.jsx'
 import styles from './Navbar.module.css'
 
 const secciones = [
-  ['#agujeros-negros', 'Trous noirs'],
-  ['#nebulosas', 'Nébuleuses'],
-  ['#tiempo', 'Temps'],
-  ['#entrevista', 'Entretien'],
-  ['#indice', 'Thèmes'],
+  ['#agujeros-negros', 'Black holes'],
+  ['#nebulosas', 'Nebulae'],
+  ['#tiempo', 'Time'],
+  ['#entrevista', 'Interview'],
+  ['#indice', 'Topics'],
   ['#contraportada', 'Archives'],
 ]
 
@@ -45,7 +45,7 @@ export default function Navbar() {
         </nav>
         <button
           type="button"
-          aria-label={abierto ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-label={abierto ? 'Close menu' : 'Open menu'}
           aria-expanded={abierto}
           aria-controls="menu-secciones"
           className={styles.menuButton}

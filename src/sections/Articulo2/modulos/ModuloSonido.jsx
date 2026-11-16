@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { NBSP } from '../typo.js'
 import Modulo from './Modulo.jsx'
 import useReduceMotion from './useReduceMotion.js'
 import s from './Modulos.module.css'
@@ -179,7 +178,7 @@ export default function ModuloSonido({ t, imagen }) {
             max="1"
             step="0.05"
             value={volumen}
-            aria-valuetext={`${Math.round(volumen * 100)}${NBSP}%`}
+            aria-valuetext={`${Math.round(volumen * 100)}%`}
             onChange={(e) => setVolumen(Number(e.target.value))}
             className={s.curseur}
             style={{ '--progreso': `${volumen * 100}%` }}

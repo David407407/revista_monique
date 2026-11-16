@@ -7,7 +7,7 @@ export const suave = (desde, hasta, v) => {
   const t = limitar((v - desde) / (hasta - desde))
   return t * t * (3 - 2 * t)
 }
-export const coma = (n, decimales = 1) => n.toFixed(decimales).replace('.', ',')
+export const coma = (n, decimales = 1) => n.toFixed(decimales) // punto decimal (versión en inglés)
 
 // La animación ocurre mientras el elemento se ve (casi) completo:
 // p = 0 cuando su centro está al 75 % de la ventana, p = 1 cuando llega al 30 %.

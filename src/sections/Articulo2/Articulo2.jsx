@@ -1,5 +1,5 @@
 // Nebulosas — responsable: compañero
-// Artículo 2 en francés: «Les piliers de la création». Dos modos de lectura: Immersif (hero a pantalla
+// Artículo 2 en inglés: «The Pillars of Creation». Dos modos de lectura: Immersif (hero a pantalla
 // completa + módulos interactivos + cita) y Simple (texto íntegro + versiones estáticas de M1, M2 y M3).
 // La hoja de esta sección va sin bordes (bleed).
 import { Fragment, useEffect, useState } from 'react'
@@ -11,7 +11,6 @@ import { texto as t } from './contenido.js'
 import ExplorateurImage from './ExplorateurImage.jsx'
 import Galerie from './Galerie.jsx'
 import Rico from './Rico.jsx'
-import { NBSP } from './typo.js'
 import Chiffres from './modulos/Chiffres.jsx'
 import { ListaMachine, TablaEchelle, TablaPalette } from './modulos/Estaticos.jsx'
 import ModuloEchelle from './modulos/ModuloEchelle.jsx'
@@ -187,7 +186,7 @@ function Cuerpo() {
 function Cita() {
   return (
     <blockquote className={styles.cita}>
-      <span className={styles.comilla} aria-hidden="true">«</span>
+      <span className={styles.comilla} aria-hidden="true">“</span>
       <p className={styles.citaTexto}>{t.cita.texto}</p>
       <footer className={styles.citaAutor}>{t.cita.autor}</footer>
     </blockquote>
@@ -203,7 +202,7 @@ function CierreNebulosas() {
       <Fragment key={e.href}>
         {`${e.fuente} — `}
         <a href={e.href} target="_blank" rel="noopener noreferrer">
-          {`«${NBSP}${e.titulo}${NBSP}»`}
+          {`“${e.titulo}”`}
           <span className="sr-only">{` ${m.nuevaVentana}`}</span>
         </a>
       </Fragment>
@@ -243,7 +242,7 @@ export default function Articulo2({ initialMode = 'immersif' }) {
     <>
       <article
         id={t.id}
-        lang="fr"
+        lang="en"
         aria-labelledby="nebulosas-titulo"
         className={`${styles.hoja} ${immersif ? styles.immersif : styles.simple}`}
       >

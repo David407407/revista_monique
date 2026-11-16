@@ -48,7 +48,7 @@ export default function ModuloEchelle({ t }) {
           <p className={e.nota}>{v.note}</p>
         </div>
 
-        <div className={e.escala} role="img" aria-label={`${t.barraLabel}${NBSP}: ${resultado}`}>
+        <div className={e.escala} role="img" aria-label={`${t.barraLabel}: ${resultado}`}>
           <div className={e.pista}>
             <span className={e.relleno} style={{ width: `${pos * 100}%` }} />
             {t.marcas.map((m, i) => (

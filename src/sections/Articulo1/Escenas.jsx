@@ -31,9 +31,9 @@ function useP(ref) {
 
 /* 1 · La Tierra comprimida hasta ser una canica */
 function formatoDiametro(m) {
-  if (m >= 1000) return `${Math.round(m / 1000).toLocaleString('fr-FR')} km`
-  if (m >= 1) return `${Math.round(m).toLocaleString('fr-FR')} m`
-  return `${(m * 100).toLocaleString('fr-FR', { maximumFractionDigits: m < 0.1 ? 1 : 0 })} cm`
+  if (m >= 1000) return `${Math.round(m / 1000).toLocaleString('en-US')} km`
+  if (m >= 1) return `${Math.round(m).toLocaleString('en-US')} m`
+  return `${(m * 100).toLocaleString('en-US', { maximumFractionDigits: m < 0.1 ? 1 : 0 })} cm`
 }
 
 export function EscenaTierra() {
@@ -46,13 +46,13 @@ export function EscenaTierra() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 2 — Pour devenir un trou noir, la Terre devrait tenir dans une bille. Schéma, pas à l’échelle."
+      pie="Fig. 2 — To become a black hole, the Earth would have to fit inside a marble. Diagram, not to scale."
       lecturas={<>
-        <span>Diamètre de la Terre : <b>{formatoDiametro(diametro)}</b></span>
-        <span>Masse : <b>inchangée</b></span>
+        <span>Earth’s diameter: <b>{formatoDiametro(diametro)}</b></span>
+        <span>Mass: <b>unchanged</b></span>
       </>}
     >
-      <svg viewBox="0 0 480 280" role="img" aria-label="La Terre se comprime jusqu’à la taille d’une bille, sans perdre de masse.">
+      <svg viewBox="0 0 480 280" role="img" aria-label="The Earth shrinks down to the size of a marble, without losing any mass.">
         <defs>
           <radialGradient id="pbp-tierra" cx="35%" cy="32%" r="75%">
             <stop offset="0" stopColor="#d3e8fb" />
@@ -64,7 +64,7 @@ export function EscenaTierra() {
         <circle cx="240" cy="140" r={r} fill="url(#pbp-tierra)" />
         <g opacity={bille}>
           <path d="M248 132 L300 90 H340" stroke="var(--niebla)" fill="none" />
-          <text x="346" y="95" className={styles.t}>une bille</text>
+          <text x="346" y="95" className={styles.t}>a marble</text>
         </g>
       </svg>
     </Escena>
@@ -83,21 +83,21 @@ export function EscenaSol() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 3 — On remplace le Soleil par un trou noir de même masse : la Terre ne change pas d’orbite. Schéma."
+      pie="Fig. 3 — We replace the Sun with a black hole of the same mass: the Earth’s orbit doesn’t change. Diagram."
       lecturas={<>
-        <span>Au centre : <b>{e < 0.5 ? 'le Soleil' : 'un trou noir'}</b></span>
-        <span>Orbite : <b>identique</b></span>
-        <span>Lumière reçue : <b>{Math.round((1 - e) * 100)} %</b></span>
+        <span>At the center: <b>{e < 0.5 ? 'the Sun' : 'a black hole'}</b></span>
+        <span>Orbit: <b>identical</b></span>
+        <span>Light received: <b>{Math.round((1 - e) * 100)}%</b></span>
       </>}
     >
-      <svg viewBox="0 0 480 280" role="img" aria-label="La Terre tourne autour du Soleil. Le Soleil devient un minuscule trou noir et la Terre garde exactement la même orbite, mais dans le noir.">
+      <svg viewBox="0 0 480 280" role="img" aria-label="The Earth goes around the Sun. The Sun turns into a tiny black hole and the Earth keeps exactly the same orbit, but in the dark.">
         <rect x="0" y="0" width="480" height="280" fill="#020605" opacity={e * 0.6} />
         <circle cx="240" cy="140" r="110" fill="none" stroke="var(--niebla)" strokeDasharray="3 6" opacity="0.7" />
         <circle cx="240" cy="140" r="70" fill="var(--plasma)" opacity={0.14 * (1 - e)} />
         <circle cx="240" cy="140" r={mezclar(32, 4, e)} fill="var(--plasma)" opacity={1 - e} />
         <circle cx="240" cy="140" r="4" fill="#050505" stroke="var(--papel)" strokeWidth="1" opacity={e} />
         <circle cx={tx} cy={ty} r="8" fill="var(--azul-palido)" opacity={1 - 0.6 * e} />
-        <text x="240" y="276" textAnchor="middle" className={styles.tSuave}>même orbite</text>
+        <text x="240" y="276" textAnchor="middle" className={styles.tSuave}>same orbit</text>
       </svg>
     </Escena>
   )
@@ -131,13 +131,13 @@ export function EscenaRio() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 4 — L’espace « coule » vers le trou noir comme une rivière vers une cascade. Schéma."
+      pie="Fig. 4 — Space “flows” toward the black hole like a river toward a waterfall. Diagram."
       lecturas={<>
-        <span>Courant : <b>{x < 200 ? 'lent' : x < HORIZONTE ? 'rapide' : 'plus rapide que la lumière'}</b></span>
-        <span>Retour possible : <b>{pasado ? 'non' : 'oui'}</b></span>
+        <span>Current: <b>{x < 200 ? 'slow' : x < HORIZONTE ? 'fast' : 'faster than light'}</b></span>
+        <span>Can turn back: <b>{pasado ? 'no' : 'yes'}</b></span>
       </>}
     >
-      <svg viewBox="0 0 480 240" role="img" aria-label="Un poisson nage à contre-courant dans une rivière qui accélère vers une cascade. Après la ligne de l’horizon, le courant l’emporte.">
+      <svg viewBox="0 0 480 240" role="img" aria-label="A fish swims upstream in a river that speeds up toward a waterfall. Past the horizon line, the current carries it away.">
         <defs>
           <linearGradient id="pbp-cascada" x1="0" x2="1">
             <stop offset="0" stopColor="#050505" stopOpacity="0" />
@@ -152,7 +152,7 @@ export function EscenaRio() {
         <g transform={`translate(${x} 120)`}>
           <path d="M-12 0 H-40 M-34 -5 L-40 0 L-34 5" stroke={pasado ? 'var(--niebla)' : 'var(--biolum)'} strokeWidth="2" fill="none" />
           <circle r="7" fill="var(--papel)" />
-          <text y="44" textAnchor="middle" className={styles.tSuave}>le poisson</text>
+          <text y="44" textAnchor="middle" className={styles.tSuave}>the fish</text>
         </g>
       </svg>
     </Escena>
@@ -181,19 +181,19 @@ export function EscenaEspagueti() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 5 — Le même objet tombe vers deux trous noirs. Plus le trou noir est petit, plus il étire. Schéma."
+      pie="Fig. 5 — The same object falls toward two black holes. The smaller the black hole, the more it stretches. Diagram."
       lecturas={<>
-        <span>Petit trou noir : étirement <b>×{coma(syPeque)}</b></span>
-        <span>Trou noir géant : étirement <b>×{coma(syGigante)}</b>{baseGigante > 262 ? ', horizon franchi' : ''}</span>
+        <span>Small black hole: stretch <b>×{coma(syPeque)}</b></span>
+        <span>Giant black hole: stretch <b>×{coma(syGigante)}</b>{baseGigante > 262 ? ', horizon crossed' : ''}</span>
       </>}
     >
-      <svg viewBox="0 0 480 300" role="img" aria-label="À gauche, un petit trou noir étire l’objet qui tombe comme un spaghetti avant même l’horizon. À droite, un trou noir géant le laisse presque intact, même après l’horizon.">
+      <svg viewBox="0 0 480 300" role="img" aria-label="On the left, a small black hole stretches the falling object like spaghetti even before the horizon. On the right, a giant black hole leaves it almost intact, even past the horizon.">
         <defs>
           <clipPath id="pbp-gigante"><rect x="250" y="0" width="230" height="300" /></clipPath>
         </defs>
         <line x1="240" y1="20" x2="240" y2="290" stroke="var(--borde-oscuro-2)" />
-        <text x="120" y="28" textAnchor="middle" className={styles.t}>Petit trou noir</text>
-        <text x="360" y="28" textAnchor="middle" className={styles.t}>Trou noir géant</text>
+        <text x="120" y="28" textAnchor="middle" className={styles.t}>Small black hole</text>
+        <text x="360" y="28" textAnchor="middle" className={styles.t}>Giant black hole</text>
 
         <circle cx="120" cy="266" r="16" fill="#050505" stroke="var(--papel)" strokeOpacity="0.6" />
         <Barra cx={120} base={mezclar(150, 226, p)} sy={syPeque} />
@@ -227,18 +227,18 @@ export function EscenaLente() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 7 — Pourquoi Gargantua a l’air « plié » : la gravité courbe la lumière de l’arrière du disque. Schéma."
-      lecturas={<span>Arrière du disque : <b>{p < 0.5 ? 'caché derrière le trou noir' : 'visible par-dessus et par-dessous'}</b></span>}
+      pie="Fig. 7 — Why Gargantua looks “folded”: gravity bends the light from the back of the disk. Diagram."
+      lecturas={<span>Back of the disk: <b>{p < 0.5 ? 'hidden behind the black hole' : 'visible above and below'}</b></span>}
     >
-      <svg viewBox="0 0 480 280" role="img" aria-label="Un disque de gaz entoure un trou noir. La lumière de l’arrière du disque est courbée et apparaît au-dessus et en dessous du trou noir.">
+      <svg viewBox="0 0 480 280" role="img" aria-label="A disk of gas surrounds a black hole. Light from the back of the disk is bent and appears above and below the black hole.">
         <Arco d={`M${240 - rx} 150 A${rx} ${ry} 0 0 1 ${240 + rx} 150`} />
         <g opacity={p}>
           <Arco d={`M178 150 A62 ${mezclar(1, 64, p)} 0 0 0 302 150`} ancho={1.5} />
         </g>
         <circle cx="240" cy="150" r="46" fill="#050505" />
         <Arco d="M50 150 A190 22 0 0 0 430 150" />
-        <text x="240" y={150 - ry - 22} textAnchor="middle" className={styles.tSuave} opacity={etiqueta}>arrière du disque</text>
-        <text x="240" y="268" textAnchor="middle" className={styles.tSuave}>avant du disque</text>
+        <text x="240" y={150 - ry - 22} textAnchor="middle" className={styles.tSuave} opacity={etiqueta}>back of the disk</text>
+        <text x="240" y="268" textAnchor="middle" className={styles.tSuave}>front of the disk</text>
       </svg>
     </Escena>
   )
@@ -288,8 +288,8 @@ export function Comparador() {
           <circle cx="600" cy="320" r="100" fill="none" stroke="#c2410c" strokeWidth="110" filter="url(#pbp-brillo)" opacity="0.8" />
           <circle cx="600" cy="320" r="92" fill="none" stroke="#ff9a3c" strokeWidth="44" filter="url(#pbp-brillo-2)" />
         </svg>
-        <span className={`${styles.marca} ${styles.marcaIzq}`}>Sans l’effet Doppler, comme dans le film</span>
-        <span className={`${styles.marca} ${styles.marcaDer}`}>Photo réelle · M87*</span>
+        <span className={`${styles.marca} ${styles.marcaIzq}`}>Without the Doppler effect, as in the movie</span>
+        <span className={`${styles.marca} ${styles.marcaDer}`}>Real photo · M87*</span>
         <span className={styles.linea} aria-hidden="true" />
         <input
           className={styles.rango}
@@ -301,7 +301,7 @@ export function Comparador() {
             tocado.current = true
             setX(Number(e.target.value))
           }}
-          aria-label="Comparer : glisser vers la gauche pour voir la photo réelle, vers la droite pour voir l’anneau symétrique"
+          aria-label="Compare: slide left to see the real photo, right to see the symmetrical ring"
         />
         <span className={styles.poignee} aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -309,7 +309,7 @@ export function Comparador() {
           </svg>
         </span>
       </div>
-      <figcaption>Fig. 8 — Gauche : un anneau parfaitement régulier, comme Gargantua (illustration). Droite : M87*, Event Horizon Telescope, 2019. Sur la vraie photo, le bas de l’anneau brille davantage.</figcaption>
+      <figcaption>Fig. 8 — Left: a perfectly even ring, like Gargantua (illustration). Right: M87*, Event Horizon Telescope, 2019. In the real photo, the bottom of the ring shines brighter.</figcaption>
     </figure>
   )
 }
@@ -402,8 +402,8 @@ export function RelojEsquina() {
         <Esfera cx={24} cy={24} r={22} refManecilla={manecilla} color="var(--biolum)" />
       </svg>
       <span className={styles.relojTexto}>
-        <span>Ton temps</span>
-        <b ref={valor}>×1,00</b>
+        <span>Your time</span>
+        <b ref={valor}>×1.00</b>
       </span>
     </div>
   )
@@ -429,16 +429,16 @@ export function RelojesFinal() {
   return (
     <figure ref={ref} className={styles.escena} data-reloj-final="">
       <div className={styles.lienzo}>
-        <svg viewBox="0 0 480 250" role="img" aria-label="Deux horloges. Celle de la Terre tourne normalement ; la tienne, près de l’horizon, avance à peine.">
+        <svg viewBox="0 0 480 250" role="img" aria-label="Two clocks. Earth’s runs normally; yours, near the horizon, barely moves.">
           <Esfera cx={130} cy={120} r={86} refManecilla={tierra} color="var(--azul-palido)" angulo={250} />
           <Esfera cx={350} cy={120} r={86} refManecilla={tuyo} color="var(--biolum)" angulo={5} />
         </svg>
         <div className={styles.lecturas}>
-          <span>Terre : <b>×1</b></span>
-          <span>Toi, près de l’horizon : <b>×0,02</b></span>
+          <span>Earth: <b>×1</b></span>
+          <span>You, near the horizon: <b>×0.02</b></span>
         </div>
       </div>
-      <figcaption>Fig. 9 — Pendant que l’horloge de la Terre fait un tour, la tienne bouge à peine. Schéma : près d’un vrai trou noir, l’écart peut être bien plus grand.</figcaption>
+      <figcaption>Fig. 9 — While Earth’s clock goes all the way around, yours barely moves. Diagram: near a real black hole, the gap can be much bigger.</figcaption>
     </figure>
   )
 }

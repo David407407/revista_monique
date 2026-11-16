@@ -14,7 +14,7 @@ export function LogoMark({ size = 36, accent = 'var(--biolum)' }) {
   )
 }
 
-export default function Logo({ accent = 'var(--biolum)', large = false, label = 'Point Bleu Pâle, aller à la couverture' }) {
+export default function Logo({ accent = 'var(--biolum)', large = false, label = 'Point Bleu Pâle, go to the cover' }) {
   return (
     <a href="#portada" aria-label={label} className={`${styles.logo} ${large ? styles.large : ''}`} style={{ '--accent': accent }}>
       <LogoMark size={large ? 40 : 36} accent={accent} />

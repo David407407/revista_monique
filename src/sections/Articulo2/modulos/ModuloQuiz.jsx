@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { NBSP } from '../typo.js'
 import Modulo from './Modulo.jsx'
 import s from './Modulos.module.css'
 
@@ -51,7 +50,7 @@ export default function ModuloQuiz({ t }) {
       {fin ? (
         <div className={s.quizCuerpo} aria-live="polite">
           <p ref={foco} tabIndex={-1} className={s.cifra}>
-            {t.score}{NBSP}: {score} / {total}
+            {t.score}: {score} / {total}
           </p>
           <p className={s.apoyo}>{mensaje}</p>
           <div>
@@ -90,7 +89,7 @@ export default function ModuloQuiz({ t }) {
               <>
                 <p className={`${s.fichaTitulo} ${acierto ? '' : s.quizMal}`}>{acierto ? t.bien : t.mal}</p>
                 <p className={s.apoyo}>
-                  {!acierto && `${t.laRespuesta}${NBSP}: ${p.vrai ? t.vrai : t.faux}. `}
+                  {!acierto && `${t.laRespuesta}: ${p.vrai ? t.vrai : t.faux}. `}
                   {p.expl}
                 </p>
               </>

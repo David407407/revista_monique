@@ -1,5 +1,5 @@
 // Plantilla compartida de artículo (anatomía del diseño). La usan Articulo1, Articulo2 y Articulo3.
-// Todo el texto visible va en francés.
+// Todo el texto visible va en inglés (versión para el doctor).
 import { useState } from 'react'
 import { LogoMark } from '../Logo/Logo.jsx'
 import Cierre from '../Cierre/Cierre.jsx'
@@ -40,18 +40,18 @@ function Partager({ id, titulo }) {
       setCopiado(true)
       setTimeout(() => setCopiado(false), 2400)
     } catch {
-      window.prompt('Copiez ce lien :', url)
+      window.prompt('Copy this link:', url)
     }
   }
 
   return (
     <div className={styles.partager}>
-      <span className={styles.etiqueta}>Partager</span>
+      <span className={styles.etiqueta}>Share</span>
       <a href={`https://www.facebook.com/sharer/sharer.php?u=${u}`} target="_blank" rel="noreferrer">Facebook</a>
       <a href={`https://x.com/intent/post?url=${u}&text=${t}`} target="_blank" rel="noreferrer">X</a>
-      <a href={`mailto:?subject=${t}&body=${u}`}>E-mail</a>
+      <a href={`mailto:?subject=${t}&body=${u}`}>Email</a>
       <button type="button" onClick={copiar} aria-live="polite">
-        {copiado ? 'Lien copié' : 'Copier le lien'}
+        {copiado ? 'Link copied' : 'Copy link'}
       </button>
     </div>
   )
@@ -82,8 +82,8 @@ export default function Article(props) {
 
   return (
     <article id={id} className={`${styles.article} ${afilado ? styles.afilado : ''}`} style={{ '--acento': acento.oscuro, '--acento-papel': acento.papel, '--acento-titulo': acento.titulo }} aria-labelledby={`${id}-titre`} data-modo={modo}>
-      {anterior && <a href={anterior.href} className={`${styles.borde} ${styles.bordeIzq}`}>← Précédent</a>}
-      {siguiente && <a href={siguiente.href} className={`${styles.borde} ${styles.bordeDer}`}>Article suivant →</a>}
+      {anterior && <a href={anterior.href} className={`${styles.borde} ${styles.bordeIzq}`}>← Previous</a>}
+      {siguiente && <a href={siguiente.href} className={`${styles.borde} ${styles.bordeDer}`}>Next article →</a>}
 
       <header className={styles.cabecera}>
         <div className={styles.cabeceraIzq}>
@@ -92,13 +92,13 @@ export default function Article(props) {
         </div>
         {!afilado && <span className={styles.marca} aria-hidden="true"><LogoMark size={30} accent="var(--acento-papel)" /></span>}
         <div className={styles.cabeceraDer}>
-          <div role="group" aria-label="Mode de lecture" className={styles.modo}>
-            <button type="button" aria-pressed={immersif} onClick={() => cambiarModo('immersif')}>Immersif</button>
+          <div role="group" aria-label="Reading mode" className={styles.modo}>
+            <button type="button" aria-pressed={immersif} onClick={() => cambiarModo('immersif')}>Immersive</button>
             <button type="button" aria-pressed={!immersif} onClick={() => cambiarModo('simple')}>Simple</button>
           </div>
           <a href="#indice" className={styles.sommaire}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18" stroke="currentColor" strokeWidth="1.4" /></svg>
-            Sommaire
+            Contents
           </a>
         </div>
       </header>
@@ -108,33 +108,33 @@ export default function Article(props) {
           <img src={hero.src} srcSet={hero.srcSet} sizes={afilado ? '100vw' : '(max-width: 640px) 100vw, 1360px'} alt={hero.alt} loading="lazy" style={{ objectPosition: hero.posicion || 'center' }} />
           <div className={styles.heroTexto}>
             <h1 id={`${id}-titre`} className={styles.titulo}>{tituloJsx}</h1>
-            <span className={styles.firma}>Écrit par {auteur} · {date}</span>
+            <span className={styles.firma}>Written by {auteur} · {date}</span>
           </div>
           <span className={styles.credito}>{hero.credito}</span>
         </div>
       ) : (
         <div className={styles.simpleCabecera}>
           <h1 id={`${id}-titre`} className={`${styles.titulo} ${styles.tituloSimple}`}>{tituloJsx}</h1>
-          <span className={styles.firma}>Écrit par {auteur} · {date}</span>
+          <span className={styles.firma}>Written by {auteur} · {date}</span>
         </div>
       )}
 
       <div className={styles.rejilla}>
-        <aside className={styles.metadatos} aria-label="Informations">
+        <aside className={styles.metadatos} aria-label="Article details">
           <span className={styles.mono}>
-            LECTURE · {lecture}
+            READING TIME · {lecture}
             <br />
             SECTION · {seccion.toUpperCase()}
             <br />
-            Nº 07 · NOV. 2026
+            No. 07 · NOV. 2026
           </span>
           <div className={styles.tags}>
             {tags.map((t) => <span key={t}>{t}</span>)}
           </div>
         </aside>
         <div className={styles.cuerpo}>{cuerpo}</div>
-        <aside className={styles.notas} aria-label="Notes en marge">
-          <span className={styles.etiqueta}>Notes en marge</span>
+        <aside className={styles.notas} aria-label="Margin notes">
+          <span className={styles.etiqueta}>Margin notes</span>
           {notas.map((n, i) => (
             <div key={i} className={styles.nota}>
               <span>{String(i + 1).padStart(2, '0')}</span>
@@ -168,7 +168,7 @@ export default function Article(props) {
             <>
               {sources.length > 0 && (
                 <div className={styles.saberMas}>
-                  <span className={styles.etiquetaAcento}>Pour en savoir plus</span>
+                  <span className={styles.etiquetaAcento}>Further reading</span>
                   <ul>
                     {sources.map((s, i) => <li key={i}>{s}</li>)}
                   </ul>
@@ -180,7 +180,7 @@ export default function Article(props) {
               <div className={styles.autor}>
                 <span className={styles.avatar} aria-hidden="true">{iniciales(auteur)}</span>
                 <div>
-                  <span className={styles.etiqueta}>Écrit par</span>
+                  <span className={styles.etiqueta}>Written by</span>
                   <span className={styles.autorNombre}>{auteur}</span>
                   <p>{auteurBio}</p>
                 </div>
@@ -194,17 +194,17 @@ export default function Article(props) {
       {afilado ? (
         <Cierre id={id} titulo={titulo} fuentes={sources} auteur={auteur} auteurBio={auteurBio} anterior={anterior} siguiente={siguiente} />
       ) : (
-      <nav aria-label="Navigation entre les articles" className={styles.prevNext}>
+      <nav aria-label="Article navigation" className={styles.prevNext}>
         {anterior && (
           <a href={anterior.href} className={styles.prev}>
-            <span className={styles.etiqueta}>← Précédent</span>
+            <span className={styles.etiqueta}>← Previous</span>
             <span className={styles.prevTitulo}>{anterior.titulo}</span>
           </a>
         )}
         {siguiente && (
           <a href={siguiente.href} className={styles.next}>
             <span>
-              <span className={styles.etiqueta}>Article suivant · {siguiente.seccion}</span>
+              <span className={styles.etiqueta}>Next article · {siguiente.seccion}</span>
               <span className={styles.prevTitulo}>{siguiente.titulo}</span>
             </span>
             <Flecha />

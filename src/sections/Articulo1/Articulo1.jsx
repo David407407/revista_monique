@@ -12,7 +12,7 @@ function Anatomie() {
   const texto = { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 15, fontWeight: 600, fill: '#F6F1E4' }
   const linea = { stroke: '#9FB3AD', strokeWidth: 1 }
   return (
-    <svg viewBox="0 0 1000 420" role="img" aria-label="Schéma d’un trou noir : au centre la singularité, entourée de l’horizon des événements, de la sphère de photons et du disque d’accrétion.">
+    <svg viewBox="0 0 1000 420" role="img" aria-label="Diagram of a black hole: the singularity at the center, surrounded by the event horizon, the photon sphere and the accretion disk.">
       <ellipse cx="500" cy="210" rx="330" ry="70" stroke="#FF7A1A" strokeWidth="18" strokeOpacity="0.35" fill="none" />
       <ellipse cx="500" cy="210" rx="330" ry="70" stroke="#FF7A1A" strokeWidth="2" fill="none" />
       <circle cx="500" cy="210" r="118" stroke="#7FE3D0" strokeWidth="1.5" strokeDasharray="6 8" fill="none" />
@@ -20,13 +20,13 @@ function Anatomie() {
       <circle cx="500" cy="210" r="4" fill="#F6F1E4" />
 
       <path d="M500 210 L640 360 H760" {...linea} fill="none" />
-      <text x="770" y="365" {...texto}>Singularité</text>
+      <text x="770" y="365" {...texto}>Singularity</text>
       <path d="M445 152 L340 70 H220" {...linea} fill="none" />
-      <text x="70" y="75" {...texto}>Horizon des événements</text>
+      <text x="70" y="75" {...texto}>Event horizon</text>
       <path d="M600 140 L680 60 H760" {...linea} fill="none" />
-      <text x="770" y="65" {...texto}>Sphère de photons</text>
+      <text x="770" y="65" {...texto}>Photon sphere</text>
       <path d="M190 225 L120 330 H80" {...linea} fill="none" />
-      <text x="20" y="360" {...texto}>Disque d’accrétion</text>
+      <text x="20" y="360" {...texto}>Accretion disk</text>
     </svg>
   )
 }
@@ -36,97 +36,97 @@ export default function Articulo1() {
     <Article
       id="agujeros-negros"
       numero="03 / 09"
-      seccion="Trous noirs"
+      seccion="Black holes"
       acento={{ oscuro: 'var(--biolum)', papel: 'var(--biolum-papel)' }}
-      titulo="Aller simple pour un trou noir"
-      tituloJsx={<>Aller simple pour <em>un trou noir</em></>}
-      auteur="[AUTEUR]"
-      auteurBio="[BIO DE L’AUTEUR]."
-      date="10 nov. 2026"
+      titulo="One-way ticket to a black hole"
+      tituloJsx={<>One-way ticket to <em>a black hole</em></>}
+      auteur="[AUTHOR]"
+      auteurBio="[AUTHOR BIO]."
+      date="Nov. 10, 2026"
       lecture="7 MIN"
-      tags={['trous noirs', 'gravité', 'relativité']}
+      tags={['black holes', 'gravity', 'relativity']}
       hero={{
         src: m87Grande,
         srcSet: `${m87Chica} 1200w, ${m87Grande} 2400w`,
-        alt: 'Première image d’un trou noir : un anneau orangé lumineux autour d’une ombre sombre, au centre de la galaxie M87.',
-        credito: 'Image : EHT Collaboration',
+        alt: 'First image of a black hole: a glowing orange ring around a dark shadow, at the center of the galaxy M87.',
+        credito: 'Image: EHT Collaboration',
         posicion: '50% 62%',
       }}
       cuerpo={
         <>
-          <p>Attache ta ceinture : on part vers l’objet le plus extrême de l’Univers. Pas de retour prévu, mais promis, tu vas apprendre plein de choses en chemin.</p>
+          <p>Buckle up: we’re heading for the most extreme object in the Universe. No return trip planned, but I promise you’ll learn a lot along the way.</p>
 
-          <h2>Un trou… qui n’est pas un trou</h2>
-          <p>Premier malentendu à régler avant le décollage : un trou noir n’est pas un trou. Ce n’est pas un tunnel, ni un vide. C’est exactement l’inverse : énormément de matière, écrasée dans un tout petit espace.</p>
-          <p>Imagine qu’on prenne la Terre entière (les océans, les montagnes, ta maison, ton prof de maths) et qu’on la comprime de plus en plus fort. Pour en faire un trou noir, il faudrait la réduire à la taille d’une bille, de moins de 2 centimètres. Le Soleil, lui, deviendrait une boule d’environ 6 kilomètres de large. La taille d’une petite ville, pour un astre qui pourrait avaler un million de Terres.</p>
-          <p>Quand la matière est aussi serrée, sa gravité devient si forte que rien ne peut s’en échapper. Pas même la lumière. Et si la lumière ne ressort pas, on ne voit rien : d’où le « noir ».</p>
+          <h2>A hole… that isn’t a hole</h2>
+          <p>First misunderstanding to clear up before takeoff: a black hole isn’t a hole. It isn’t a tunnel, and it isn’t empty. It’s exactly the opposite: a huge amount of matter, crushed into a tiny space.</p>
+          <p>Imagine taking the whole Earth (the oceans, the mountains, your house, your math teacher) and squeezing it harder and harder. To turn it into a black hole, you’d have to shrink it to the size of a marble, less than 2 centimeters across. The Sun would become a ball about 6 kilometers wide. The size of a small town, for an object that could swallow a million Earths.</p>
+          <p>When matter is packed that tightly, its gravity becomes so strong that nothing can escape. Not even light. And if light can’t get out, we see nothing: hence the “black”.</p>
           <EscenaTierra />
 
-          <h2>Non, ce n’est pas un aspirateur</h2>
-          <p><strong>Mythe :</strong> un trou noir aspire tout ce qui passe près de lui. <strong>Réalité :</strong> un trou noir attire les choses exactement comme n’importe quel objet de la même masse. Pas plus.</p>
-          <p>Faisons une expérience (dans notre tête, heureusement). Remplaçons le Soleil par un trou noir qui a exactement la même masse. Que se passe-t-il pour la Terre ? Rien. Elle continue de tourner sur la même orbite, au même rythme, comme si de rien n’était.</p>
-          <p>Enfin… presque rien. Il n’y aurait plus de lumière ni de chaleur. On vivrait dans le noir, à moins 200 degrés. Mais au moins, on ne serait pas aspirés.</p>
-          <p>Le vrai danger, c’est de s’approcher trop près. Et c’est justement ce qu’on va faire.</p>
+          <h2>No, it’s not a vacuum cleaner</h2>
+          <p><strong>Myth:</strong> a black hole sucks in everything that passes nearby. <strong>Reality:</strong> a black hole pulls on things exactly like any other object with the same mass. No more.</p>
+          <p>Let’s try an experiment (in our heads, thankfully). Let’s replace the Sun with a black hole that has exactly the same mass. What happens to the Earth? Nothing. It keeps going around on the same orbit, at the same pace, as if nothing had happened.</p>
+          <p>Well… almost nothing. There would be no more light or heat. We’d live in the dark, at minus 200 degrees. But at least we wouldn’t get sucked in.</p>
+          <p>The real danger is getting too close. And that’s exactly what we’re about to do.</p>
           <EscenaSol />
 
-          <h2>La porte sans retour</h2>
-          <p>Autour de chaque trou noir, il y a une frontière invisible : l’horizon des événements. Ce n’est pas un mur, ni une surface. C’est une limite. De l’extérieur, on peut encore s’en aller. Une fois de l’autre côté, c’est fini. Rien ne ressort, jamais.</p>
-          <p>Les physiciens aiment l’expliquer avec une rivière. Imagine que l’espace coule vers le trou noir comme l’eau d’une rivière vers une cascade. Loin de la chute, un poisson nage sans problème à contre-courant. Plus il s’approche, plus le courant accélère. À un certain point, l’eau va plus vite que le poisson ne peut nager : même en donnant tout, il recule.</p>
-          <p>L’horizon des événements, c’est cet endroit. Là, l’espace « coule » plus vite que la lumière ne peut avancer. Et comme rien ne va plus vite que la lumière… rien ne peut remonter.</p>
+          <h2>The door of no return</h2>
+          <p>Around every black hole there’s an invisible boundary: the event horizon. It isn’t a wall, or a surface. It’s a limit. From outside, you can still get away. Once you’re on the other side, it’s over. Nothing comes back out, ever.</p>
+          <p>Physicists like to explain it with a river. Imagine that space flows toward the black hole like the water of a river toward a waterfall. Far from the falls, a fish swims upstream with no trouble. The closer it gets, the faster the current. At some point, the water moves faster than the fish can swim: even giving it everything, it drifts backward.</p>
+          <p>The event horizon is that place. There, space “flows” faster than light can travel. And since nothing goes faster than light… nothing can make it back up.</p>
           <EscenaRio />
 
-          <h2>Attention, tu vas devenir un spaghetti</h2>
-          <p>Imaginons que tu tombes les pieds en avant. Tes pieds sont un peu plus près du trou noir que ta tête, donc ils sont tirés un peu plus fort. Sur Terre, cette différence est minuscule. Près d’un trou noir, elle devient énorme : tes pieds sont tirés beaucoup plus fort que ta tête, et tu t’étires. Encore. Et encore. Jusqu’à ressembler à un spaghetti.</p>
-          <p>Les scientifiques appellent vraiment ça la « spaghettification ». Promis, ce n’est pas une blague.</p>
-          <p>Mais voici le paradoxe : ce sont les petits trous noirs les plus dangereux. Avec un trou noir de la masse de quelques soleils, tu serais étiré bien avant d’atteindre l’horizon. Avec un trou noir géant, des millions de fois plus lourd, l’étirement est si doux au niveau de l’horizon que tu le traverserais sans rien sentir. Les géants sont, en quelque sorte, les plus « gentils ».</p>
+          <h2>Careful, you’re about to become spaghetti</h2>
+          <p>Let’s say you fall in feet first. Your feet are a little closer to the black hole than your head, so they get pulled a little harder. On Earth, that difference is tiny. Near a black hole, it becomes enormous: your feet are pulled much harder than your head, and you stretch. And stretch. And stretch. Until you look like a strand of spaghetti.</p>
+          <p>Scientists really do call it “spaghettification”. I promise, it’s not a joke.</p>
+          <p>But here’s the paradox: the small black holes are the most dangerous. With a black hole of a few solar masses, you’d be stretched long before reaching the horizon. With a giant black hole, millions of times heavier, the stretching at the horizon is so gentle that you’d cross it without feeling a thing. The giants are, in a way, the “nicest” ones.</p>
           <EscenaEspagueti />
           <RelojEsquina />
         </>
       }
       notas={[
-        'Horizon des événements : la frontière au-delà de laquelle rien, pas même la lumière, ne peut ressortir.',
-        'Singularité : le point central où toute la matière est écrasée. Personne ne sait encore vraiment ce qui s’y passe.',
-        'Disque d’accrétion : le gaz qui tourne autour du trou noir à toute vitesse et chauffe au point de briller.',
-        'Les trous noirs et les fluides ont plus en commun qu’on ne le croit. On en parle avec un vrai spécialiste dans l’interview, à la fin du numéro.',
+        'Event horizon: the boundary beyond which nothing, not even light, can get back out.',
+        'Singularity: the central point where all the matter is crushed. Nobody really knows yet what happens there.',
+        'Accretion disk: the gas that whirls around the black hole at top speed and heats up until it glows.',
+        'Black holes and fluids have more in common than you’d think. We talk about it with a real expert in the interview, at the end of the issue.',
       ]}
       figura={{
         svg: <Anatomie />,
-        pie: 'Fig. 6 — Anatomie d’un trou noir (schéma, pas à l’échelle). © Point Bleu Pâle',
+        pie: 'Fig. 6 — Anatomy of a black hole (diagram, not to scale). © Point Bleu Pâle',
       }}
       cuerpoFinal={
         <>
-          <h2>Hollywood a dessiné un trou noir avant tout le monde</h2>
-          <p>En 2014, le film <em>Interstellar</em> a montré au cinéma un trou noir géant appelé Gargantua. Et ce n’était pas qu’un joli effet spécial.</p>
-          <p>Derrière le film, il y avait un vrai physicien : Kip Thorne, l’un des plus grands spécialistes des trous noirs, qui recevra plus tard le prix Nobel de physique (en 2017). Sa condition pour participer : rien dans le film ne devait contredire les lois de la physique.</p>
-          <p>Alors l’équipe des effets visuels n’a pas dessiné Gargantua. Elle l’a calculé. Les programmeurs ont utilisé les équations d’Einstein pour suivre le trajet de millions de rayons de lumière autour du trou noir. Certaines images ont demandé des dizaines d’heures de calcul.</p>
-          <p>Le résultat les a surpris eux-mêmes. Le disque de gaz brûlant qui tourne autour du trou noir n’apparaît pas seulement devant lui : on le voit aussi au-dessus et en dessous. En réalité, on voit l’arrière du disque, parce que la gravité courbe sa lumière et la fait passer par-dessus le trou noir, comme un pont. Ce rendu était tellement précis que l’équipe a publié un véritable article scientifique en 2015.</p>
+          <h2>Hollywood drew a black hole before anyone else</h2>
+          <p>In 2014, the movie <em>Interstellar</em> put a giant black hole called Gargantua on the big screen. And it wasn’t just a pretty special effect.</p>
+          <p>Behind the film there was a real physicist: Kip Thorne, one of the world’s leading black hole experts, who would later win the Nobel Prize in Physics (in 2017). His condition for taking part: nothing in the film could contradict the laws of physics.</p>
+          <p>So the visual effects team didn’t draw Gargantua. They calculated it. The programmers used Einstein’s equations to follow the paths of millions of light rays around the black hole. Some frames took dozens of hours to compute.</p>
+          <p>The result surprised even them. The disk of blazing gas spinning around the black hole doesn’t only appear in front of it: you also see it above and below. What you’re actually seeing is the back of the disk, because gravity bends its light and sends it over the black hole, like a bridge. The rendering was so accurate that the team published a real scientific paper in 2015.</p>
           <EscenaLente />
-          <p>Un film qui finit dans une revue scientifique. Ça n’arrive pas tous les jours.</p>
+          <p>A movie that ends up in a scientific journal. That doesn’t happen every day.</p>
 
-          <h2>Cinq ans plus tard, la vraie photo</h2>
-          <p>Le 10 avril 2019, le monde a découvert la première vraie image d’un trou noir. Elle a été prise par l’Event Horizon Telescope : huit radiotélescopes répartis sur la planète, qui ont travaillé ensemble comme un seul télescope de la taille de la Terre.</p>
-          <p>Le trou noir s’appelle M87*. Il est 6,5 milliards de fois plus lourd que le Soleil et se trouve à 55 millions d’années-lumière. Sur la photo : un anneau orangé autour d’une ombre noire. Exactement l’idée d’<em>Interstellar</em>.</p>
+          <h2>Five years later, the real photo</h2>
+          <p>On April 10, 2019, the world saw the first real image of a black hole. It was taken by the Event Horizon Telescope: eight radio telescopes spread across the planet, working together as a single telescope the size of the Earth.</p>
+          <p>The black hole is called M87*. It’s 6.5 billion times heavier than the Sun and lies 55 million light-years away. In the photo: an orange ring around a black shadow. Exactly the idea from <em>Interstellar</em>.</p>
           <Comparador />
-          <p>Mais compare bien les deux images. Sur la vraie photo, un côté de l’anneau est beaucoup plus brillant que l’autre. C’est normal : le gaz tourne à toute vitesse, et le côté qui vient vers nous brille davantage. Les créateurs du film le savaient… et l’ont enlevé exprès, pour que le public ne soit pas perdu.</p>
-          <p>Le film a eu presque tout bon. Sauf ce détail.</p>
-          <p>En 2022, la même équipe a photographié Sagittarius A*, le trou noir qui se trouve au centre de notre propre galaxie. Il pèse environ 4 millions de soleils. Rassure-toi : il est à environ 26 000 années-lumière. Il ne viendra pas nous chercher.</p>
+          <p>But take a close look at the two images. In the real photo, one side of the ring is much brighter than the other. That’s expected: the gas is spinning at enormous speed, and the side coming toward us shines brighter. The filmmakers knew this… and removed it on purpose, so the audience wouldn’t get confused.</p>
+          <p>The movie got almost everything right. Except that detail.</p>
+          <p>In 2022, the same team photographed Sagittarius A*, the black hole at the center of our own galaxy. It weighs about 4 million suns. Don’t worry: it’s about 26,000 light-years away. It won’t be coming for us.</p>
 
-          <h2>Et le temps, dans tout ça ?</h2>
-          <p className={estilosEscenas.soloInmersivo}>Tu as remarqué la petite horloge, dans le coin de l’écran ? Elle ralentit depuis le début. Ce n’est pas un bug.</p>
-          <p>Près d’un trou noir, le temps s’écoule plus lentement que loin de lui. Pas dans ta tête : pour de vrai. Si tu pouvais rester un moment près de l’horizon puis revenir sur Terre, tes amis auraient vieilli beaucoup plus que toi.</p>
-          <p>Dans <em>Interstellar</em>, les héros passent environ une heure sur la planète de Miller, en orbite autour de Gargantua. Pendant ce temps, sur Terre, sept ans s’écoulent. C’est extrême, mais Kip Thorne a fait les calculs : c’est possible si le trou noir tourne sur lui-même presque à la vitesse maximale autorisée par la physique.</p>
+          <h2>And what about time?</h2>
+          <p className={estilosEscenas.soloInmersivo}>Did you notice the little clock in the corner of the screen? It’s been slowing down since the start. That’s not a bug.</p>
+          <p>Near a black hole, time passes more slowly than far away from it. Not in your head: for real. If you could stay near the horizon for a while and then come back to Earth, your friends would have aged much more than you.</p>
+          <p>In <em>Interstellar</em>, the heroes spend about an hour on Miller’s planet, which orbits Gargantua. Meanwhile, back on Earth, seven years go by. It’s extreme, but Kip Thorne did the math: it’s possible if the black hole spins at almost the maximum speed physics allows.</p>
           <RelojesFinal />
-          <p>Comment le temps peut-il ralentir ? Ça, c’est une autre histoire. Et elle t’attend un peu plus loin dans ce numéro.</p>
+          <p>How can time slow down? Now that’s another story. And it’s waiting for you a little further on in this issue.</p>
         </>
       }
       sources={[
-        'Event Horizon Telescope — eventhorizontelescope.org (images de M87* et de Sagittarius A*).',
-        'Kip Thorne, La Science d’Interstellar, 2014.',
-        'O. James, E. von Tunzelmann, P. Franklin, K. S. Thorne, « Gravitational lensing by spinning black holes in astrophysics, and in the movie Interstellar », Classical and Quantum Gravity, 2015.',
-        'NASA — « Black Holes », science.nasa.gov.',
+        'Event Horizon Telescope — eventhorizontelescope.org (images of M87* and Sagittarius A*).',
+        'Kip Thorne, The Science of Interstellar, 2014.',
+        'O. James, E. von Tunzelmann, P. Franklin, K. S. Thorne, “Gravitational lensing by spinning black holes in astrophysics, and in the movie Interstellar”, Classical and Quantum Gravity, 2015.',
+        'NASA — “Black Holes”, science.nasa.gov.',
       ]}
-      anterior={{ href: '#indice', titulo: 'Sommaire' }}
-      siguiente={{ href: '#nebulosas', seccion: 'Nébuleuses', titulo: 'Là où naissent les étoiles' }}
+      anterior={{ href: '#indice', titulo: 'Contents' }}
+      siguiente={{ href: '#nebulosas', seccion: 'Nebulae', titulo: 'Where stars are born' }}
     />
   )
 }

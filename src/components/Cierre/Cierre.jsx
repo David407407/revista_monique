@@ -1,6 +1,6 @@
 // Cierre de artículo: banda oscura con una tarjeta clara (fuentes, compartir, autor) y los enlaces
 // Précédent / Suivant en vertical a los lados. Esquinas casi rectas. Lo usan Articulo2 y Articulo3
-// (este último a través de <Article variante="afilado">). Todo el texto visible va en francés.
+// (este último a través de <Article variante="afilado">). Todo el texto visible va en inglés.
 import { useState } from 'react'
 import styles from './Cierre.module.css'
 
@@ -41,19 +41,19 @@ function Compartir({ id, titulo }) {
       setCopiado(true)
       setTimeout(() => setCopiado(false), 2400)
     } catch {
-      window.prompt('Copiez ce lien :', url)
+      window.prompt('Copy this link:', url)
     }
   }
 
   return (
     <div className={styles.bloque}>
-      <span className={styles.etiqueta}>Partager l’article</span>
+      <span className={styles.etiqueta}>Share this article</span>
       <div className={styles.iconos}>
-        <a href={`https://www.facebook.com/sharer/sharer.php?u=${u}`} target="_blank" rel="noreferrer" aria-label="Partager sur Facebook (nouvel onglet)"><Icono nombre="facebook" /></a>
-        <a href={`https://x.com/intent/post?url=${u}&text=${t}`} target="_blank" rel="noreferrer" aria-label="Partager sur X (nouvel onglet)"><Icono nombre="x" /></a>
-        <a href={`mailto:?subject=${t}&body=${u}`} aria-label="Partager par e-mail"><Icono nombre="mail" /></a>
-        <button type="button" onClick={copiar} aria-label="Copier le lien"><Icono nombre="lien" /></button>
-        <span className={styles.aviso} role="status" aria-live="polite">{copiado ? 'Lien copié' : ''}</span>
+        <a href={`https://www.facebook.com/sharer/sharer.php?u=${u}`} target="_blank" rel="noreferrer" aria-label="Share on Facebook (new tab)"><Icono nombre="facebook" /></a>
+        <a href={`https://x.com/intent/post?url=${u}&text=${t}`} target="_blank" rel="noreferrer" aria-label="Share on X (new tab)"><Icono nombre="x" /></a>
+        <a href={`mailto:?subject=${t}&body=${u}`} aria-label="Share by email"><Icono nombre="mail" /></a>
+        <button type="button" onClick={copiar} aria-label="Copy link"><Icono nombre="lien" /></button>
+        <span className={styles.aviso} role="status" aria-live="polite">{copiado ? 'Link copied' : ''}</span>
       </div>
     </div>
   )
@@ -67,11 +67,11 @@ export default function Cierre({ id, titulo, fuentes = [], nota, auteur, auteurB
   const vars = acento ? { '--acento': acento.oscuro, '--acento-papel': acento.papel } : undefined
 
   return (
-    <footer className={styles.cierre} style={vars} aria-label="Fin de l’article">
+    <footer className={styles.cierre} style={vars} aria-label="End of article">
       <div className={styles.rejilla}>
         {anterior && (
           <a href={anterior.href} className={`${styles.lateral} ${styles.izq}`}>
-            <span aria-hidden="true">←</span> Article précédent
+            <span aria-hidden="true">←</span> Previous article
             <span className="sr-only"> : {anterior.titulo}</span>
           </a>
         )}
@@ -80,7 +80,7 @@ export default function Cierre({ id, titulo, fuentes = [], nota, auteur, auteurB
           <div className={styles.columna}>
             {fuentes.length > 0 && (
               <div className={styles.bloque}>
-                <span className={styles.etiqueta}>Pour en savoir plus</span>
+                <span className={styles.etiqueta}>Further reading</span>
                 <ul className={styles.fuentes}>
                   {fuentes.map((f, i) => <li key={i}>{f}</li>)}
                 </ul>
@@ -92,7 +92,7 @@ export default function Cierre({ id, titulo, fuentes = [], nota, auteur, auteurB
 
           <div className={styles.columna}>
             <div className={styles.bloque}>
-              <span className={styles.etiqueta}>À propos de l’auteur</span>
+              <span className={styles.etiqueta}>About the author</span>
               <p className={styles.nombre}>{auteur}</p>
               <p className={styles.bio}>{auteurBio}</p>
             </div>
@@ -101,17 +101,17 @@ export default function Cierre({ id, titulo, fuentes = [], nota, auteur, auteurB
           {siguiente && (
             <a href={siguiente.href} className={styles.suivant}>
               <span className={styles.suivantTexto}>
-                <span className={styles.suivantEtiqueta}>À suivre · {siguiente.seccion}</span>
+                <span className={styles.suivantEtiqueta}>Up next · {siguiente.seccion}</span>
                 <span className={styles.suivantTitulo}>{siguiente.titulo}</span>
               </span>
-              <span className={styles.boton} aria-hidden="true">Lire →</span>
+              <span className={styles.boton} aria-hidden="true">Read →</span>
             </a>
           )}
         </div>
 
         {siguiente && (
           <a href={siguiente.href} className={`${styles.lateral} ${styles.der}`}>
-            Article suivant <span aria-hidden="true">→</span>
+            Next article <span aria-hidden="true">→</span>
             <span className="sr-only"> : {siguiente.titulo}</span>
           </a>
         )}

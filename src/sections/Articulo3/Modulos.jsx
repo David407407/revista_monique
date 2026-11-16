@@ -5,16 +5,16 @@ import s from './Articulo3.module.css'
 
 /* ---------- utilidades ---------- */
 
-const coma = (n, dec = 1) => n.toFixed(dec).replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '').replace('.', ',')
+const coma = (n, dec = 1) => n.toFixed(dec).replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '') // punto decimal (versión en inglés)
 
 function fmtAnios(a) {
-  if (a < 1e6) return `${Math.round(a).toLocaleString('fr-FR')} ans`
+  if (a < 1e6) return `${Math.round(a).toLocaleString('en-US')} ${Math.round(a) === 1 ? 'year' : 'years'}`
   if (a < 1e9) {
     const m = a / 1e6
-    return `${coma(m, m < 10 ? 1 : 0)} million${m >= 2 ? 's' : ''} d’années`
+    return `${coma(m, m < 10 ? 1 : 0)} million years`
   }
   const g = a / 1e9
-  return `${coma(g, 1)} milliard${g >= 2 ? 's' : ''} d’années`
+  return `${coma(g, 1)} billion years`
 }
 
 function useMovimientoReducido() {
@@ -57,7 +57,7 @@ function Modulo({ titulo, children, lecturas, mensaje, pie }) {
     <figure className={s.modulo}>
       <div className={s.panel}>
         <div className={s.moduloCabecera}>
-          <span className={s.kicker}>À toi de jouer</span>
+          <span className={s.kicker}>Your turn</span>
           <p className={s.moduloTitulo}>{titulo}</p>
         </div>
         {children}
@@ -95,31 +95,31 @@ function Opciones({ etiqueta, opciones, valor, onChange }) {
 const objetos = [
   {
     id: 'soleil',
-    boton: 'Le Soleil',
-    distancia: 'un peu plus de 8 minutes-lumière',
-    salida: 'il y a un peu plus de 8 minutes',
-    terre: 'Il y a 8 minutes, tu étais peut-être déjà en train de lire cet article.',
+    boton: 'The Sun',
+    distancia: 'a little over 8 light-minutes',
+    salida: 'a little over 8 minutes ago',
+    terre: '8 minutes ago, you might already have been reading this article.',
   },
   {
     id: 'chat',
-    boton: 'La Patte de Chat',
-    distancia: '≈ 5 500 années-lumière',
-    salida: 'il y a ≈ 5 500 ans',
-    terre: 'Sur Terre, les premières villes et l’écriture apparaissent en Mésopotamie.',
+    boton: 'The Cat’s Paw',
+    distancia: '≈ 5,500 light-years',
+    salida: '≈ 5,500 years ago',
+    terre: 'On Earth, the first cities and writing are appearing in Mesopotamia.',
   },
   {
     id: 'ngc',
     boton: 'NGC 1068',
-    distancia: '≈ 47 millions d’années-lumière',
-    salida: 'il y a ≈ 47 millions d’années',
-    terre: 'Sur Terre, les mammifères modernes commencent tout juste à se diversifier.',
+    distancia: '≈ 47 million light-years',
+    salida: '≈ 47 million years ago',
+    terre: 'On Earth, modern mammals are just beginning to diversify.',
   },
   {
     id: 'fond',
-    boton: 'Les galaxies du fond',
-    distancia: 'des milliards d’années-lumière',
-    salida: 'il y a des milliards d’années',
-    terre: 'Selon la galaxie, le Soleil et la Terre n’existaient peut-être même pas encore : le Soleil n’a qu’environ 4,6 milliards d’années.',
+    boton: 'Background galaxies',
+    distancia: 'billions of light-years',
+    salida: 'billions of years ago',
+    terre: 'Depending on the galaxy, the Sun and the Earth may not even have existed yet: the Sun is only about 4.6 billion years old.',
   },
 ]
 
@@ -168,15 +168,15 @@ export function ModuloMachine() {
 
   return (
     <Modulo
-      titulo="La machine à remonter le temps"
+      titulo="The time machine"
       mensaje={o.terre}
       lecturas={[
         ['Distance', o.distancia],
-        ['Lumière partie', o.salida],
+        ['Light left', o.salida],
       ]}
-      pie="Fig. 1 — Choisis un objet : la lumière que tu reçois aujourd’hui est partie il y a longtemps. Schéma, distances pas à l’échelle."
+      pie="Fig. 1 — Pick an object: the light you receive today set out a long time ago. Diagram, distances not to scale."
     >
-      <Opciones etiqueta="Choisis un objet à observer" opciones={objetos.map((x) => [x.id, x.boton])} valor={sel} onChange={setSel} />
+      <Opciones etiqueta="Pick an object to observe" opciones={objetos.map((x) => [x.id, x.boton])} valor={sel} onChange={setSel} />
       <svg viewBox="0 0 640 180" className={s.lienzo} aria-hidden="true">
         <line x1="110" y1="90" x2="560" y2="90" className={s.trayecto} />
         <Astro id={o.id} />
@@ -186,7 +186,7 @@ export function ModuloMachine() {
           <ellipse cx="586" cy="90" rx="8" ry="20" />
           <line x1="566" y1="90" x2="606" y2="90" />
         </g>
-        <text x="586" y="140" textAnchor="middle" className={s.svgEtiqueta}>Toi</text>
+        <text x="586" y="140" textAnchor="middle" className={s.svgEtiqueta}>You</text>
         <text x="70" y="160" textAnchor="middle" className={s.svgEtiqueta}>{o.boton}</text>
       </svg>
     </Modulo>
@@ -223,15 +223,15 @@ export function ModuloCarrera() {
     setT(0)
   }
 
-  let mensaje = 'Appuie sur « Lancer le chrono » : les deux étoiles commencent à brûler leur combustible en même temps.'
+  let mensaje = 'Press “Start the clock”: both stars start burning their fuel at the same time.'
   if (t > 0 && escala === 'soleil') {
     mensaje = solFin
-      ? 'Le Soleil arrive au bout de son combustible. Pas d’explosion pour lui : il n’est pas assez massif pour devenir une supernova.'
-      : 'Boum ! L’étoile massive a déjà explosé en supernova. Le Soleil, lui, a à peine commencé. Essaie le zoom pour voir ce qui s’est passé.'
+      ? 'The Sun runs out of fuel. No explosion for it: it isn’t massive enough to become a supernova.'
+      : 'Boom! The massive star has already exploded as a supernova. The Sun has barely started. Try the zoom to see what happened.'
   } else if (t > 0) {
     mensaje = explotada
-      ? 'Boum ! Supernova après quelques millions d’années. Pendant ce temps, le Soleil a utilisé moins de 0,1 % de son combustible.'
-      : 'L’étoile massive vide son réservoir à toute vitesse…'
+      ? 'Boom! Supernova after a few million years. Meanwhile, the Sun has used less than 0.1% of its fuel.'
+      : 'The massive star is emptying its tank at full speed…'
   }
 
   const fila = (y, nombre, r, color, resta, muerta) => (
@@ -252,29 +252,29 @@ export function ModuloCarrera() {
 
   return (
     <Modulo
-      titulo="La course des étoiles"
+      titulo="The star race"
       mensaje={mensaje}
       lecturas={[
-        ['Chrono', fmtAnios(transcurrido)],
-        ['Combustible du Soleil', `${coma(solResta * 100, solResta > 0.99 ? 2 : 0)} %`],
-        ['Étoile massive', explotada ? 'supernova' : `${coma(masivaResta * 100, 0)} %`],
+        ['Clock', fmtAnios(transcurrido)],
+        ['Sun’s fuel', `${coma(solResta * 100, solResta > 0.99 ? 2 : 0)}%`],
+        ['Massive star', explotada ? 'supernova' : `${coma(masivaResta * 100, 0)}%`],
       ]}
-      pie="Fig. 4 — La même course, vue à l’échelle du Soleil puis avec un zoom ×1 000. Schéma : la durée exacte dépend de la masse de l’étoile."
+      pie="Fig. 4 — The same race, seen on the Sun’s scale and then zoomed in ×1,000. Diagram: the exact duration depends on the star’s mass."
     >
       <div className={s.controles}>
         <Opciones
-          etiqueta="Échelle du chrono"
-          opciones={[['soleil', 'Échelle du Soleil'], ['zoom', 'Zoom ×1 000']]}
+          etiqueta="Clock scale"
+          opciones={[['soleil', 'Sun’s scale'], ['zoom', 'Zoom ×1,000']]}
           valor={escala}
           onChange={cambiarEscala}
         />
         <button type="button" className={s.accion} onClick={lanzar} disabled={corriendo}>
-          {t > 0 && !corriendo ? 'Recommencer' : 'Lancer le chrono'}
+          {t > 0 && !corriendo ? 'Restart' : 'Start the clock'}
         </button>
       </div>
       <svg viewBox="0 0 640 190" className={s.lienzo} aria-hidden="true">
-        {fila(55, 'Le Soleil', 14, 'var(--acento-papel)', solResta, false)}
-        {fila(140, 'Une étoile massive', 22, 'var(--tinta)', masivaResta, explotada)}
+        {fila(55, 'The Sun', 14, 'var(--acento-papel)', solResta, false)}
+        {fila(140, 'A massive star', 22, 'var(--tinta)', masivaResta, explotada)}
       </svg>
     </Modulo>
   )
@@ -321,22 +321,22 @@ export function ModuloGalaxia() {
   const ang = (-90 + vueltas * 360) * (Math.PI / 180)
   const solX = 200 + 120 * Math.cos(ang)
   const solY = 200 + 120 * Math.sin(ang)
-  const textoTiempo = ma === 0 ? 'aujourd’hui' : `il y a ${fmtAnios(ma * 1e6)}`
+  const textoTiempo = ma === 0 ? 'today' : `${fmtAnios(ma * 1e6)} ago`
 
-  let mensaje = `Il y a ${fmtAnios(ma * 1e6)}, le Soleil se trouvait ici. Depuis, il a fait ${coma(vueltas, 1)} tour${vueltas >= 2 ? 's' : ''} de la Galaxie.`
-  if (ma === 0) mensaje = 'Aujourd’hui. Toute l’histoire humaine tient dans un trait trop fin pour être dessiné sur ce cercle.'
-  else if (Math.abs(ma - ANIO_COSMICO) <= 10) mensaje = 'Il y a une année cosmique, le Soleil était au même endroit… et les premiers dinosaures faisaient à peine leur apparition.'
-  else if (ma >= EDAD_SOL) mensaje = 'Naissance du Soleil, il y a environ 4,6 milliards d’années. Depuis, il a fait une vingtaine de tours.'
+  let mensaje = `${fmtAnios(ma * 1e6)} ago, the Sun was here. Since then, it has made ${coma(vueltas, 1)} ${vueltas === 1 ? 'lap' : 'laps'} around the Galaxy.`
+  if (ma === 0) mensaje = 'Today. All of human history fits into a line too thin to draw on this circle.'
+  else if (Math.abs(ma - ANIO_COSMICO) <= 10) mensaje = 'One cosmic year ago, the Sun was in the same spot… and the first dinosaurs were only just appearing.'
+  else if (ma >= EDAD_SOL) mensaje = 'The birth of the Sun, about 4.6 billion years ago. Since then, it has made some twenty laps.'
 
   return (
     <Modulo
-      titulo="L’horloge de la Galaxie"
+      titulo="The Galaxy clock"
       mensaje={mensaje}
       lecturas={[
-        ['Moment', textoTiempo],
-        ['Tours de galaxie', coma(vueltas, 1)],
+        ['When', textoTiempo],
+        ['Laps around the galaxy', coma(vueltas, 1)],
       ]}
-      pie="Fig. 7 — Fais remonter le temps : le Soleil fait un tour de la Voie lactée en environ 230 millions d’années. Schéma, pas à l’échelle."
+      pie="Fig. 7 — Turn back time: the Sun makes one lap around the Milky Way in about 230 million years. Diagram, not to scale."
     >
       <div className={s.galaxia}>
         <svg viewBox="0 0 400 400" className={s.lienzoCuadrado} aria-hidden="true">
@@ -349,7 +349,7 @@ export function ModuloGalaxia() {
           <circle cx={solX} cy={solY} r="6" className={s.acentoLleno} />
         </svg>
         <div className={s.galaxiaControles}>
-          <label htmlFor="tiempo-galaxia" className={s.kicker}>Remonter le temps</label>
+          <label htmlFor="tiempo-galaxia" className={s.kicker}>Turn back time</label>
           <input
             id="tiempo-galaxia"
             type="range"
@@ -357,17 +357,17 @@ export function ModuloGalaxia() {
             max={EDAD_SOL}
             step="10"
             value={ma}
-            aria-valuetext={`${textoTiempo}, ${coma(vueltas, 1)} tours`}
+            aria-valuetext={`${textoTiempo}, ${coma(vueltas, 1)} laps`}
             onChange={(e) => ir(Number(e.target.value))}
             style={{ '--progreso': `${(ma / EDAD_SOL) * 100}%` }}
           />
-          <div className={s.escalaRango} aria-hidden="true"><span>aujourd’hui</span><span>4,6 milliards d’années</span></div>
+          <div className={s.escalaRango} aria-hidden="true"><span>today</span><span>4.6 billion years</span></div>
           <div className={s.opciones}>
-            <button type="button" onClick={() => ir(0)} aria-pressed={ma === 0}>Aujourd’hui</button>
-            <button type="button" onClick={() => ir(ANIO_COSMICO)} aria-pressed={ma === ANIO_COSMICO}>Premiers dinosaures</button>
-            <button type="button" onClick={() => ir(EDAD_SOL)} aria-pressed={ma === EDAD_SOL}>Naissance du Soleil</button>
+            <button type="button" onClick={() => ir(0)} aria-pressed={ma === 0}>Today</button>
+            <button type="button" onClick={() => ir(ANIO_COSMICO)} aria-pressed={ma === ANIO_COSMICO}>First dinosaurs</button>
+            <button type="button" onClick={() => ir(EDAD_SOL)} aria-pressed={ma === EDAD_SOL}>Birth of the Sun</button>
           </div>
-          <button type="button" className={s.accion} onClick={jugar} disabled={jugando}>Faire tourner la Galaxie</button>
+          <button type="button" className={s.accion} onClick={jugar} disabled={jugando}>Spin the Galaxy</button>
         </div>
       </div>
     </Modulo>
@@ -383,21 +383,21 @@ export function ModuloGps() {
   const avance = us >= 1000 ? `${coma(us / 1000, 2)} ms` : `${us} µs`
   const desvio = Math.min(km, 300) * 1.3 // 300 km = 390 px
 
-  let mensaje = 'Avec la correction d’Einstein, ton GPS tombe juste.'
-  if (dias >= 1) mensaje = `Sans correction depuis ${dias} jour${dias > 1 ? 's' : ''}, ton GPS se trompe d’environ ${km} km.`
-  if (dias === 1) mensaje += ' La boulangerie est dans la ville d’à côté.'
-  else if (dias >= 2 && dias < 10) mensaje += ' Tes amis t’attendent toujours au cinéma.'
-  else if (dias >= 10) mensaje += ' À ce stade, il te place carrément dans une autre région.'
+  let mensaje = 'With Einstein’s correction, your GPS is spot on.'
+  if (dias >= 1) mensaje = `After ${dias} day${dias > 1 ? 's' : ''} without correction, your GPS is off by about ${km} km.`
+  if (dias === 1) mensaje += ' The bakery is in the next town over.'
+  else if (dias >= 2 && dias < 10) mensaje += ' Your friends are still waiting for you at the movies.'
+  else if (dias >= 10) mensaje += ' At this point, it puts you in a whole other region.'
 
   return (
     <Modulo
-      titulo="Et si le GPS oubliait Einstein ?"
+      titulo="What if GPS forgot about Einstein?"
       mensaje={mensaje}
       lecturas={[
-        ['Avance des horloges du satellite', avance],
-        ['Erreur de position', `≈ ${km} km`],
+        ['Satellite clocks running ahead by', avance],
+        ['Position error', `≈ ${km} km`],
       ]}
-      pie="Fig. 8 — Chaque jour sans correction, les horloges des satellites prennent environ 38 microsecondes d’avance, et la position dérive d’environ 10 km. Schéma."
+      pie="Fig. 8 — Every day without correction, the satellites’ clocks gain about 38 microseconds, and the position drifts by about 10 km. Diagram."
     >
       <svg viewBox="0 0 640 220" className={s.lienzo} aria-hidden="true">
         {[40, 80, 120, 160, 200].map((y) => <line key={y} x1="0" y1={y} x2="640" y2={y} className={s.calle} />)}
@@ -408,15 +408,15 @@ export function ModuloGps() {
         )}
         <g transform={`translate(${120 + desvio} 120)`} className={dias > 0 ? s.pinFantasma : s.pinOculto}>
           <path d="M0 0 C -12 -16 -12 -34 0 -34 C 12 -34 12 -16 0 0 Z" className={s.acentoLleno} />
-          <text x="0" y="22" textAnchor="middle" className={s.svgEtiqueta}>ton GPS</text>
+          <text x="0" y="22" textAnchor="middle" className={s.svgEtiqueta}>your GPS</text>
         </g>
         <g transform="translate(120 120)">
           <path d="M0 0 C -12 -16 -12 -34 0 -34 C 12 -34 12 -16 0 0 Z" className={s.tintaLlena} />
           <circle cx="0" cy="-23" r="4" style={{ fill: 'var(--papel-2)' }} />
-          <text x="0" y="22" textAnchor="middle" className={s.svgEtiqueta}>toi</text>
+          <text x="0" y="22" textAnchor="middle" className={s.svgEtiqueta}>you</text>
         </g>
       </svg>
-      <label htmlFor="tiempo-gps" className={s.kicker}>Jours sans correction : {dias}</label>
+      <label htmlFor="tiempo-gps" className={s.kicker}>Days without correction: {dias}</label>
       <input
         id="tiempo-gps"
         type="range"
@@ -424,7 +424,7 @@ export function ModuloGps() {
         max="30"
         step="1"
         value={dias}
-        aria-valuetext={`${dias} jours, erreur d’environ ${km} kilomètres`}
+        aria-valuetext={`${dias} days, error of about ${km} kilometers`}
         onChange={(e) => setDias(Number(e.target.value))}
         style={{ '--progreso': `${(dias / 30) * 100}%` }}
       />
@@ -438,20 +438,20 @@ const x = (anios) => 50 + (Math.log10(anios) + 5.5) * 56.25
 const EJE_Y = 340
 
 const graduaciones = [
-  [1, '1 an'],
-  [1e3, '1 000 ans'],
-  [1e6, '1 million d’années'],
-  [1e9, '1 milliard d’années'],
+  [1, '1 year'],
+  [1e3, '1,000 years'],
+  [1e6, '1 million years'],
+  [1e9, '1 billion years'],
 ]
 
 // [años, fila (y), etiqueta, valor, lado del texto]
 const duraciones = [
-  [8.3 / (60 * 24 * 365.25), 88, 'Lumière du Soleil', '8 minutes de trajet', 'derecha'],
-  [5500, 280, 'Lumière de la Patte de Chat', 'partie il y a 5 500 ans', 'izquierda'],
-  [47e6, 184, 'Lumière de NGC 1068', 'partie il y a 47 millions d’années', 'izquierda'],
-  [230e6, 136, 'Une année cosmique', '230 millions d’années', 'izquierda'],
-  [1e10, 88, 'Vie du Soleil', '10 milliards d’années', 'izquierda'],
-  [13.8e9, 40, 'Âge de l’Univers', '13,8 milliards d’années', 'izquierda'],
+  [8.3 / (60 * 24 * 365.25), 88, 'Light from the Sun', '8-minute trip', 'derecha'],
+  [5500, 280, 'Light from the Cat’s Paw', 'left 5,500 years ago', 'izquierda'],
+  [47e6, 184, 'Light from NGC 1068', 'left 47 million years ago', 'izquierda'],
+  [230e6, 136, 'One cosmic year', '230 million years', 'izquierda'],
+  [1e10, 88, 'Life of the Sun', '10 billion years', 'izquierda'],
+  [13.8e9, 40, 'Age of the Universe', '13.8 billion years', 'izquierda'],
 ]
 
 export function EscalaTiempo() {
@@ -470,7 +470,7 @@ export function EscalaTiempo() {
   }
 
   return (
-    <svg viewBox="0 0 1000 390" role="img" aria-label="Échelle des durées de l’article, du plus court au plus long : 8 minutes pour la lumière du Soleil, 5 500 ans pour celle de la Patte de Chat, quelques millions d’années de vie pour une étoile massive, 47 millions d’années pour la lumière de NGC 1068, 230 millions d’années pour une année cosmique, 10 milliards d’années de vie pour le Soleil et 13,8 milliards d’années pour l’âge de l’Univers.">
+    <svg viewBox="0 0 1000 390" role="img" aria-label="Scale of the spans of time in the article, from shortest to longest: 8 minutes for light from the Sun, 5,500 years for light from the Cat’s Paw, a few million years of life for a massive star, 47 million years for light from NGC 1068, 230 million years for one cosmic year, 10 billion years of life for the Sun and 13.8 billion years for the age of the Universe.">
       {graduaciones.map(([anios, nombre]) => (
         <g key={nombre}>
           <line x1={x(anios)} y1={EJE_Y - 8} x2={x(anios)} y2={EJE_Y + 8} className={s.marca} />
@@ -482,7 +482,7 @@ export function EscalaTiempo() {
 
       <line x1={tramo[0]} y1={EJE_Y} x2={tramo[1]} y2={EJE_Y} className={s.tramo} />
       <line x1={medioTramo} y1={EJE_Y} x2={medioTramo} y2={232 - 14} className={s.guia} />
-      {texto(medioTramo, 232, 'Vie d’une étoile massive', 'quelques millions d’années', 'izquierda')}
+      {texto(medioTramo, 232, 'Life of a massive star', 'a few million years', 'izquierda')}
 
       {duraciones.map(([anios, y, etiqueta, valor, lado]) => (
         <g key={etiqueta}>

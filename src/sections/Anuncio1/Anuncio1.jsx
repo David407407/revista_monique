@@ -3,9 +3,9 @@
 import styles from './Anuncio1.module.css'
 
 const datos = [
-  ['Gratuit', 'Aucun abonnement'],
-  ['3D', 'Planètes, lunes et sondes'],
-  ['Navigateur', 'Rien à installer'],
+  ['Free', 'No subscription'],
+  ['3D', 'Planets, moons and spacecraft'],
+  ['Browser', 'Nothing to install'],
 ]
 
 // Órbitas del sistema solar interior que giran despacio
@@ -38,25 +38,25 @@ function Orbitas() {
 
 export default function Anuncio1() {
   return (
-    <aside id="anuncio-1" aria-label="Publicité" className={styles.anuncio}>
+    <aside id="anuncio-1" aria-label="Advertisement" className={styles.anuncio}>
       <div className={styles.cabecera}>
         <span className={styles.marca}>
           NASA’s <em>Eyes</em>
         </span>
-        <span className={styles.pill}>Publicité</span>
+        <span className={styles.pill}>Advertisement</span>
       </div>
 
       <div className={styles.cuerpo}>
         <div className={styles.texto}>
           <h2 className={styles.titulo}>
-            Vous avez lu.
+            You’ve read about it.
             <br />
-            Maintenant, <em>regardez.</em>
+            Now <em>see it.</em>
           </h2>
           <p className={styles.bajada}>
-            Explorez le Système solaire en 3D et suivez les sondes spatiales là où elles se
-            trouvent aujourd’hui. Une application gratuite de la NASA, directement dans votre
-            navigateur.
+            Explore the Solar System in 3D and follow space probes to wherever they are
+            today. A free app from NASA, right in your
+            browser.
           </p>
           <dl className={styles.datos}>
             {datos.map(([valor, texto]) => (
@@ -67,19 +67,19 @@ export default function Anuncio1() {
             ))}
           </dl>
           <a href="https://eyes.nasa.gov/" target="_blank" rel="noreferrer" className={styles.cta}>
-            Ouvrir NASA’s Eyes
+            Open NASA’s Eyes
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="sr-only">(s’ouvre dans un nouvel onglet)</span>
+            <span className="sr-only">(opens in a new tab)</span>
           </a>
         </div>
         <Orbitas />
       </div>
 
       <p className={styles.legal}>
-        Annonce à but éducatif. NASA’s Eyes est un service gratuit de la NASA et du JPL.
-        Point Bleu Pâle n’est pas affilié à la NASA.
+        Educational advertisement. NASA’s Eyes is a free service from NASA and JPL.
+        Point Bleu Pâle is not affiliated with NASA.
       </p>
     </aside>
   )

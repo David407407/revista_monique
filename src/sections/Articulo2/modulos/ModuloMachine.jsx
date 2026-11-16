@@ -75,15 +75,15 @@ export default function ModuloMachine({ t }) {
 
         <dl className={s.lecturas}>
           <div>
-            <dt>{t.distancia}{NBSP}:</dt>
+            <dt>{t.distancia}:</dt>
             <dd>{nombre(v)} {plural(v, t.al)}</dd>
           </div>
           <div>
-            <dt>{t.resta}{NBSP}:</dt>
+            <dt>{t.resta}:</dt>
             <dd>{nombre(resta)} {plural(resta, t.al)} {t.restaFin}</dd>
           </div>
           <div>
-            <dt>{t.anio}{NBSP}:</dt>
+            <dt>{t.anio}:</dt>
             <dd>{anio}</dd>
           </div>
         </dl>
