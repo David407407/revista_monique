@@ -1,11 +1,12 @@
 // Anuncio 1: NASA's Eyes — responsable: David407407
 // Anuncio real de una herramienta gratuita. Sin logos oficiales: solo el nombre del servicio.
+import { useT } from '../../components/Idioma/Idioma.jsx'
 import styles from './Anuncio1.module.css'
 
 const datos = [
-  ['Free', 'No subscription'],
-  ['3D', 'Planets, moons and spacecraft'],
-  ['Browser', 'Nothing to install'],
+  [['Gratuit', 'Free'], ['Aucun abonnement', 'No subscription']],
+  [['3D', '3D'], ['Planètes, lunes et sondes', 'Planets, moons and spacecraft']],
+  [['Navigateur', 'Browser'], ['Rien à installer', 'Nothing to install']],
 ]
 
 // Órbitas del sistema solar interior que giran despacio
@@ -37,49 +38,53 @@ function Orbitas() {
 }
 
 export default function Anuncio1() {
+  const t = useT()
   return (
-    <aside id="anuncio-1" aria-label="Advertisement" className={styles.anuncio}>
+    <aside id="anuncio-1" aria-label={t('Publicité', 'Advertisement')} className={styles.anuncio}>
       <div className={styles.cabecera}>
         <span className={styles.marca}>
           NASA’s <em>Eyes</em>
         </span>
-        <span className={styles.pill}>Advertisement</span>
+        <span className={styles.pill}>{t('Publicité', 'Advertisement')}</span>
       </div>
 
       <div className={styles.cuerpo}>
         <div className={styles.texto}>
           <h2 className={styles.titulo}>
-            You’ve read about it.
+            {t('Vous avez lu.', 'You’ve read about it.')}
             <br />
-            Now <em>see it.</em>
+            {t('Maintenant, ', 'Now ')}<em>{t('regardez.', 'see it.')}</em>
           </h2>
           <p className={styles.bajada}>
-            Explore the Solar System in 3D and follow space probes to wherever they are
-            today. A free app from NASA, right in your
-            browser.
+            {t(
+              'Explorez le Système solaire en 3D et suivez les sondes spatiales là où elles se trouvent aujourd’hui. Une application gratuite de la NASA, directement dans votre navigateur.',
+              'Explore the Solar System in 3D and follow space probes to wherever they are today. A free app from NASA, right in your browser.',
+            )}
           </p>
           <dl className={styles.datos}>
             {datos.map(([valor, texto]) => (
-              <div key={valor}>
-                <dt>{valor}</dt>
-                <dd>{texto}</dd>
+              <div key={valor[0]}>
+                <dt>{t(...valor)}</dt>
+                <dd>{t(...texto)}</dd>
               </div>
             ))}
           </dl>
           <a href="https://eyes.nasa.gov/" target="_blank" rel="noreferrer" className={styles.cta}>
-            Open NASA’s Eyes
+            {t('Ouvrir NASA’s Eyes', 'Open NASA’s Eyes')}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="sr-only">(opens in a new tab)</span>
+            <span className="sr-only">{t('(s’ouvre dans un nouvel onglet)', '(opens in a new tab)')}</span>
           </a>
         </div>
         <Orbitas />
       </div>
 
       <p className={styles.legal}>
-        Educational advertisement. NASA’s Eyes is a free service from NASA and JPL.
-        Point Bleu Pâle is not affiliated with NASA.
+        {t(
+          'Annonce à but éducatif. NASA’s Eyes est un service gratuit de la NASA et du JPL. Point Bleu Pâle n’est pas affilié à la NASA.',
+          'Educational advertisement. NASA’s Eyes is a free service from NASA and JPL. Point Bleu Pâle is not affiliated with NASA.',
+        )}
       </p>
     </aside>
   )

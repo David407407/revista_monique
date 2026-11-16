@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
+import { useIdioma } from '../../../components/Idioma/Idioma.jsx'
+import { dosPuntos } from '../typo.js'
 import Modulo from './Modulo.jsx'
 import s from './Modulos.module.css'
 
 // M4 — «Vrai ou faux ?»: una afirmación a la vez, sin temporizador.
 export default function ModuloQuiz({ t }) {
   const total = t.preguntas.length
+  const { idioma } = useIdioma()
   const [i, setI] = useState(0)
   const [respuesta, setRespuesta] = useState(null) // null | true | false (lo que eligió)
   const [score, setScore] = useState(0)
@@ -50,7 +53,7 @@ export default function ModuloQuiz({ t }) {
       {fin ? (
         <div className={s.quizCuerpo} aria-live="polite">
           <p ref={foco} tabIndex={-1} className={s.cifra}>
-            {t.score}: {score} / {total}
+            {t.score}{dosPuntos(idioma)} {score} / {total}
           </p>
           <p className={s.apoyo}>{mensaje}</p>
           <div>
@@ -89,7 +92,7 @@ export default function ModuloQuiz({ t }) {
               <>
                 <p className={`${s.fichaTitulo} ${acierto ? '' : s.quizMal}`}>{acierto ? t.bien : t.mal}</p>
                 <p className={s.apoyo}>
-                  {!acierto && `${t.laRespuesta}: ${p.vrai ? t.vrai : t.faux}. `}
+                  {!acierto && `${t.laRespuesta}${dosPuntos(idioma)} ${p.vrai ? t.vrai : t.faux}. `}
                   {p.expl}
                 </p>
               </>

@@ -1,3 +1,4 @@
+import { useT } from '../Idioma/Idioma.jsx'
 import styles from './Logo.module.css'
 
 // Punto azul pálido con anillo orbital. `accent` colorea el anillo y "pâle revue".
@@ -14,7 +15,9 @@ export function LogoMark({ size = 36, accent = 'var(--biolum)' }) {
   )
 }
 
-export default function Logo({ accent = 'var(--biolum)', large = false, label = 'Point Bleu Pâle, go to the cover' }) {
+export default function Logo({ accent = 'var(--biolum)', large = false, label }) {
+  const tr = useT()
+  label ??= tr('Point Bleu Pâle, aller à la couverture', 'Point Bleu Pâle, go to the cover')
   return (
     <a href="#portada" aria-label={label} className={`${styles.logo} ${large ? styles.large : ''}`} style={{ '--accent': accent }}>
       <LogoMark size={large ? 40 : 36} accent={accent} />

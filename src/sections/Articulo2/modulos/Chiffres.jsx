@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
+import { useIdioma } from '../../../components/Idioma/Idioma.jsx'
 import { annee, nombre } from '../typo.js'
 import useReduceMotion from './useReduceMotion.js'
 import s from './Modulos.module.css'
 
 const DURACION_MS = 900
 
-const formatear = (item, n) => `${item.prefijo ?? ''}${item.anio ? annee(n) : nombre(n)}`
+const formatear = (item, n, idioma) => `${item.prefijo ?? ''}${item.anio ? annee(n) : nombre(n, undefined, idioma)}`
 
 // «Les piliers en six chiffres»: cuenta de 0 al valor al entrar en pantalla.
 // El texto accesible es siempre el valor final; la cifra animada va oculta para lectores de pantalla.
 export default function Chiffres({ t }) {
   const reducir = useReduceMotion()
+  const { idioma } = useIdioma()
   const caja = useRef(null)
   const [avanceAnimado, setAvance] = useState(0) // 0–1
   const avance = reducir ? 1 : avanceAnimado
@@ -47,8 +49,8 @@ export default function Chiffres({ t }) {
       </h2>
       <ul className={s.chiffresLista}>
         {t.items.map((item) => {
-          const final = item.texto ?? formatear(item, item.n)
-          const visible = item.texto ?? formatear(item, Math.round(item.n * avance))
+          const final = item.texto ?? formatear(item, item.n, idioma)
+          const visible = item.texto ?? formatear(item, Math.round(item.n * avance), idioma)
           return (
             <li key={item.label}>
               <span className={s.chiffreCifra}>

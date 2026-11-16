@@ -40,14 +40,14 @@ const LINEAS = [
   ['caph', 'schedar', 'gammaCas', 'ruchbah', 'segin'],
 ]
 
-// Nombres que se quedan derechos mientras el cielo gira: [texto, estrellas de referencia, desplazamiento px, tipo]
+// Nombres que se quedan derechos mientras el cielo gira: [[francés, inglés], estrellas de referencia, desplazamiento px, tipo]
 const NOMBRES = [
-  ['Big Dipper', ['megrez', 'phecda', 'alioth'], [0, 34], 'constelacion'],
-  ['Little Dipper', ['kochab', 'zetaUmi', 'pherkad'], [0, 30], 'constelacion'],
-  ['Cassiopeia', ['schedar', 'gammaCas', 'ruchbah'], [0, -26], 'constelacion'],
-  ['Capella', ['capella'], [10, -10], 'estrella'],
-  ['Vega', ['vega'], [10, -10], 'estrella'],
-  ['Deneb', ['deneb'], [10, -10], 'estrella'],
+  [['Grande Ourse', 'Big Dipper'], ['megrez', 'phecda', 'alioth'], [0, 34], 'constelacion'],
+  [['Petite Ourse', 'Little Dipper'], ['kochab', 'zetaUmi', 'pherkad'], [0, 30], 'constelacion'],
+  [['Cassiopée', 'Cassiopeia'], ['schedar', 'gammaCas', 'ruchbah'], [0, -26], 'constelacion'],
+  [['Capella', 'Capella'], ['capella'], [10, -10], 'estrella'],
+  [['Véga', 'Vega'], ['vega'], [10, -10], 'estrella'],
+  [['Deneb', 'Deneb'], ['deneb'], [10, -10], 'estrella'],
 ]
 
 const rad = Math.PI / 180
@@ -98,8 +98,9 @@ function suelo(w, h, horizonte) {
   return `M0,${h} L${puntos.join(' L')} L${w + 24},${h} Z`
 }
 
-export function Cielo({ medidas, lst, giro, etiquetas }) {
+export function Cielo({ medidas, lst, giro, etiquetas, idioma = 'fr' }) {
   const { w, h, px, py, horizonte, escala } = medidas
+  const t = (fr, en) => (idioma === 'en' ? en : fr)
 
   const cielo = useMemo(() => {
     const pos = Object.fromEntries(Object.entries(ESTRELLAS).map(([k, [ar, dec, mag]]) => [k, { p: proyectar([ar, dec], lst), mag }]))
@@ -153,14 +154,14 @@ export function Cielo({ medidas, lst, giro, etiquetas }) {
         <g transform={`translate(${e('polaire').join(' ')})`}>
           <circle r={radio(2)} className={styles.polar} />
           <path d="M-13,-6 A14,14 0 0 1 -6,-13 M6,-13 A14,14 0 0 1 13,-6 M13,6 A14,14 0 0 1 6,13 M-6,13 A14,14 0 0 1 -13,6" className={styles.reticula} />
-          <text x="22" y="-3" className={styles.nombrePolar}>North Star</text>
-          <text x="22" y="15" className={styles.notaPolar}>everything turns around it</text>
+          <text x="22" y="-3" className={styles.nombrePolar}>{t('Étoile polaire', 'North Star')}</text>
+          <text x="22" y="15" className={styles.notaPolar}>{t('tout tourne autour d’elle', 'everything turns around it')}</text>
         </g>
       </g>
 
       {nombres.map((n, i) => (
         <text
-          key={n.texto}
+          key={n.texto[0]}
           ref={(el) => { etiquetas.current[i] = el }}
           data-x={n.x}
           data-y={n.y}
@@ -170,12 +171,12 @@ export function Cielo({ medidas, lst, giro, etiquetas }) {
           className={n.tipo === 'constelacion' ? styles.constelacion : styles.nombreEstrella}
           {...posicionEtiqueta({ x: n.x, y: n.y, dx: n.dx, dy: n.dy }, 0, medidas)}
         >
-          {n.texto}
+          {t(...n.texto)}
         </text>
       ))}
 
       <path d={suelo(w, h, horizonte)} className={styles.suelo} />
-      {[['NW', -45], ['N', 0], ['NE', 45]].map(([letra, az]) => (
+      {[[t('NO', 'NW'), -45], ['N', 0], ['NE', 45]].map(([letra, az]) => (
         <text key={letra} x={px + az * escala} y={horizonte - 18} textAnchor="middle" className={styles.cardinal}>
           {letra}
         </text>

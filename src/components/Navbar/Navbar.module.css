@@ -114,6 +114,38 @@
   color: var(--azul-palido);
 }
 
+/* Selector de idioma FR / EN: píldora de cristal como el selector Immersif / Simple */
+.idioma {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(246, 241, 228, 0.3);
+  border-radius: 999px;
+}
+
+.idioma button {
+  min-width: 40px;
+  min-height: 34px;
+  padding: 0 10px;
+  font: 600 13px/1 var(--font-ui);
+  letter-spacing: 0.04em;
+  color: var(--papel);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+
+.idioma button:hover {
+  background: rgba(246, 241, 228, 0.12);
+}
+
+.idioma button[aria-pressed='true'] {
+  color: var(--grafito);
+  background: var(--papel);
+}
+
 .menuButton {
   display: none;
   width: var(--tap);
@@ -146,6 +178,11 @@
 
   .menuButton {
     display: flex;
+    margin-left: 0;
+  }
+
+  .idioma {
+    margin-left: auto;
   }
 
   .nav {

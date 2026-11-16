@@ -1,18 +1,35 @@
 import { useEffect, useState } from 'react'
 import Logo from '../Logo/Logo.jsx'
+import { useIdioma, useT } from '../Idioma/Idioma.jsx'
 import styles from './Navbar.module.css'
 
 const secciones = [
-  ['#agujeros-negros', 'Black holes'],
-  ['#nebulosas', 'Nebulae'],
-  ['#tiempo', 'Time'],
-  ['#entrevista', 'Interview'],
-  ['#indice', 'Topics'],
-  ['#contraportada', 'Archives'],
+  ['#agujeros-negros', 'Trous noirs', 'Black holes'],
+  ['#nebulosas', 'Nébuleuses', 'Nebulae'],
+  ['#tiempo', 'Temps', 'Time'],
+  ['#entrevista', 'Entretien', 'Interview'],
+  ['#indice', 'Thèmes', 'Topics'],
+  ['#contraportada', 'Archives', 'Archives'],
 ]
+
+// Botón FR / EN: cambia el idioma de toda la revista
+function SelectorIdioma() {
+  const { idioma, setIdioma } = useIdioma()
+  const t = useT()
+  return (
+    <div role="group" aria-label={t('Langue', 'Language')} className={styles.idioma}>
+      {[['fr', 'FR', 'Français'], ['en', 'EN', 'English']].map(([codigo, corto, largo]) => (
+        <button key={codigo} type="button" lang={codigo} aria-pressed={idioma === codigo} aria-label={largo} onClick={() => setIdioma(codigo)}>
+          {corto}
+        </button>
+      ))}
+    </div>
+  )
+}
 
 export default function Navbar() {
   const [abierto, setAbierto] = useState(false)
+  const t = useT()
   // Transparente mientras está sobre la foto de la portada
   const [sobreFoto, setSobreFoto] = useState(true)
 
@@ -39,13 +56,14 @@ export default function Navbar() {
         <Logo accent="var(--azul-palido)" />
         <span className={styles.divider} aria-hidden="true" />
         <nav id="menu-secciones" aria-label="Sections" className={`${styles.nav} ${abierto ? styles.open : ''}`}>
-          {secciones.map(([href, nombre]) => (
-            <a key={href} href={href} onClick={() => setAbierto(false)}>{nombre}</a>
+          {secciones.map(([href, fr, en]) => (
+            <a key={href} href={href} onClick={() => setAbierto(false)}>{t(fr, en)}</a>
           ))}
         </nav>
+        <SelectorIdioma />
         <button
           type="button"
-          aria-label={abierto ? 'Close menu' : 'Open menu'}
+          aria-label={abierto ? t('Fermer le menu', 'Close menu') : t('Ouvrir le menu', 'Open menu')}
           aria-expanded={abierto}
           aria-controls="menu-secciones"
           className={styles.menuButton}

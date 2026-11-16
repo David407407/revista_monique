@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { NBSP } from '../typo.js'
+import { useIdioma } from '../../../components/Idioma/Idioma.jsx'
+import { NBSP, dosPuntos } from '../typo.js'
 import { dureeAnnees, formatDuree, posicionLog } from './calculos.js'
 import e from './Echelle.module.css'
 
@@ -7,8 +8,9 @@ import e from './Echelle.module.css'
 // Estilo «Papier et vin»: papel mate, líneas finas, serif ligera y cifra en rojo vino.
 export default function ModuloEchelle({ t }) {
   const [sel, setSel] = useState('voyager')
+  const { idioma } = useIdioma()
   const v = t.vitesses.find((x) => x.id === sel)
-  const resultado = formatDuree(dureeAnnees(t.longitudAl, v.kmS))
+  const resultado = formatDuree(dureeAnnees(t.longitudAl, v.kmS), idioma)
   const pos = posicionLog(dureeAnnees(t.longitudAl, v.kmS))
 
   // «≈ 71 000 ans» → aprox. «≈», cifra «71 000», unidad «ans»
@@ -48,7 +50,7 @@ export default function ModuloEchelle({ t }) {
           <p className={e.nota}>{v.note}</p>
         </div>
 
-        <div className={e.escala} role="img" aria-label={`${t.barraLabel}: ${resultado}`}>
+        <div className={e.escala} role="img" aria-label={`${t.barraLabel}${dosPuntos(idioma)} ${resultado}`}>
           <div className={e.pista}>
             <span className={e.relleno} style={{ width: `${pos * 100}%` }} />
             {t.marcas.map((m, i) => (

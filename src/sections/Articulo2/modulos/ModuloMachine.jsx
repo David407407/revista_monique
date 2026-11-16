@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { NBSP, nombre } from '../typo.js'
+import { useIdioma } from '../../../components/Idioma/Idioma.jsx'
+import { NBSP, dosPuntos, nombre } from '../typo.js'
 import { anneeTexte, plural } from './calculos.js'
 import Modulo from './Modulo.jsx'
 import useReduceMotion from './useReduceMotion.js'
@@ -10,6 +11,7 @@ const DURACION_MS = 14000 // de 0 a 6 500 en ~14 s
 // M2 — «Machine à remonter la lumière»
 export default function ModuloMachine({ t }) {
   const total = t.distanciaTotal
+  const { idioma } = useIdioma()
   const [valor, setValor] = useState(0)
   const [jugandoPedido, setJugando] = useState(false)
   const reducir = useReduceMotion()
@@ -58,7 +60,7 @@ export default function ModuloMachine({ t }) {
           max={total}
           step="1"
           value={v}
-          aria-valuetext={`${nombre(v)}${NBSP}${plural(v, t.ecoule)}, ${anio}`}
+          aria-valuetext={`${nombre(v, undefined, idioma)}${NBSP}${plural(v, t.ecoule, idioma)}, ${anio}`}
           onChange={(e) => irA(Number(e.target.value))}
           className={s.curseur}
           style={{ '--progreso': `${(v / total) * 100}%` }}
@@ -75,15 +77,15 @@ export default function ModuloMachine({ t }) {
 
         <dl className={s.lecturas}>
           <div>
-            <dt>{t.distancia}:</dt>
-            <dd>{nombre(v)} {plural(v, t.al)}</dd>
+            <dt>{t.distancia}{dosPuntos(idioma)}</dt>
+            <dd>{nombre(v, undefined, idioma)} {plural(v, t.al, idioma)}</dd>
           </div>
           <div>
-            <dt>{t.resta}:</dt>
-            <dd>{nombre(resta)} {plural(resta, t.al)} {t.restaFin}</dd>
+            <dt>{t.resta}{dosPuntos(idioma)}</dt>
+            <dd>{nombre(resta, undefined, idioma)} {plural(resta, t.al, idioma)} {t.restaFin}</dd>
           </div>
           <div>
-            <dt>{t.anio}:</dt>
+            <dt>{t.anio}{dosPuntos(idioma)}</dt>
             <dd>{anio}</dd>
           </div>
         </dl>

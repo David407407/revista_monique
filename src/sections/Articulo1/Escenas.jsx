@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { coma, limitar, mezclar, suave, useMovimientoReducido, useProgreso } from './useProgreso.js'
 import m87 from '../../assets/articulo1/m87-1200.webp'
+import { localeDe, useIdioma, useT } from '../../components/Idioma/Idioma.jsx'
 import styles from './Escenas.module.css'
 
 // Ritmo de "tu" reloj visto desde la Tierra: 1 al empezar el artículo, casi 0 al final.
@@ -30,29 +31,32 @@ function useP(ref) {
 }
 
 /* 1 · La Tierra comprimida hasta ser una canica */
-function formatoDiametro(m) {
-  if (m >= 1000) return `${Math.round(m / 1000).toLocaleString('en-US')} km`
-  if (m >= 1) return `${Math.round(m).toLocaleString('en-US')} m`
-  return `${(m * 100).toLocaleString('en-US', { maximumFractionDigits: m < 0.1 ? 1 : 0 })} cm`
+function formatoDiametro(m, idioma) {
+  const loc = localeDe(idioma)
+  if (m >= 1000) return `${Math.round(m / 1000).toLocaleString(loc)} km`
+  if (m >= 1) return `${Math.round(m).toLocaleString(loc)} m`
+  return `${(m * 100).toLocaleString(loc, { maximumFractionDigits: m < 0.1 ? 1 : 0 })} cm`
 }
 
 export function EscenaTierra() {
   const ref = useRef(null)
   const p = useP(ref)
+  const t = useT()
   const r = 120 * Math.pow(6 / 120, p)
   const diametro = 12742000 * Math.pow(0.018 / 12742000, p)
   const bille = suave(0.7, 0.95, p)
+  const { idioma } = useIdioma()
 
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 2 — To become a black hole, the Earth would have to fit inside a marble. Diagram, not to scale."
+      pie={t('Fig. 2 — Pour devenir un trou noir, la Terre devrait tenir dans une bille. Schéma, pas à l’échelle.', 'Fig. 2 — To become a black hole, the Earth would have to fit inside a marble. Diagram, not to scale.')}
       lecturas={<>
-        <span>Earth’s diameter: <b>{formatoDiametro(diametro)}</b></span>
-        <span>Mass: <b>unchanged</b></span>
+        <span>{t('Diamètre de la Terre :', 'Earth’s diameter:')} <b>{formatoDiametro(diametro, idioma)}</b></span>
+        <span>{t('Masse :', 'Mass:')} <b>{t('inchangée', 'unchanged')}</b></span>
       </>}
     >
-      <svg viewBox="0 0 480 280" role="img" aria-label="The Earth shrinks down to the size of a marble, without losing any mass.">
+      <svg viewBox="0 0 480 280" role="img" aria-label={t('La Terre se comprime jusqu’à la taille d’une bille, sans perdre de masse.', 'The Earth shrinks down to the size of a marble, without losing any mass.')}>
         <defs>
           <radialGradient id="pbp-tierra" cx="35%" cy="32%" r="75%">
             <stop offset="0" stopColor="#d3e8fb" />
@@ -64,7 +68,7 @@ export function EscenaTierra() {
         <circle cx="240" cy="140" r={r} fill="url(#pbp-tierra)" />
         <g opacity={bille}>
           <path d="M248 132 L300 90 H340" stroke="var(--niebla)" fill="none" />
-          <text x="346" y="95" className={styles.t}>a marble</text>
+          <text x="346" y="95" className={styles.t}>{t('une bille', 'a marble')}</text>
         </g>
       </svg>
     </Escena>
@@ -75,6 +79,7 @@ export function EscenaTierra() {
 export function EscenaSol() {
   const ref = useRef(null)
   const p = useP(ref)
+  const t = useT()
   const e = suave(0.2, 0.6, p)
   const ang = ((-90 + p * 540) * Math.PI) / 180
   const tx = 240 + 110 * Math.cos(ang)
@@ -83,21 +88,21 @@ export function EscenaSol() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 3 — We replace the Sun with a black hole of the same mass: the Earth’s orbit doesn’t change. Diagram."
+      pie={t('Fig. 3 — On remplace le Soleil par un trou noir de même masse : la Terre ne change pas d’orbite. Schéma.', 'Fig. 3 — We replace the Sun with a black hole of the same mass: the Earth’s orbit doesn’t change. Diagram.')}
       lecturas={<>
-        <span>At the center: <b>{e < 0.5 ? 'the Sun' : 'a black hole'}</b></span>
-        <span>Orbit: <b>identical</b></span>
-        <span>Light received: <b>{Math.round((1 - e) * 100)}%</b></span>
+        <span>{t('Au centre :', 'At the center:')} <b>{e < 0.5 ? t('le Soleil', 'the Sun') : t('un trou noir', 'a black hole')}</b></span>
+        <span>{t('Orbite :', 'Orbit:')} <b>{t('identique', 'identical')}</b></span>
+        <span>{t('Lumière reçue :', 'Light received:')} <b>{Math.round((1 - e) * 100)}{t(' %', '%')}</b></span>
       </>}
     >
-      <svg viewBox="0 0 480 280" role="img" aria-label="The Earth goes around the Sun. The Sun turns into a tiny black hole and the Earth keeps exactly the same orbit, but in the dark.">
+      <svg viewBox="0 0 480 280" role="img" aria-label={t('La Terre tourne autour du Soleil. Le Soleil devient un minuscule trou noir et la Terre garde exactement la même orbite, mais dans le noir.', 'The Earth goes around the Sun. The Sun turns into a tiny black hole and the Earth keeps exactly the same orbit, but in the dark.')}>
         <rect x="0" y="0" width="480" height="280" fill="#020605" opacity={e * 0.6} />
         <circle cx="240" cy="140" r="110" fill="none" stroke="var(--niebla)" strokeDasharray="3 6" opacity="0.7" />
         <circle cx="240" cy="140" r="70" fill="var(--plasma)" opacity={0.14 * (1 - e)} />
         <circle cx="240" cy="140" r={mezclar(32, 4, e)} fill="var(--plasma)" opacity={1 - e} />
         <circle cx="240" cy="140" r="4" fill="#050505" stroke="var(--papel)" strokeWidth="1" opacity={e} />
         <circle cx={tx} cy={ty} r="8" fill="var(--azul-palido)" opacity={1 - 0.6 * e} />
-        <text x="240" y="276" textAnchor="middle" className={styles.tSuave}>same orbit</text>
+        <text x="240" y="276" textAnchor="middle" className={styles.tSuave}>{t('même orbite', 'same orbit')}</text>
       </svg>
     </Escena>
   )
@@ -107,6 +112,7 @@ export function EscenaSol() {
 export function EscenaRio() {
   const ref = useRef(null)
   const p = useP(ref)
+  const t = useT()
   const HORIZONTE = 350
   const x = mezclar(60, 420, p)
   const pasado = x > HORIZONTE
@@ -131,13 +137,13 @@ export function EscenaRio() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 4 — Space “flows” toward the black hole like a river toward a waterfall. Diagram."
+      pie={t('Fig. 4 — L’espace « coule » vers le trou noir comme une rivière vers une cascade. Schéma.', 'Fig. 4 — Space “flows” toward the black hole like a river toward a waterfall. Diagram.')}
       lecturas={<>
-        <span>Current: <b>{x < 200 ? 'slow' : x < HORIZONTE ? 'fast' : 'faster than light'}</b></span>
-        <span>Can turn back: <b>{pasado ? 'no' : 'yes'}</b></span>
+        <span>{t('Courant :', 'Current:')} <b>{x < 200 ? t('lent', 'slow') : x < HORIZONTE ? t('rapide', 'fast') : t('plus rapide que la lumière', 'faster than light')}</b></span>
+        <span>{t('Retour possible :', 'Can turn back:')} <b>{pasado ? t('non', 'no') : t('oui', 'yes')}</b></span>
       </>}
     >
-      <svg viewBox="0 0 480 240" role="img" aria-label="A fish swims upstream in a river that speeds up toward a waterfall. Past the horizon line, the current carries it away.">
+      <svg viewBox="0 0 480 240" role="img" aria-label={t('Un poisson nage à contre-courant dans une rivière qui accélère vers une cascade. Après la ligne de l’horizon, le courant l’emporte.', 'A fish swims upstream in a river that speeds up toward a waterfall. Past the horizon line, the current carries it away.')}>
         <defs>
           <linearGradient id="pbp-cascada" x1="0" x2="1">
             <stop offset="0" stopColor="#050505" stopOpacity="0" />
@@ -152,7 +158,7 @@ export function EscenaRio() {
         <g transform={`translate(${x} 120)`}>
           <path d="M-12 0 H-40 M-34 -5 L-40 0 L-34 5" stroke={pasado ? 'var(--niebla)' : 'var(--biolum)'} strokeWidth="2" fill="none" />
           <circle r="7" fill="var(--papel)" />
-          <text y="44" textAnchor="middle" className={styles.tSuave}>the fish</text>
+          <text y="44" textAnchor="middle" className={styles.tSuave}>{t('le poisson', 'the fish')}</text>
         </g>
       </svg>
     </Escena>
@@ -174,26 +180,28 @@ function Barra({ cx, base, sy }) {
 export function EscenaEspagueti() {
   const ref = useRef(null)
   const p = useP(ref)
+  const t = useT()
   const syPeque = 1 + 1.1 * p * p
   const syGigante = 1 + 0.05 * p
   const baseGigante = mezclar(140, 286, p)
+  const { idioma } = useIdioma()
 
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 5 — The same object falls toward two black holes. The smaller the black hole, the more it stretches. Diagram."
+      pie={t('Fig. 5 — Le même objet tombe vers deux trous noirs. Plus le trou noir est petit, plus il étire. Schéma.', 'Fig. 5 — The same object falls toward two black holes. The smaller the black hole, the more it stretches. Diagram.')}
       lecturas={<>
-        <span>Small black hole: stretch <b>×{coma(syPeque)}</b></span>
-        <span>Giant black hole: stretch <b>×{coma(syGigante)}</b>{baseGigante > 262 ? ', horizon crossed' : ''}</span>
+        <span>{t('Petit trou noir : étirement', 'Small black hole: stretch')} <b>×{coma(syPeque, 1, idioma)}</b></span>
+        <span>{t('Trou noir géant : étirement', 'Giant black hole: stretch')} <b>×{coma(syGigante, 1, idioma)}</b>{baseGigante > 262 ? t(', horizon franchi', ', horizon crossed') : ''}</span>
       </>}
     >
-      <svg viewBox="0 0 480 300" role="img" aria-label="On the left, a small black hole stretches the falling object like spaghetti even before the horizon. On the right, a giant black hole leaves it almost intact, even past the horizon.">
+      <svg viewBox="0 0 480 300" role="img" aria-label={t('À gauche, un petit trou noir étire l’objet qui tombe comme un spaghetti avant même l’horizon. À droite, un trou noir géant le laisse presque intact, même après l’horizon.', 'On the left, a small black hole stretches the falling object like spaghetti even before the horizon. On the right, a giant black hole leaves it almost intact, even past the horizon.')}>
         <defs>
           <clipPath id="pbp-gigante"><rect x="250" y="0" width="230" height="300" /></clipPath>
         </defs>
         <line x1="240" y1="20" x2="240" y2="290" stroke="var(--borde-oscuro-2)" />
-        <text x="120" y="28" textAnchor="middle" className={styles.t}>Small black hole</text>
-        <text x="360" y="28" textAnchor="middle" className={styles.t}>Giant black hole</text>
+        <text x="120" y="28" textAnchor="middle" className={styles.t}>{t('Petit trou noir', 'Small black hole')}</text>
+        <text x="360" y="28" textAnchor="middle" className={styles.t}>{t('Trou noir géant', 'Giant black hole')}</text>
 
         <circle cx="120" cy="266" r="16" fill="#050505" stroke="var(--papel)" strokeOpacity="0.6" />
         <Barra cx={120} base={mezclar(150, 226, p)} sy={syPeque} />
@@ -220,6 +228,7 @@ function Arco({ d, ancho = 3 }) {
 export function EscenaLente() {
   const ref = useRef(null)
   const p = useP(ref)
+  const t = useT()
   const rx = mezclar(190, 68, p)
   const ry = mezclar(22, 80, p)
   const etiqueta = suave(0.65, 0.95, p)
@@ -227,18 +236,18 @@ export function EscenaLente() {
   return (
     <Escena
       refEscena={ref}
-      pie="Fig. 7 — Why Gargantua looks “folded”: gravity bends the light from the back of the disk. Diagram."
-      lecturas={<span>Back of the disk: <b>{p < 0.5 ? 'hidden behind the black hole' : 'visible above and below'}</b></span>}
+      pie={t('Fig. 7 — Pourquoi Gargantua a l’air « plié » : la gravité courbe la lumière de l’arrière du disque. Schéma.', 'Fig. 7 — Why Gargantua looks “folded”: gravity bends the light from the back of the disk. Diagram.')}
+      lecturas={<span>{t('Arrière du disque :', 'Back of the disk:')} <b>{p < 0.5 ? t('caché derrière le trou noir', 'hidden behind the black hole') : t('visible par-dessus et par-dessous', 'visible above and below')}</b></span>}
     >
-      <svg viewBox="0 0 480 280" role="img" aria-label="A disk of gas surrounds a black hole. Light from the back of the disk is bent and appears above and below the black hole.">
+      <svg viewBox="0 0 480 280" role="img" aria-label={t('Un disque de gaz entoure un trou noir. La lumière de l’arrière du disque est courbée et apparaît au-dessus et en dessous du trou noir.', 'A disk of gas surrounds a black hole. Light from the back of the disk is bent and appears above and below the black hole.')}>
         <Arco d={`M${240 - rx} 150 A${rx} ${ry} 0 0 1 ${240 + rx} 150`} />
         <g opacity={p}>
           <Arco d={`M178 150 A62 ${mezclar(1, 64, p)} 0 0 0 302 150`} ancho={1.5} />
         </g>
         <circle cx="240" cy="150" r="46" fill="#050505" />
         <Arco d="M50 150 A190 22 0 0 0 430 150" />
-        <text x="240" y={150 - ry - 22} textAnchor="middle" className={styles.tSuave} opacity={etiqueta}>back of the disk</text>
-        <text x="240" y="268" textAnchor="middle" className={styles.tSuave}>front of the disk</text>
+        <text x="240" y={150 - ry - 22} textAnchor="middle" className={styles.tSuave} opacity={etiqueta}>{t('arrière du disque', 'back of the disk')}</text>
+        <text x="240" y="268" textAnchor="middle" className={styles.tSuave}>{t('avant du disque', 'front of the disk')}</text>
       </svg>
     </Escena>
   )
@@ -248,6 +257,7 @@ export function EscenaLente() {
 export function Comparador() {
   const ref = useRef(null)
   const [x, setX] = useState(50)
+  const t = useT()
   const tocado = useRef(false)
   const reducido = useMovimientoReducido()
 
@@ -288,8 +298,8 @@ export function Comparador() {
           <circle cx="600" cy="320" r="100" fill="none" stroke="#c2410c" strokeWidth="110" filter="url(#pbp-brillo)" opacity="0.8" />
           <circle cx="600" cy="320" r="92" fill="none" stroke="#ff9a3c" strokeWidth="44" filter="url(#pbp-brillo-2)" />
         </svg>
-        <span className={`${styles.marca} ${styles.marcaIzq}`}>Without the Doppler effect, as in the movie</span>
-        <span className={`${styles.marca} ${styles.marcaDer}`}>Real photo · M87*</span>
+        <span className={`${styles.marca} ${styles.marcaIzq}`}>{t('Sans l’effet Doppler, comme dans le film', 'Without the Doppler effect, as in the movie')}</span>
+        <span className={`${styles.marca} ${styles.marcaDer}`}>{t('Photo réelle · M87*', 'Real photo · M87*')}</span>
         <span className={styles.linea} aria-hidden="true" />
         <input
           className={styles.rango}
@@ -301,7 +311,7 @@ export function Comparador() {
             tocado.current = true
             setX(Number(e.target.value))
           }}
-          aria-label="Compare: slide left to see the real photo, right to see the symmetrical ring"
+          aria-label={t('Comparer : glisser vers la gauche pour voir la photo réelle, vers la droite pour voir l’anneau symétrique', 'Compare: slide left to see the real photo, right to see the symmetrical ring')}
         />
         <span className={styles.poignee} aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -309,7 +319,7 @@ export function Comparador() {
           </svg>
         </span>
       </div>
-      <figcaption>Fig. 8 — Left: a perfectly even ring, like Gargantua (illustration). Right: M87*, Event Horizon Telescope, 2019. In the real photo, the bottom of the ring shines brighter.</figcaption>
+      <figcaption>{t('Fig. 8 — Gauche : un anneau parfaitement régulier, comme Gargantua (illustration). Droite : M87*, Event Horizon Telescope, 2019. Sur la vraie photo, le bas de l’anneau brille davantage.', 'Fig. 8 — Left: a perfectly even ring, like Gargantua (illustration). Right: M87*, Event Horizon Telescope, 2019. In the real photo, the bottom of the ring shines brighter.')}</figcaption>
     </figure>
   )
 }
@@ -352,6 +362,8 @@ export function RelojEsquina() {
   const manecilla = useRef(null)
   const valor = useRef(null)
   const ritmoActual = useRef(1)
+  const { idioma } = useIdioma()
+  const t = useT()
   const reducido = useMovimientoReducido()
   const [visible, setVisible] = useState(false)
 
@@ -370,7 +382,7 @@ export function RelojEsquina() {
       const recorrido = final ? final.top - r.top - vh : r.height - vh
       const p = limitar(-r.top / recorrido)
       ritmoActual.current = ritmo(p)
-      if (valor.current) valor.current.textContent = `×${coma(ritmoActual.current, 2)}`
+      if (valor.current) valor.current.textContent = `×${coma(ritmoActual.current, 2, idioma)}`
       const finalVisible = final && final.top < vh && final.bottom > 0
       setVisible(articulo.dataset.modo !== 'simple' && r.top < vh * 0.2 && r.bottom > vh * 0.7 && !finalVisible)
     }
@@ -391,7 +403,7 @@ export function RelojEsquina() {
       window.removeEventListener('scroll', alScroll)
       window.removeEventListener('resize', pedir)
     }
-  }, [])
+  }, [idioma])
 
   const obtenerRitmo = useCallback(() => ritmoActual.current, [])
   useManecilla(manecilla, visible && !reducido, obtenerRitmo)
@@ -402,8 +414,8 @@ export function RelojEsquina() {
         <Esfera cx={24} cy={24} r={22} refManecilla={manecilla} color="var(--biolum)" />
       </svg>
       <span className={styles.relojTexto}>
-        <span>Your time</span>
-        <b ref={valor}>×1.00</b>
+        <span>{t('Ton temps', 'Your time')}</span>
+        <b ref={valor}>{t('×1,00', '×1.00')}</b>
       </span>
     </div>
   )
@@ -414,6 +426,7 @@ export function RelojesFinal() {
   const ref = useRef(null)
   const tierra = useRef(null)
   const tuyo = useRef(null)
+  const t = useT()
   const reducido = useMovimientoReducido()
   const [enPantalla, setEnPantalla] = useState(false)
 
@@ -429,16 +442,16 @@ export function RelojesFinal() {
   return (
     <figure ref={ref} className={styles.escena} data-reloj-final="">
       <div className={styles.lienzo}>
-        <svg viewBox="0 0 480 250" role="img" aria-label="Two clocks. Earth’s runs normally; yours, near the horizon, barely moves.">
+        <svg viewBox="0 0 480 250" role="img" aria-label={t('Deux horloges. Celle de la Terre tourne normalement ; la tienne, près de l’horizon, avance à peine.', 'Two clocks. Earth’s runs normally; yours, near the horizon, barely moves.')}>
           <Esfera cx={130} cy={120} r={86} refManecilla={tierra} color="var(--azul-palido)" angulo={250} />
           <Esfera cx={350} cy={120} r={86} refManecilla={tuyo} color="var(--biolum)" angulo={5} />
         </svg>
         <div className={styles.lecturas}>
-          <span>Earth: <b>×1</b></span>
-          <span>You, near the horizon: <b>×0.02</b></span>
+          <span>{t('Terre :', 'Earth:')} <b>×1</b></span>
+          <span>{t('Toi, près de l’horizon :', 'You, near the horizon:')} <b>{t('×0,02', '×0.02')}</b></span>
         </div>
       </div>
-      <figcaption>Fig. 9 — While Earth’s clock goes all the way around, yours barely moves. Diagram: near a real black hole, the gap can be much bigger.</figcaption>
+      <figcaption>{t('Fig. 9 — Pendant que l’horloge de la Terre fait un tour, la tienne bouge à peine. Schéma : près d’un vrai trou noir, l’écart peut être bien plus grand.', 'Fig. 9 — While Earth’s clock goes all the way around, yours barely moves. Diagram: near a real black hole, the gap can be much bigger.')}</figcaption>
     </figure>
   )
 }

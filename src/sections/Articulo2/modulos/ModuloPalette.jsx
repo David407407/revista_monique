@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { useIdioma } from '../../../components/Idioma/Idioma.jsx'
 import { NBSP, nombre } from '../typo.js'
 import Modulo from './Modulo.jsx'
 import s from './Modulos.module.css'
 
-const um = (n) => `${nombre(n)}${NBSP}µm`
+const um = (n, idioma) => `${nombre(n, undefined, idioma)}${NBSP}µm`
 const TICKS = [1, 2, 3, 4, 5]
 // Altura de las piezas de la regla (px): carril de arriba, eje, carril de abajo, rótulos.
 const EJE_Y = 64
@@ -13,6 +14,7 @@ const CARRIL_ABAJO = 106
 // M3 — «Palette Webb»: regla espectral lineal con los 6 filtros de Webb.
 export default function ModuloPalette({ t }) {
   const [sel, setSel] = useState(0)
+  const { idioma } = useIdioma()
   const [min, max] = t.rango
   const pct = (x) => ((x - min) / (max - min)) * 100
   const f = t.filtres[sel]
@@ -50,7 +52,7 @@ export default function ModuloPalette({ t }) {
               <g key={n}>
                 <line x1={`${pct(n)}%`} x2={`${pct(n)}%`} y1={EJE_Y + 4} y2={EJE_Y + 10} className={s.reglaTick} />
                 <text x={`${pct(n)}%`} y="148" textAnchor={n === max ? 'end' : 'middle'} className={s.reglaTexto}>
-                  {um(n)}
+                  {um(n, idioma)}
                 </text>
               </g>
             ))}
@@ -66,7 +68,7 @@ export default function ModuloPalette({ t }) {
                 key={x.couleur}
                 type="button"
                 aria-pressed={i === sel}
-                aria-label={`${x.couleur}, ${um(x.um)}, ${x.nom}`}
+                aria-label={`${x.couleur}, ${um(x.um, idioma)}, ${x.nom}`}
                 className={s.marcadorFiltro}
                 style={{ left: `${pct(x.um)}%`, top: (i % 2 === 0 ? CARRIL_ARRIBA : CARRIL_ABAJO) - 22, '--color': x.hex }}
                 onClick={() => setSel(i)}
@@ -82,7 +84,7 @@ export default function ModuloPalette({ t }) {
         <div aria-live="polite" className={s.fichaOscura}>
           <p className={s.filaMuestra}>
             <span className={s.muestra} style={{ background: f.hex }} aria-hidden="true" />
-            <span className={s.dato}>{f.couleur} · {um(f.um)}</span>
+            <span className={s.dato}>{f.couleur} · {um(f.um, idioma)}</span>
           </p>
           <h3 className={s.fichaTitulo}>{f.nom}</h3>
           <p className={s.apoyo}>{f.texte}</p>
