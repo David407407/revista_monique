@@ -7,17 +7,18 @@ import { Comparador, EscenaEspagueti, EscenaLente, EscenaRio, EscenaSol, EscenaT
 import estilosEscenas from './Escenas.module.css'
 
 
-// Esquema de las partes de un agujero negro (no está a escala)
+// Esquema de las partes de un agujero negro (no está a escala).
+// Dibujado en tinta sobre papel, como las figuras de la variante «afilado».
 function Anatomie() {
-  const texto = { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 15, fontWeight: 600, fill: '#F6F1E4' }
-  const linea = { stroke: '#9FB3AD', strokeWidth: 1 }
+  const texto = { fontFamily: 'var(--font-ui)', fontSize: 15, fontWeight: 600, fill: 'var(--tinta)' }
+  const linea = { stroke: 'var(--tinta-suave)', strokeWidth: 1 }
   return (
     <svg viewBox="0 0 1000 420" role="img" aria-label="Schéma d’un trou noir : au centre la singularité, entourée de l’horizon des événements, de la sphère de photons et du disque d’accrétion.">
-      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="#FF7A1A" strokeWidth="18" strokeOpacity="0.35" fill="none" />
-      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="#FF7A1A" strokeWidth="2" fill="none" />
-      <circle cx="500" cy="210" r="118" stroke="#7FE3D0" strokeWidth="1.5" strokeDasharray="6 8" fill="none" />
-      <circle cx="500" cy="210" r="80" fill="#050505" stroke="#F6F1E4" strokeWidth="1.5" />
-      <circle cx="500" cy="210" r="4" fill="#F6F1E4" />
+      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="var(--plasma-papel)" strokeWidth="14" strokeOpacity="0.18" fill="none" />
+      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="var(--plasma-papel)" strokeWidth="2" fill="none" />
+      <circle cx="500" cy="210" r="118" stroke="var(--biolum-papel)" strokeWidth="1.5" strokeDasharray="6 8" fill="none" />
+      <circle cx="500" cy="210" r="80" fill="var(--tinta)" />
+      <circle cx="500" cy="210" r="4" fill="var(--papel)" />
 
       <path d="M500 210 L640 360 H760" {...linea} fill="none" />
       <text x="770" y="365" {...texto}>Singularité</text>
@@ -35,13 +36,15 @@ export default function Articulo1() {
   return (
     <Article
       id="agujeros-negros"
+      // Misma anatomía que El tiempo: hero a pantalla completa, esquinas rectas y cierre <Cierre>
+      variante="afilado"
       numero="03 / 09"
       seccion="Trous noirs"
       acento={{ oscuro: 'var(--biolum)', papel: 'var(--biolum-papel)' }}
       titulo="Aller simple pour un trou noir"
       tituloJsx={<>Aller simple pour <em>un trou noir</em></>}
-      auteur="[AUTEUR]"
-      auteurBio="[BIO DE L’AUTEUR]."
+      auteur="Andy Tarango"
+      auteurBio="Élève et co-auteur de Point Bleu Pâle."
       date="10 nov. 2026"
       lecture="7 MIN"
       tags={['trous noirs', 'gravité', 'relativité']}
