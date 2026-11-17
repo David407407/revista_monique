@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { NBSP } from '../typo.js'
+import { useIdioma } from '../../../components/Idioma/Idioma.jsx'
+import { pourcent } from '../typo.js'
 import Modulo from './Modulo.jsx'
 import useReduceMotion from './useReduceMotion.js'
 import s from './Modulos.module.css'
@@ -61,6 +62,7 @@ function silenciar(a) {
 export default function ModuloSonido({ t, imagen }) {
   const [jugando, setJugando] = useState(false)
   const [volumen, setVolumen] = useState(0.4)
+  const { idioma } = useIdioma()
   const [error, setError] = useState(false)
   const reducir = useReduceMotion()
   const audio = useRef(null) // { ctx, maestro, voces, brillo }
@@ -179,7 +181,7 @@ export default function ModuloSonido({ t, imagen }) {
             max="1"
             step="0.05"
             value={volumen}
-            aria-valuetext={`${Math.round(volumen * 100)}${NBSP}%`}
+            aria-valuetext={`${Math.round(volumen * 100)}${pourcent(idioma)}`}
             onChange={(e) => setVolumen(Number(e.target.value))}
             className={s.curseur}
             style={{ '--progreso': `${volumen * 100}%` }}

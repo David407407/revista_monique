@@ -5,13 +5,17 @@
 // (cielo mirando al norte, horizonte, puntos cardinales, reloj) y gira con el scroll.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Cielo, posicionEtiqueta } from './Cielo.jsx'
+import { localeDe, useIdioma } from '../../components/Idioma/Idioma.jsx'
 import styles from './Anuncio2.module.css'
 
 const HORAS = 6 // el scroll lleva la noche de las 21:00 a las 03:00
 const ALTURA_POLO = 30 // grados entre la Estrella Polar y el horizonte (latitud aproximada)
 
-const formatoDia = new Intl.DateTimeFormat('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })
-const formatoHora = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit' })
+// Fecha y hora del reloj en el formato del idioma elegido
+const formatos = (idioma) => ({
+  dia: new Intl.DateTimeFormat(localeDe(idioma), { weekday: 'short', day: 'numeric', month: 'short' }),
+  hora: new Intl.DateTimeFormat(localeDe(idioma), { hour: '2-digit', minute: '2-digit' }),
+})
 
 // Esta noche a las 21:00, hora local
 function inicioDeNoche() {
@@ -43,6 +47,9 @@ export default function Anuncio2() {
   const dia = useRef(null)
   const hora = useRef(null)
   const [medidas, setMedidas] = useState(null)
+  const { idioma } = useIdioma()
+  const t = (fr, en) => (idioma === 'en' ? en : fr)
+  const { dia: formatoDia, hora: formatoHora } = useMemo(() => formatos(idioma), [idioma])
 
   const inicio = useMemo(inicioDeNoche, [])
   const lst = useMemo(() => tiempoSidereo(inicio), [inicio])
@@ -122,26 +129,27 @@ export default function Anuncio2() {
       window.removeEventListener('resize', pedir)
       quieto.removeEventListener('change', pedir)
     }
-  }, [medidas, inicio])
+  }, [medidas, inicio, formatoDia, formatoHora])
 
   return (
-    <aside id="anuncio-2" aria-label="Publicité : Stellarium Web" className={styles.anuncio} ref={raiz}>
-      {medidas && <Cielo medidas={medidas} lst={lst} giro={giro} etiquetas={etiquetas} />}
+    <aside id="anuncio-2" aria-label={t('Publicité : Stellarium Web', 'Advertisement: Stellarium Web')} className={styles.anuncio} ref={raiz}>
+      {medidas && <Cielo medidas={medidas} lst={lst} giro={giro} etiquetas={etiquetas} idioma={idioma} />}
 
       <div className={styles.cabecera}>
-        <span className={styles.pill}>Publicité</span>
+        <span className={styles.pill}>{t('Publicité', 'Advertisement')}</span>
       </div>
 
       <div className={styles.texto}>
         <h2 className={styles.titulo}>
-          Le ciel de votre naissance.
+          {t('Le ciel de votre naissance.', 'The sky on the day you were born.')}
           <br />
-          Ou celui dans <em>mille ans.</em>
+          {t('Ou celui dans ', 'Or the one ')}<em>{t('mille ans.', 'a thousand years from now.')}</em>
         </h2>
         <p className={styles.bajada}>
-          Choisissez une date et un lieu, et regardez les étoiles, les planètes et les
-          constellations telles qu’elles étaient, ou seront, au-dessus de votre tête. Un
-          planétarium gratuit, dans votre navigateur ou sur votre téléphone.
+          {t(
+            'Choisissez une date et un lieu, et regardez les étoiles, les planètes et les constellations telles qu’elles étaient, ou seront, au-dessus de votre tête. Un planétarium gratuit, dans votre navigateur ou sur votre téléphone.',
+            'Pick a date and a place, and see the stars, planets and constellations as they were, or will be, above your head. A free planetarium, in your browser or on your phone.',
+          )}
         </p>
       </div>
 
@@ -162,22 +170,23 @@ export default function Anuncio2() {
             Stellarium <em>Web</em>
           </span>
           <ul className={styles.datos}>
-            <li>Gratuit et libre</li>
-            <li>Rien à installer</li>
-            <li>Passé et futur</li>
+            <li>{t('Gratuit et libre', 'Free and open source')}</li>
+            <li>{t('Rien à installer', 'Nothing to install')}</li>
+            <li>{t('Passé et futur', 'Past and future')}</li>
           </ul>
         </div>
         <a href="https://stellarium-web.org/" target="_blank" rel="noreferrer" className={styles.cta}>
-          Ouvrir Stellarium Web
+          {t('Ouvrir Stellarium Web', 'Open Stellarium Web')}
           {flecha}
-          <span className="sr-only">(s’ouvre dans un nouvel onglet)</span>
+          <span className="sr-only">{t('(s’ouvre dans un nouvel onglet)', '(opens in a new tab)')}</span>
         </a>
       </div>
 
       <p className={styles.legal}>
-        Annonce à but éducatif. Le ciel dessiné est celui de ce soir, vers le nord, de façon
-        approximative. Stellarium est un logiciel de planétarium libre et gratuit. Point Bleu Pâle
-        n’est pas affilié au projet Stellarium.
+        {t(
+          'Annonce à but éducatif. Le ciel dessiné est celui de ce soir, vers le nord, de façon approximative. Stellarium est un logiciel de planétarium libre et gratuit. Point Bleu Pâle n’est pas affilié au projet Stellarium.',
+          'Educational advertisement. The sky shown is tonight’s, looking north, approximately. Stellarium is free, open-source planetarium software. Point Bleu Pâle is not affiliated with the Stellarium project.',
+        )}
       </p>
     </aside>
   )

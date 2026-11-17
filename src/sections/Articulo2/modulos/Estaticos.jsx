@@ -1,9 +1,11 @@
 // Versiones estáticas de M1, M2 y M3 para el modo Simple (sobre el papel, dentro de la columna de texto).
+import { useIdioma } from '../../../components/Idioma/Idioma.jsx'
 import { NBSP, nombre } from '../typo.js'
 import { dureeAnnees, formatDuree } from './calculos.js'
 import s from './Modulos.module.css'
 
 export function TablaEchelle({ t }) {
+  const { idioma } = useIdioma()
   return (
     <table className={s.tabla}>
       <caption>{t.tabla.caption}</caption>
@@ -19,7 +21,7 @@ export function TablaEchelle({ t }) {
           <tr key={v.id}>
             <th scope="row">{v.label}</th>
             <td>{v.detail}</td>
-            <td>{formatDuree(dureeAnnees(t.longitudAl, v.kmS))}</td>
+            <td>{formatDuree(dureeAnnees(t.longitudAl, v.kmS), idioma)}</td>
           </tr>
         ))}
       </tbody>
@@ -47,6 +49,7 @@ export function ListaMachine({ t }) {
 }
 
 export function TablaPalette({ t }) {
+  const { idioma } = useIdioma()
   return (
     <>
       <table className={s.tabla}>
@@ -64,7 +67,7 @@ export function TablaPalette({ t }) {
               <th scope="row">
                 <span className={s.muestra} style={{ background: f.hex }} aria-hidden="true" /> {f.couleur}
               </th>
-              <td>{nombre(f.um)}{NBSP}µm</td>
+              <td>{nombre(f.um, undefined, idioma)}{NBSP}µm</td>
               <td>
                 <strong>{f.nom}.</strong> {f.texte}
               </td>

@@ -12,19 +12,25 @@ const dosCifras = (n) => {
   return Math.round(n / paso) * paso
 }
 
+const UNIDADES = {
+  fr: { millones: 'millions d’années', anio: 'an', anios: 'ans' },
+  en: { millones: 'million years', anio: 'year', anios: 'years' },
+}
+
 // ≥ 1 millón → «≈ X millions d’années» (1 decimal si < 10); ≥ 1 000 → 2 cifras significativas; < 10 → entero.
-export function formatDuree(anios) {
+export function formatDuree(anios, idioma = 'fr') {
+  const u = UNIDADES[idioma]
   if (anios >= 1e6) {
     const m = anios / 1e6
     const v = m < 10 ? Math.round(m * 10) / 10 : dosCifras(m)
-    return `≈${NBSP}${nombre(v)}${NBSP}millions d’années`
+    return `≈${NBSP}${nombre(v, undefined, idioma)}${NBSP}${u.millones}`
   }
-  if (anios >= 1000) return `≈${NBSP}${nombre(dosCifras(anios))}${NBSP}ans`
+  if (anios >= 1000) return `≈${NBSP}${nombre(dosCifras(anios), undefined, idioma)}${NBSP}${u.anios}`
   if (anios < 10) {
     const v = Math.round(anios)
-    return `${nombre(v)}${NBSP}${v < 2 ? 'an' : 'ans'}`
+    return `${nombre(v, undefined, idioma)}${NBSP}${plural(v, [u.anio, u.anios], idioma)}`
   }
-  return `≈${NBSP}${nombre(Math.round(anios))}${NBSP}ans`
+  return `≈${NBSP}${nombre(Math.round(anios), undefined, idioma)}${NBSP}${u.anios}`
 }
 
 // Posición en la barra logarítmica de 1 año (0) a 1 000 millones de años (1).
@@ -36,4 +42,5 @@ export function anneeTexte(ecoule, anioSalida, avJC) {
   return a >= 1 ? annee(a) : `${annee(1 - a)}${NBSP}${avJC}`
 }
 
-export const plural = (n, [uno, varios]) => (n < 2 ? uno : varios)
+// Francés: 0 y 1 van en singular. Inglés: solo 1.
+export const plural = (n, [uno, varios], idioma = 'fr') => ((idioma === 'en' ? n === 1 : n < 2) ? uno : varios)

@@ -11,8 +11,14 @@ const nf = new Intl.NumberFormat('fr-FR')
 const nfAnnee = new Intl.NumberFormat('fr-FR', { useGrouping: false })
 
 // Números con espacio fino en los miles y coma decimal (Intl usa U+202F en fr-FR).
-export const nombre = (n, opciones) => (opciones ? new Intl.NumberFormat('fr-FR', opciones) : nf).format(n)
+// idioma: 'fr' (por defecto) o 'en' (coma en los miles y punto decimal)
+export const nombre = (n, opciones, idioma = 'fr') =>
+  (opciones || idioma === 'en' ? new Intl.NumberFormat(idioma === 'en' ? 'en-US' : 'fr-FR', opciones) : nf).format(n)
 export const annee = (n) => nfAnnee.format(n)
+
+// Puntuación que cambia con el idioma: el francés lleva espacio fino antes de « : » y « % »
+export const dosPuntos = (idioma) => (idioma === 'en' ? ':' : `${NBSP}:`)
+export const pourcent = (idioma) => (idioma === 'en' ? '%' : `${NBSP}%`)
 
 export function fr(texto) {
   return texto

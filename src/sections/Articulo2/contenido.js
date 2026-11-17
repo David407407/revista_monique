@@ -102,10 +102,10 @@ const crudo = {
     botonesLabel: 'Choisir un détail',
     credito: 'Image : NASA, ESA, CSA, STScI',
     defs: [
-      { label: 'Pilier gauche', tag: 'DÉTAIL 1 · PILIER GAUCHE', origin: '20% 18%', scale: 2.3, title: 'Le sommet du pilier gauche', fact: 'Des bords effilochés de gaz et de poussière, sculptés par le rayonnement d’étoiles jeunes voisines.', alt: 'Gros plan sur le sommet du pilier gauche de la nébuleuse' },
-      { label: 'Pilier central', tag: 'DÉTAIL 2 · PILIER CENTRAL', origin: '45% 12%', scale: 2.4, title: 'Des éclats rouges au sommet', fact: 'Les points rouges signalent de très jeunes étoiles qui expulsent encore de la matière dans leur environnement.', alt: 'Gros plan sur la pointe du pilier central, avec des éclats rouges' },
-      { label: 'Pilier droit', tag: 'DÉTAIL 3 · PILIER DROIT', origin: '72% 22%', scale: 2.3, title: 'Le pilier le plus fragmenté', fact: 'Une colonne plus fine et plus sombre, aux ramifications qui se fondent dans le fond bleu.', alt: 'Gros plan sur le pilier droit de la nébuleuse' },
-      { label: 'Étoiles', tag: 'DÉTAIL 4 · CHAMP STELLAIRE', origin: '2% 60%', scale: 2.5, title: 'Des pointes qui ne viennent pas de l’étoile', fact: 'Les pointes à huit branches sont de la diffraction de la lumière par le miroir hexagonal et les supports du télescope.', alt: 'Gros plan sur des étoiles brillantes aux pointes de diffraction' },
+      { label: 'Pilier gauche', tag: 'DÉTAIL 1 · PILIER GAUCHE', cx: 0.19, cy: 0.15, scale: 2.6, title: 'Le sommet du pilier gauche', fact: 'Des bords effilochés de gaz et de poussière, sculptés par le rayonnement d’étoiles jeunes voisines.', alt: 'Gros plan sur le sommet du pilier gauche de la nébuleuse' },
+      { label: 'Pilier central', tag: 'DÉTAIL 2 · PILIER CENTRAL', cx: 0.45, cy: 0.1, scale: 2.8, title: 'Des éclats rouges au sommet', fact: 'Les points rouges signalent de très jeunes étoiles qui expulsent encore de la matière dans leur environnement.', alt: 'Gros plan sur la pointe du pilier central, avec des éclats rouges' },
+      { label: 'Pilier droit', tag: 'DÉTAIL 3 · PILIER DROIT', cx: 0.74, cy: 0.22, scale: 2.6, title: 'Le pilier le plus fragmenté', fact: 'Une colonne plus fine et plus sombre, aux ramifications qui se fondent dans le fond bleu.', alt: 'Gros plan sur le pilier droit de la nébuleuse' },
+      { label: 'Étoiles', tag: 'DÉTAIL 4 · CHAMP STELLAIRE', cx: 0.1, cy: 0.55, scale: 2.5, title: 'Des pointes qui ne viennent pas de l’étoile', fact: 'Les pointes à huit branches sont de la diffraction de la lumière par le miroir hexagonal et les supports du télescope.', alt: 'Gros plan sur des étoiles brillantes aux pointes de diffraction' },
     ],
   },
 

@@ -1,5 +1,5 @@
 // Nebulosas — responsable: compañero
-// Artículo 2 en francés: «Les piliers de la création». Dos modos de lectura: Immersif (hero a pantalla
+// Artículo 2 en francés o inglés según el selector: «Les piliers de la création» / «The Pillars of Creation». Dos modos de lectura: Immersif (hero a pantalla
 // completa + módulos interactivos + cita) y Simple (texto íntegro + versiones estáticas de M1, M2 y M3).
 // La hoja de esta sección va sin bordes (bleed).
 import { Fragment, useEffect, useState } from 'react'
@@ -7,7 +7,9 @@ import img1000 from '../../assets/nebulosas/piliers-de-la-creation-1000.webp'
 import img1600 from '../../assets/nebulosas/piliers-de-la-creation-1600.webp'
 import img2560 from '../../assets/nebulosas/piliers-de-la-creation-2560.webp'
 import Cierre from '../../components/Cierre/Cierre.jsx'
-import { texto as t } from './contenido.js'
+import { useIdioma } from '../../components/Idioma/Idioma.jsx'
+import { texto as textoFr } from './contenido.js'
+import { texto as textoEn } from './contenido.en.js'
 import ExplorateurImage from './ExplorateurImage.jsx'
 import Galerie from './Galerie.jsx'
 import Rico from './Rico.jsx'
@@ -30,6 +32,12 @@ const imagen = {
 
 const CLAVE_MODO = 'pbp:nebulosas:modo'
 
+// Textos de la sección en el idioma elegido (contenido.js en francés, contenido.en.js en inglés)
+function useTexto() {
+  const { idioma } = useIdioma()
+  return idioma === 'en' ? textoEn : textoFr
+}
+
 function leerModo(inicial) {
   try {
     const guardado = window.localStorage.getItem(CLAVE_MODO)
@@ -41,6 +49,7 @@ function leerModo(inicial) {
 }
 
 function BarraSuperior({ modo, setModo }) {
+  const t = useTexto()
   return (
     <header className={`${styles.barra} ${modo === 'immersif' ? styles.barraSobreHero : ''}`}>
       <div className={styles.barraInner}>
@@ -69,6 +78,7 @@ function BarraSuperior({ modo, setModo }) {
 }
 
 function Titulo({ className }) {
+  const t = useTexto()
   return (
     <h1 id="nebulosas-titulo" className={className}>
       {t.hero.tituloAntes}
@@ -78,6 +88,7 @@ function Titulo({ className }) {
 }
 
 function HeroPantallaCompleta() {
+  const t = useTexto()
   return (
     <figure className={`${styles.hero} ${styles.oscuro}`}>
       <img
@@ -110,6 +121,7 @@ function HeroPantallaCompleta() {
 }
 
 function CabeceraSimple() {
+  const t = useTexto()
   return (
     <div className={styles.cabeceraSimple}>
       <Titulo className={styles.simpleTitulo} />
@@ -119,6 +131,7 @@ function CabeceraSimple() {
 }
 
 function Ficha() {
+  const t = useTexto()
   return (
     <aside className={styles.ficha} aria-labelledby="nebulosas-ficha">
       <h2 id="nebulosas-ficha" className={styles.fichaTitulo}>{t.ficha.titulo}</h2>
@@ -160,6 +173,7 @@ function BloqueTexto({ children }) {
 }
 
 function Cuerpo() {
+  const t = useTexto()
   return (
     <div id="nebulosas-corps" className={styles.columnas}>
       <div className={styles.colIzq}>
@@ -185,9 +199,11 @@ function Cuerpo() {
 }
 
 function Cita() {
+  const { idioma } = useIdioma()
+  const t = useTexto()
   return (
     <blockquote className={styles.cita}>
-      <span className={styles.comilla} aria-hidden="true">«</span>
+      <span className={styles.comilla} aria-hidden="true">{idioma === 'en' ? '“' : '«'}</span>
       <p className={styles.citaTexto}>{t.cita.texto}</p>
       <footer className={styles.citaAutor}>{t.cita.autor}</footer>
     </blockquote>
@@ -196,6 +212,8 @@ function Cita() {
 
 // Cierre compartido con El tiempo (src/components/Cierre): fuentes, compartir, autor y artículos vecinos.
 function CierreNebulosas() {
+  const { idioma } = useIdioma()
+  const t = useTexto()
   const m = t.masLejos
   const n = t.navegacion
   const fuentes = [
@@ -203,7 +221,7 @@ function CierreNebulosas() {
       <Fragment key={e.href}>
         {`${e.fuente} — `}
         <a href={e.href} target="_blank" rel="noopener noreferrer">
-          {`«${NBSP}${e.titulo}${NBSP}»`}
+          {idioma === 'en' ? `“${e.titulo}”` : `«${NBSP}${e.titulo}${NBSP}»`}
           <span className="sr-only">{` ${m.nuevaVentana}`}</span>
         </a>
       </Fragment>
@@ -227,6 +245,8 @@ function CierreNebulosas() {
 
 export default function Articulo2({ initialMode = 'immersif' }) {
   const [modo, setModo] = useState(() => leerModo(initialMode))
+  const { idioma } = useIdioma()
+  const t = useTexto()
 
   useEffect(() => {
     try {
@@ -243,7 +263,7 @@ export default function Articulo2({ initialMode = 'immersif' }) {
     <>
       <article
         id={t.id}
-        lang="fr"
+        lang={idioma}
         aria-labelledby="nebulosas-titulo"
         className={`${styles.hoja} ${immersif ? styles.immersif : styles.simple}`}
       >

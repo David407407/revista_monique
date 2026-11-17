@@ -2,7 +2,7 @@
 
 Contexto del proyecto para cualquier Claude que trabaje en este repo. Léelo antes de empezar.
 
-> **IDIOMA: todo el contenido visible de la revista va en FRANCÉS** (textos, títulos, botones, `alt` de imágenes, `aria-label`, anuncios, entrevista). Decidido el 2026-11-10. Este archivo, los comentarios del código, los nombres de carpetas y los `id` de las secciones (`#agujeros-negros`, etc.) siguen en español.
+> **IDIOMA: la revista se escribe en FRANCÉS y tiene versión en INGLÉS** (selector FR / EN en el navbar, desde 2026-11-16). El francés es el idioma por defecto; `?lang=en` abre la versión inglesa. Todo texto visible, `alt` y `aria-label` debe existir en los dos idiomas: usa `useT()` de `src/components/Idioma/Idioma.jsx` (`t('Texte', 'Text')`) o archivos `*.fr.jsx` / `*.en.jsx` por sección. Este archivo, los comentarios del código, los nombres de carpetas y los `id` de las secciones siguen en español.
 
 ## Qué es
 
