@@ -35,7 +35,7 @@ Es una revista hecha por dos estudiantes para sus compañeros: tiene estructura 
 ## Brand Commitments
 
 - Nombre: **Point Bleu Pâle**, con **â**. Referencia a la foto "Pale Blue Dot" de la Voyager 1 y a Carl Sagan.
-- Idioma del contenido: **francés** (desde 2026-11-10). Todo texto visible, `alt` y `aria-label` van en francés; el `<html>` lleva `lang="fr"`.
+- Idioma del contenido: **francés** por defecto, con versión completa en **inglés** (selector FR / EN desde 2026-11-16; la inglesa se hizo para el doctor entrevistado). Todo texto visible, `alt` y `aria-label` existe en ambos idiomas; `<html lang>` cambia con el selector.
 - Tono: cercano, con humor, sin fórmulas.
 
 ## Evidence on Hand
