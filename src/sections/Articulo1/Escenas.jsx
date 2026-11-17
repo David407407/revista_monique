@@ -384,7 +384,8 @@ export function RelojEsquina() {
       ritmoActual.current = ritmo(p)
       if (valor.current) valor.current.textContent = `×${coma(ritmoActual.current, 2, idioma)}`
       const finalVisible = final && final.top < vh && final.bottom > 0
-      setVisible(articulo.dataset.modo !== 'simple' && r.top < vh * 0.2 && r.bottom > vh * 0.7 && !finalVisible)
+      // Aparece cuando la foto a pantalla completa ya salió a medias: así no tapa el crédito del hero
+      setVisible(articulo.dataset.modo !== 'simple' && r.top < -vh * 0.5 && r.bottom > vh * 0.7 && !finalVisible)
     }
     const pedir = () => {
       if (!raf) raf = requestAnimationFrame(medir)

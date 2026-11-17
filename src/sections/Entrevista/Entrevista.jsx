@@ -1,10 +1,11 @@
-// Entrevista — responsable: compañero
-import { useT } from '../../components/Idioma/Idioma.jsx'
+// Entrevista: doctor en mecánica de fluidos — responsable: compañero
+// El texto vive en dos archivos, uno por idioma: Entrevista.fr.jsx y Entrevista.en.jsx.
+// Humo, Pizarron y Tarjetas son los mismos en los dos y traducen sus rótulos solos.
+import { useIdioma } from '../../components/Idioma/Idioma.jsx'
+import EntrevistaFr from './Entrevista.fr.jsx'
+import EntrevistaEn from './Entrevista.en.jsx'
+
 export default function Entrevista() {
-  const t = useT()
-  return (
-    <section id="entrevista" aria-label={t('Entretien', 'Interview')} style={{ minHeight: "60vh", padding: 24, color: "var(--papel)" }}>
-      <h2>{t('Entretien', 'Interview')}</h2>
-    </section>
-  )
+  const { idioma } = useIdioma()
+  return idioma === 'en' ? <EntrevistaEn /> : <EntrevistaFr />
 }

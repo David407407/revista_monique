@@ -167,7 +167,7 @@ export default function Articulo3Fr() {
         'Kip Thorne, La Science d’Interstellar, 2014.',
       ]}
       anterior={{ href: '#nebulosas', titulo: 'Les piliers de la création' }}
-      siguiente={{ href: '#entrevista', seccion: 'Entretien', titulo: '[NOM DU DOCTEUR] et les fluides de l’univers' }}
+      siguiente={{ href: '#entrevista', seccion: 'Entretien', titulo: 'De la douche à Jupiter' }}
     />
   )
 }

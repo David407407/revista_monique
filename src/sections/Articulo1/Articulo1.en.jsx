@@ -8,17 +8,18 @@ import { Comparador, EscenaEspagueti, EscenaLente, EscenaRio, EscenaSol, EscenaT
 import estilosEscenas from './Escenas.module.css'
 
 
-// Esquema de las partes de un agujero negro (no está a escala)
+// Esquema de las partes de un agujero negro (no está a escala).
+// Dibujado en tinta sobre papel, como las figuras de la variante «afilado».
 function Anatomie() {
-  const texto = { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: 15, fontWeight: 600, fill: '#F6F1E4' }
-  const linea = { stroke: '#9FB3AD', strokeWidth: 1 }
+  const texto = { fontFamily: 'var(--font-ui)', fontSize: 15, fontWeight: 600, fill: 'var(--tinta)' }
+  const linea = { stroke: 'var(--tinta-suave)', strokeWidth: 1 }
   return (
     <svg viewBox="0 0 1000 420" role="img" aria-label="Diagram of a black hole: the singularity at the center, surrounded by the event horizon, the photon sphere and the accretion disk.">
-      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="#FF7A1A" strokeWidth="18" strokeOpacity="0.35" fill="none" />
-      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="#FF7A1A" strokeWidth="2" fill="none" />
-      <circle cx="500" cy="210" r="118" stroke="#7FE3D0" strokeWidth="1.5" strokeDasharray="6 8" fill="none" />
-      <circle cx="500" cy="210" r="80" fill="#050505" stroke="#F6F1E4" strokeWidth="1.5" />
-      <circle cx="500" cy="210" r="4" fill="#F6F1E4" />
+      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="var(--plasma-papel)" strokeWidth="14" strokeOpacity="0.18" fill="none" />
+      <ellipse cx="500" cy="210" rx="330" ry="70" stroke="var(--plasma-papel)" strokeWidth="2" fill="none" />
+      <circle cx="500" cy="210" r="118" stroke="var(--biolum-papel)" strokeWidth="1.5" strokeDasharray="6 8" fill="none" />
+      <circle cx="500" cy="210" r="80" fill="var(--tinta)" />
+      <circle cx="500" cy="210" r="4" fill="var(--papel)" />
 
       <path d="M500 210 L640 360 H760" {...linea} fill="none" />
       <text x="770" y="365" {...texto}>Singularity</text>
@@ -36,13 +37,15 @@ export default function Articulo1En() {
   return (
     <Article
       id="agujeros-negros"
+      // Misma anatomía que El tiempo: hero a pantalla completa, esquinas rectas y cierre <Cierre>
+      variante="afilado"
       numero="03 / 09"
       seccion="Black holes"
       acento={{ oscuro: 'var(--biolum)', papel: 'var(--biolum-papel)' }}
       titulo="One-way ticket to a black hole"
       tituloJsx={<>One-way ticket to <em>a black hole</em></>}
-      auteur="[AUTHOR]"
-      auteurBio="[AUTHOR BIO]."
+      auteur="Andy Tarango"
+      auteurBio="Student and co-author of Point Bleu Pâle."
       date="Nov. 10, 2026"
       lecture="7 MIN"
       tags={['black holes', 'gravity', 'relativity']}

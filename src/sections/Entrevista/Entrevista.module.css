@@ -1,0 +1,476 @@
+/* Entrevista: hoja de papel con apertura oscura. Acento de entrevistas: --nebulosa.
+   Esquinas casi rectas (2px), igual que Nebulosas y El tiempo. */
+.entrevista {
+  --acento: var(--nebulosa);
+  --acento-papel: var(--nebulosa-papel);
+  color: var(--tinta);
+  background: var(--papel);
+}
+
+/* ——— Apertura ——— */
+.apertura {
+  min-height: calc(100vh - var(--nav-h));
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-rows: auto 1fr;
+  color: var(--papel);
+  background: var(--abismo);
+}
+
+.cabecera {
+  grid-column: 1 / -1;
+  padding: 28px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.cabeceraIzq {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.numero {
+  font: 400 13px/1 var(--font-mono);
+  color: var(--niebla);
+}
+
+.seccion {
+  font: 700 13px/1 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+.sommaire {
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 20px/1 var(--font-ui);
+  color: var(--papel);
+  text-decoration: none;
+}
+
+.sommaire:hover {
+  color: var(--acento);
+}
+
+.aperturaTexto {
+  align-self: end;
+  padding: 48px 40px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.titulo {
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.98;
+  color: var(--papel);
+}
+
+.titulo em {
+  color: var(--acento);
+}
+
+.bajada {
+  max-width: 34em;
+  font: 400 var(--text-lead) / 1.4 var(--font-display);
+  color: var(--niebla-clara);
+}
+
+.firma {
+  font: 600 13px/1.4 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--niebla);
+}
+
+.vela {
+  margin: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.lienzo {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 420px;
+}
+
+.vela figcaption {
+  max-width: 34ch;
+  margin: 0 auto;
+  padding: 8px 24px 48px;
+  font: 400 14px/1.55 var(--font-ui);
+  text-align: center;
+  color: var(--niebla);
+}
+
+/* ——— Cuerpo: tres columnas (datos · diálogo · notas de la redacción) ——— */
+.rejilla {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 104px 40px 0;
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(0, var(--measure)) minmax(220px, 1fr);
+  column-gap: 56px;
+}
+
+.fila {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: start;
+}
+
+.dialogo,
+.fila > .bloqueTitulo {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.metadatos {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 6px;
+}
+
+.mono {
+  font: 400 12px/1.8 var(--font-mono);
+  color: var(--tinta-suave);
+}
+
+.metaTexto {
+  font: 400 14px/1.55 var(--font-body);
+  color: var(--tinta-suave);
+}
+
+/* Retrato del doctor en el pizarrón: ocupa todo el ancho */
+.filaRetrato {
+  margin-top: 96px;
+}
+
+.retratoAncho {
+  grid-column: 1 / -1;
+}
+
+.bloqueTitulo {
+  margin: 112px 0 0;
+  font-size: var(--text-h2);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--tinta);
+}
+
+.pregunta {
+  margin: 44px 0 14px;
+  font: 600 var(--text-body) / 1.45 var(--font-ui);
+  letter-spacing: 0;
+  color: var(--acento-papel);
+}
+
+.respuesta p + p {
+  margin-top: 20px;
+}
+
+.respuesta a,
+.ndlr a {
+  color: var(--acento-papel);
+}
+
+/* La respuesta de una sola palabra */
+.intro > .pregunta {
+  margin-top: 0;
+}
+
+.motUnique {
+  margin: 20px 0 18px;
+  font: italic 800 clamp(3.5rem, 9vw, 6rem) / 1 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--acento-papel);
+}
+
+.apresMot {
+  font: 400 var(--text-lead) / 1.38 var(--font-display);
+  color: var(--tinta-suave);
+}
+
+/* Notas de la redacción al margen, a la altura de su respuesta */
+.ndlr {
+  grid-column: 3;
+  margin-top: 48px;
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font: 400 15px/1.55 var(--font-body);
+  color: var(--tinta-suave);
+  border-top: 2px solid var(--tinta);
+}
+
+.ndlrEtiqueta {
+  font: 700 12px/1.4 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acento-papel);
+}
+
+/* Citas destacadas */
+.cita {
+  grid-column: 1 / -1;
+  padding: 120px 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.cita p {
+  max-width: 22ch;
+  font: italic 800 clamp(2rem, 3.8vw, 3.25rem) / 1.12 var(--font-display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--tinta);
+}
+
+.cita footer {
+  font: 600 13px/1.4 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acento-papel);
+}
+
+/* ——— Preguntas rápidas: tarjetas que se voltean ——— */
+.filaAncha {
+  margin-top: 112px;
+}
+
+.rapidas {
+  grid-column: 1 / -1;
+  padding: clamp(32px, 5vw, 72px);
+  color: var(--papel);
+  background: var(--abismo);
+  border-radius: 2px;
+}
+
+.rapidas .bloqueTitulo {
+  margin: 0;
+  color: var(--papel);
+}
+
+.instruccion {
+  margin-top: 12px;
+  font: 400 16px/1.5 var(--font-ui);
+  color: var(--niebla);
+}
+
+.cartas {
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.carta {
+  perspective: 1400px;
+}
+
+.cartaBoton {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: block;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.cartaInterior {
+  height: 100%;
+  min-height: 300px;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cartaBoton[data-vuelta='true'] .cartaInterior {
+  transform: rotateY(180deg);
+}
+
+.cara {
+  grid-area: 1 / 1;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  border-radius: 2px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.caraFrente {
+  background: var(--bosque);
+  border: 1px solid var(--borde-oscuro-2);
+  transition: border-color 0.25s;
+}
+
+.cartaBoton:hover .caraFrente {
+  border-color: var(--acento);
+}
+
+.caraDorso {
+  color: var(--tinta);
+  background: var(--papel);
+  transform: rotateY(180deg);
+}
+
+.cartaPregunta {
+  font: 800 clamp(1.5rem, 2vw, 1.75rem) / 1.15 var(--font-display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--papel);
+}
+
+.cartaPista {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 12px/1 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+.cartaPreguntaChica {
+  font: 600 13px/1.4 var(--font-ui);
+  color: var(--tinta-suave);
+}
+
+.cartaRespuesta {
+  font: 800 clamp(1.75rem, 2.4vw, 2.25rem) / 1.08 var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--acento-papel);
+}
+
+.cartaDetalle {
+  font: 400 15px/1.5 var(--font-body);
+  color: var(--tinta-suave);
+}
+
+/* Sin movimiento: la tarjeta cambia de cara sin girar */
+@media (prefers-reduced-motion: reduce) {
+  .cartaBoton[data-vuelta='true'] .cartaInterior {
+    transform: none;
+  }
+
+  .caraDorso {
+    transform: none;
+    visibility: hidden;
+  }
+
+  .cartaBoton[data-vuelta='true'] .caraDorso {
+    visibility: visible;
+  }
+
+  .cartaBoton[data-vuelta='true'] .caraFrente {
+    visibility: hidden;
+  }
+}
+
+/* ——— Pantallas medianas: una sola columna, notas bajo su respuesta ——— */
+@media (max-width: 1100px) {
+  .rejilla {
+    max-width: calc(var(--measure) + 80px);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dialogo,
+  .fila > .bloqueTitulo,
+  .metadatos,
+  .ndlr {
+    grid-column: 1;
+  }
+
+  .metadatos {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--borde-papel);
+  }
+
+  .ndlr {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: var(--papel-2);
+    border-top: 0;
+    border-radius: 2px;
+  }
+}
+
+/* ——— Celular ——— */
+@media (max-width: 760px) {
+  .apertura {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .cabecera {
+    padding: 16px 20px;
+  }
+
+  .sommaire {
+    font-size: 16px;
+  }
+
+  .aperturaTexto {
+    padding: 40px 20px 8px;
+    gap: 24px;
+  }
+
+  .lienzo {
+    min-height: 0;
+    height: 56vh;
+  }
+
+  .vela figcaption {
+    padding: 4px 20px 40px;
+  }
+
+  .rejilla {
+    padding: 64px 20px 0;
+  }
+
+  .bloqueTitulo {
+    margin-top: 80px;
+  }
+
+  .cita {
+    padding-top: 88px;
+  }
+
+  .filaAncha {
+    margin-top: 80px;
+  }
+
+  .rapidas {
+    margin: 0 -8px;
+    padding: 40px 20px;
+  }
+
+  .cartaInterior {
+    min-height: 220px;
+  }
+}
