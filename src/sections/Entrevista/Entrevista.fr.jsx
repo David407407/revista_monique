@@ -98,7 +98,7 @@ export default function EntrevistaFr() {
           <p className={styles.bajada}>
             Pourquoi l’eau de la douche sort-elle parfois en filets ? Pourquoi la Grande Tache rouge de Jupiter tourne-t-elle depuis des siècles ? Pour comprendre tout ce qui coule, souffle et tourbillonne, nous avons interrogé {DOCTOR}, docteur en mécanique des fluides.
           </p>
-          <span className={styles.firma}>Entretien · Propos recueillis par Baruc Bazán</span>
+          <span className={styles.firma}>Entretien · Propos recueillis par Baruc Bazan et Andy Tarango</span>
         </div>
 
         <figure className={styles.vela}>
@@ -267,8 +267,8 @@ export default function EntrevistaFr() {
           'Event Horizon Telescope — eventhorizontelescope.org, première image du trou noir de M87 (2019).',
         ]}
         nota="Les sources concernent les notes de la rédaction. Les réponses sont celles de notre invité."
-        auteur="Baruc Bazán"
-        auteurBio="Élève et co-auteur de Point Bleu Pâle, à l’origine des questions de cet entretien."
+        auteur="Baruc Bazan et Andy Tarango"
+        auteurBio="Élèves et co-auteurs de Point Bleu Pâle."
         anterior={{ href: '#tiempo', titulo: 'Le temps dans le cosmos' }}
       />
     </article>

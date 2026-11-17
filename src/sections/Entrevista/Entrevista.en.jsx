@@ -98,7 +98,7 @@ export default function EntrevistaEn() {
           <p className={styles.bajada}>
             Why does shower water sometimes come out in thin streams? Why has Jupiter’s Great Red Spot been spinning for centuries? To understand everything that flows, blows and swirls, we spoke with {DOCTOR}, a PhD in fluid mechanics.
           </p>
-          <span className={styles.firma}>Interview · Conducted by Baruc Bazán</span>
+          <span className={styles.firma}>Interview · Conducted by Baruc Bazan and Andy Tarango</span>
         </div>
 
         <figure className={styles.vela}>
@@ -267,8 +267,8 @@ export default function EntrevistaEn() {
           'Event Horizon Telescope — eventhorizontelescope.org, first image of the M87 black hole (2019).',
         ]}
         nota="The sources relate to the editors’ notes. The answers are those of our guest."
-        auteur="Baruc Bazán"
-        auteurBio="Student and co-author of Point Bleu Pâle, who came up with the questions for this interview."
+        auteur="Baruc Bazan and Andy Tarango"
+        auteurBio="Students and co-authors of Point Bleu Pâle."
         anterior={{ href: '#tiempo', titulo: 'Time in the cosmos' }}
       />
     </article>

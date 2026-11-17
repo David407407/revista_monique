@@ -102,10 +102,10 @@ const crudo = {
     botonesLabel: 'Choose a detail',
     credito: 'Image: NASA, ESA, CSA, STScI',
     defs: [
-      { label: 'Left pillar', tag: 'DETAIL 1 · LEFT PILLAR', origin: '20% 18%', scale: 2.3, title: 'The top of the left pillar', fact: 'Frayed edges of gas and dust, sculpted by the radiation of nearby young stars.', alt: 'Close-up of the top of the nebula’s left pillar' },
-      { label: 'Center pillar', tag: 'DETAIL 2 · CENTER PILLAR', origin: '45% 12%', scale: 2.4, title: 'Red flashes at the top', fact: 'The red dots mark very young stars that are still ejecting material into their surroundings.', alt: 'Close-up of the tip of the center pillar, with red flashes' },
-      { label: 'Right pillar', tag: 'DETAIL 3 · RIGHT PILLAR', origin: '72% 22%', scale: 2.3, title: 'The most fragmented pillar', fact: 'A thinner, darker column, with branches that fade into the blue background.', alt: 'Close-up of the nebula’s right pillar' },
-      { label: 'Stars', tag: 'DETAIL 4 · STAR FIELD', origin: '2% 60%', scale: 2.5, title: 'Spikes that don’t come from the star', fact: 'The eight-pointed spikes are light diffracted by the telescope’s hexagonal mirror and supports.', alt: 'Close-up of bright stars with diffraction spikes' },
+      { label: 'Left pillar', tag: 'DETAIL 1 · LEFT PILLAR', cx: 0.19, cy: 0.15, scale: 2.6, title: 'The top of the left pillar', fact: 'Frayed edges of gas and dust, sculpted by the radiation of nearby young stars.', alt: 'Close-up of the top of the nebula’s left pillar' },
+      { label: 'Center pillar', tag: 'DETAIL 2 · CENTER PILLAR', cx: 0.45, cy: 0.1, scale: 2.8, title: 'Red flashes at the top', fact: 'The red dots mark very young stars that are still ejecting material into their surroundings.', alt: 'Close-up of the tip of the center pillar, with red flashes' },
+      { label: 'Right pillar', tag: 'DETAIL 3 · RIGHT PILLAR', cx: 0.74, cy: 0.22, scale: 2.6, title: 'The most fragmented pillar', fact: 'A thinner, darker column, with branches that fade into the blue background.', alt: 'Close-up of the nebula’s right pillar' },
+      { label: 'Stars', tag: 'DETAIL 4 · STAR FIELD', cx: 0.1, cy: 0.55, scale: 2.5, title: 'Spikes that don’t come from the star', fact: 'The eight-pointed spikes are light diffracted by the telescope’s hexagonal mirror and supports.', alt: 'Close-up of bright stars with diffraction spikes' },
     ],
   },
 

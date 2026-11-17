@@ -51,7 +51,7 @@ export default function Articulo3En() {
       acento={{ oscuro: '#b3c8b4', papel: '#2f5b44', titulo: '#f6c978' }}
       titulo="Time in the cosmos"
       tituloJsx={<>Time <em>in the cosmos</em></>}
-      auteur="Baruc Bazán"
+      auteur="Baruc Bazan"
       auteurBio="Student and co-author of Point Bleu Pâle."
       date="Nov. 10, 2026"
       lecture="8 MIN"

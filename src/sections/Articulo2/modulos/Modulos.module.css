@@ -246,10 +246,46 @@
   object-fit: cover;
 }
 
+/* Explorez l’image: la «escena» es la foto a su tamaño con cover; el zoom (translate + scale) se aplica a ella */
+.visorEscena {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+}
+
 .visorZoom {
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Mini-mapa: la foto entera con un recuadro en la zona que se ve ampliada */
+.localizador {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: clamp(88px, 17%, 148px);
+  overflow: hidden;
+  border: 1px solid rgba(246, 241, 228, 0.7);
+  background: var(--noche-profunda);
+  pointer-events: none;
+}
+
+.localizadorImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.localizadorZona {
+  position: absolute;
+  border: 1.5px solid var(--papel);
+  box-shadow: 0 0 0 200px rgba(5, 10, 8, 0.55);
   transition:
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform-origin 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    left 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    top 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    width 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    height 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .visorTag {
